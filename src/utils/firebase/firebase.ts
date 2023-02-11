@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, getFirestore, orderBy, query, limit, getDocs } from "firebase/firestore";
+import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs } from "firebase/firestore";
+import { quizzType } from "../../store/quizzes/quizz-types";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_SECRET_KEY,
@@ -8,23 +9,6 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
-};
-
-type answerType = {
-  [key: number]:
-    | {
-        text: string;
-        correct: boolean;
-      }
-    | undefined;
-};
-
-export type quizzType = {
-  title: string;
-  author: string;
-  authorUID: string;
-  description: string;
-  answers: answerType[];
 };
 
 const app = initializeApp(firebaseConfig);
@@ -49,10 +33,12 @@ export const addQuizToDB = (Quizz: quizzType) => {
   }
 };
 
-export const getRandomQuiz = async () => {
-  const collectionQuizzes = collection(db, "quizzes");
-  const q = query(collectionQuizzes, orderBy("title"), limit(4));
-  const quizSnapshot = await getDocs(q);
+export const getRandomQuiz = async (numberOfdocs: number): Promise<quizzType[] | void> => {
+  if (numberOfdocs <= 10) {
+    const collectionQuizzes = collection(db, "quizzes");
+    const q = query(collectionQuizzes, orderBy("title"), limit(numberOfdocs));
+    const quizSnapshot = await getDocs(q);
 
-  if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data());
+    if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data()) as quizzType[];
+  } else throw new Error("max docs to fetch is a 10");
 };
