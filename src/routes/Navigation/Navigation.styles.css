@@ -1,0 +1,25 @@
+.Navigation {
+  background-color: #232426;
+  width: 100%;
+  height: 8vh;
+}
+
+.Navigation-container {
+  width: 50%;
+  line-height: 8vh;
+  display: flex;
+  float: right;
+}
+
+.Navigation-link {
+  flex-grow: 1;
+  font-size: 2em;
+}
+
+.Navigation-search-box-container {
+  flex-grow: 2;
+}
+
+.Navigation-search-box-container > .search-box {
+  width: 70%;
+}

@@ -1,18 +1,17 @@
 import "./App.css";
-import Test from "./components/test";
-import logo from "./logo.svg";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./routes/Navigation/Navigation.component";
+import HomePage from "./routes/Home-page/Home-page.component";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          React Page
-        </a>
-        <Test />
-      </header>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<HomePage />}></Route>
+          <Route path="/login" element={<span>LogIn</span>}></Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

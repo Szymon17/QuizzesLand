@@ -1,0 +1,14 @@
+.search-box {
+  width: 100%;
+}
+
+.search-box > input {
+  width: 100%;
+  height: 30px;
+  border-radius: 7px;
+  padding: 5px 10px;
+}
+
+.search-box > input:focus {
+  border: 2px solid black;
+}

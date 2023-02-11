@@ -18,6 +18,8 @@ const testSlice = createSlice({
 });
 
 export const { incremented, decremented } = testSlice.actions;
-export const selectCount = (state: stateType) => state.test.value;
+export const selectCount = (state: stateType) => {
+  console.log(state);
+};
 
 export default testSlice.reducer;
