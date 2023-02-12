@@ -16,8 +16,12 @@ export const quizzesSlice = createSlice({
   name: "quizzesSlice",
   initialState: initialState,
   reducers: {
-    clearQuizzes: state => {
-      state.quizzes = initialState.quizzes;
+    updateQuizLikes: (state, action) => {
+      const quizToUpdate = action.payload;
+      // console.log(quizToUpdate);
+      const index = state.quizzes.findIndex(quiz => quiz.uid === quizToUpdate.uid);
+      state.quizzes[index].likes += 1;
+      // console.log(state.quizzes[index].likes, "tyle ma lików po update");
     },
   },
   extraReducers: builder => {
@@ -28,6 +32,7 @@ export const quizzesSlice = createSlice({
 
       .addCase(fetchQuizes.fulfilled, (state, action) => {
         state.status = "idle";
+        if (state.quizzes.length >= 50) state.quizzes = initialState.quizzes;
         state.quizzes = [...state.quizzes, ...action.payload];
       })
       .addCase(fetchQuizes.rejected, state => {
@@ -36,5 +41,7 @@ export const quizzesSlice = createSlice({
       });
   },
 });
+
+export const { updateQuizLikes } = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;

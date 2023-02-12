@@ -6,6 +6,8 @@ describe("quiz test", () => {
     authorUID: "randomIterals",
     author: "test",
     description: "dasdasdsa",
+    uid: "dsadas5fdsadas",
+    likes: 5,
     answers: [
       {
         1: { text: "this is first answer", correct: true },
@@ -43,6 +45,12 @@ describe("quiz test", () => {
 
       quizWithoutAuthor.authorUID = "";
       expect(() => validateQuiz(quizWithoutAuthor)).toThrow(Error);
+    });
+
+    test("UID", () => {
+      const quizWithoutUID = quiz;
+      quizWithoutUID.uid = "";
+      expect(() => validateQuiz(quizWithoutUID)).toThrow(Error);
     });
   });
 });

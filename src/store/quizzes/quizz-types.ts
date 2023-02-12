@@ -12,5 +12,7 @@ export type quizzType = {
   author: string;
   authorUID: string;
   description: string;
+  uid: string;
   answers: answerType[];
+  likes: number;
 };

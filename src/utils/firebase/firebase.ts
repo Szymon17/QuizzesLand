@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs } from "firebase/firestore";
+import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs, updateDoc, doc } from "firebase/firestore";
 import { quizzType } from "../../store/quizzes/quizz-types";
+import { v4 } from "uuid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_SECRET_KEY,
@@ -19,11 +20,14 @@ export const validateQuiz = (Quizz: quizzType) => {
   else if (Quizz.answers.length <= 1) throw Error("You need add more answers");
   else if (!Quizz.title) throw Error("You forgot about title");
   else if (!Quizz.author || Quizz.authorUID) throw Error("Something is wrong with your loggin session");
+  else if (!Quizz.uid) throw Error("something went wrong");
 };
 
 export const addQuizToDB = (Quizz: quizzType) => {
   if (validateQuiz(Quizz)) {
-    const colectionRef = collection(db, `quizzes`);
+    const regex = /\w+/g;
+
+    const colectionRef = collection(db, `quizzes/${v4().match(regex)?.join("")}`);
     console.log(Quizz);
     try {
       addDoc(colectionRef, Quizz).then(() => alert("dodano"));
@@ -41,4 +45,12 @@ export const getRandomQuiz = async (numberOfdocs: number): Promise<quizzType[] |
 
     if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data()) as quizzType[];
   } else throw new Error("max docs to fetch is a 10");
+};
+
+export const updateLikes = async (quizz: quizzType) => {
+  const docRef = doc(db, "quizzes", quizz.uid);
+
+  await updateDoc(docRef, {
+    likes: quizz.likes + 1,
+  });
 };
