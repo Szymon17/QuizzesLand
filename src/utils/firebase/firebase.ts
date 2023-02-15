@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs, updateDoc, doc } from "firebase/firestore";
+import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs, updateDoc, doc, getDoc } from "firebase/firestore";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import { v4 } from "uuid";
 
@@ -35,6 +35,13 @@ export const addQuizToDB = (Quizz: quizzType) => {
       throw Error(error as any);
     }
   }
+};
+
+export const getQuiz = async (uid: string): Promise<quizzType | void> => {
+  const docRef = doc(db, "quizzes", uid);
+  const docSnapshot = await getDoc(docRef);
+
+  if (docSnapshot.exists()) return docSnapshot.data() as quizzType;
 };
 
 export const getRandomQuiz = async (numberOfdocs: number): Promise<quizzType[] | void> => {

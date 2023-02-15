@@ -1,4 +1,4 @@
-type answerType = {
+export type answerType = {
   [key: number]:
     | {
         text: string;

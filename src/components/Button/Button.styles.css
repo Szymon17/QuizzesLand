@@ -1,7 +1,7 @@
 .button {
   width: 190px;
   height: 40px;
-  padding: 10px 10px;
+  padding: 5px 10px;
   color: whitesmoke;
   cursor: pointer;
   border-radius: 3px;
@@ -12,12 +12,13 @@
   letter-spacing: 2px;
   transition: 0.3s all linear;
 
-  --base: rgb(17, 17, 17);
+  --base: rgb(172, 172, 172);
   --neon: rgb(0, 195, 255);
 }
 
 .button.base {
-  background-color: var(--base);
+  border: 2px solid var(--base);
+  background-color: transparent;
 }
 
 .button.base:hover {
