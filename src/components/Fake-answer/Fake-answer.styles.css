@@ -1,9 +1,29 @@
-.Answer {
+.Fake-answer {
   width: 80%;
   text-align: center;
   margin-bottom: 30px;
 }
 
-.Answer > .button {
+.Fake-answer > .fake-button {
+  display: block;
   width: 100%;
+  height: 40px;
+  line-height: 25px;
+  padding: 5px 10px;
+  color: whitesmoke;
+  border-radius: 3px;
+  border: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1em;
+  letter-spacing: 2px;
+  border: 2px solid rgb(172, 172, 172);
+  background-color: transparent;
+}
+
+.Fake-answer-correct {
+  background-color: rgb(0, 196, 33);
+}
+
+.Fake-answer-incorrect {
+  background-color: rgb(252, 8, 0);
 }

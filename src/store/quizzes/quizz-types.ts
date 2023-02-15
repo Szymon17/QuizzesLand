@@ -3,6 +3,7 @@ export type answerType = {
     | {
         text: string;
         correct: boolean;
+        id: number;
       }
     | undefined;
 };

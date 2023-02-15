@@ -1,12 +1,12 @@
 import { AnyAction, createSlice } from "@reduxjs/toolkit";
-import { answerValuesType } from "./answers-types";
+import { answerType } from "../quizzes/quizz-types";
 
 type initialStateTypes = {
-  userAnswers: answerValuesType[];
+  userAnswers: answerType[];
 };
 
 type actionType = AnyAction & {
-  payload: answerValuesType;
+  payload: answerType;
 };
 
 const initialState: initialStateTypes = {

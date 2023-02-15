@@ -9,18 +9,16 @@ import { answerValuesType } from "../../store/answers/answers-types";
 type answerPropTypes = {
   answer: answerValuesType;
   changeAnsweredState?: Function;
-  animationTime?: number;
 };
 
-const Answer: FC<answerPropTypes> = ({ answer, changeAnsweredState, animationTime }) => {
+const Answer: FC<answerPropTypes> = ({ answer, changeAnsweredState }) => {
   const dispatch = useAppDispatch();
 
   const onClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
     if (changeAnsweredState) changeAnsweredState();
 
-    if (answer && answer.text && answer.correct) {
-      if (animationTime) setTimeout(() => dispatch(addUserAnswer(answer)), animationTime);
-      else dispatch(addUserAnswer(answer));
+    if (answer) {
+      dispatch(addUserAnswer(answer));
     }
   };
 
