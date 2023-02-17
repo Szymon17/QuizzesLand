@@ -1,12 +1,13 @@
 import "./Quiz.styles.css";
 import { FC, useState } from "react";
-import { quizzType } from "../store/quizzes/quizz-types";
-import { useAppSelector } from "../store/hooks";
-import { selectProgress } from "../store/answers/answers-selectors";
+import { quizzType } from "../../store/quizzes/quizz-types";
+import { useAppSelector } from "../../store/hooks";
+import { selectProgress } from "../../store/answers/answers-selectors";
 import { motion } from "framer-motion";
-import QuizAnswers from "../components/Quiz-answers/Quiz-answers.component";
+import QuizAnswers from "../Quiz-answers/Quiz-answers.component";
+import QuizResult from "../Quiz-result/Quiz-result.component";
 
-type quizPropsTypes = {
+export type quizPropsTypes = {
   quiz: quizzType;
 };
 
@@ -16,31 +17,28 @@ const Quiz: FC<quizPropsTypes> = ({ quiz }) => {
   const [quizAnswer, setQuizAnswer] = useState(quiz.answers[0]);
   const progress = useAppSelector(selectProgress);
 
-  const fullAnimationTime = 1500;
+  const howLongVisible = 1000;
 
-  const onClickHandler = () => {
+  const showCorrectOrIncorrect = () => {
     setFakeButtonsState(true);
 
     setTimeout(() => {
       setFakeButtonsState(false);
+      setQuizAnswer(quiz.answers[progress + 1]);
       setAnimState(true);
 
-      setTimeout(() => {
-        setQuizAnswer(quiz.answers[progress + 1]);
-        setAnimState(false);
-      }, 10);
-    }, fullAnimationTime - 10);
+      setTimeout(() => setAnimState(false), 10);
+    }, howLongVisible - 10);
   };
 
-  console.log(quizAnswer);
   return (
     <div className="Quiz">
       {!startAnim && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="Quiz-container">
           {quizAnswer ? (
-            <QuizAnswers quizAnswer={quizAnswer} fakeAnswersState={renderFakeButtons} clickHandler={onClickHandler} />
+            <QuizAnswers quizAnswer={quizAnswer} fakeAnswersState={renderFakeButtons} clickHandler={showCorrectOrIncorrect} />
           ) : (
-            <span>Result</span>
+            <QuizResult quiz={quiz} />
           )}
         </motion.div>
       )}

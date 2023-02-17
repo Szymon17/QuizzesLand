@@ -3,6 +3,8 @@ import { FC } from "react";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 type QuizCardParamsType = {
   quiz: quizzType;
@@ -20,7 +22,10 @@ const QuizCard: FC<QuizCardParamsType> = ({ quiz }) => {
       </div>
       <p className="quiz-description">{quiz.description}</p>
       <footer className="quizz-footer">
-        <span className="quizz-likes">{quiz.likes}</span>
+        <span className="quizz-likes">
+          <FontAwesomeIcon icon={faHeart} />
+          <span className="quizz-likes-count">{quiz.likes}</span>
+        </span>
         <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={navigateHandler}>
           Przejdź do quizu
         </Button>

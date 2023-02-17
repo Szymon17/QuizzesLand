@@ -7,3 +7,7 @@
 .Answer > .button {
   width: 100%;
 }
+
+.Answer > .answer-to-display {
+  width: 100%;
+}

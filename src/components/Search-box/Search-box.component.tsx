@@ -1,5 +1,5 @@
 import "./Search-box.styles.css";
-import { FC, HTMLAttributes } from "react";
+import { FC } from "react";
 
 type searchBoxProps = {
   onChangeHandler: () => void;

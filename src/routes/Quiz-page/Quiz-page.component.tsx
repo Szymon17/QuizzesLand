@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import Error404 from "../../components/Error404/Error404.component";
-import Quiz from "../../Quiz/Quiz.component";
+import Spiner from "../../components/Spiner/Spiner.component";
+import Quiz from "../../components/Quiz/Quiz.component";
 import { useAppSelector } from "../../store/hooks";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import { selectQuizzes } from "../../store/quizzes/quizzes-selectors";
@@ -24,7 +24,7 @@ const QuizPage = () => {
     else if (url) setQuizFromDB(url);
   }, []);
 
-  return <div className="Quizz">{quiz ? <Quiz quiz={quiz} /> : <Error404 />}</div>;
+  return <div className="Quizz">{quiz ? <Quiz quiz={quiz} /> : <Spiner />}</div>;
 };
 
 export default QuizPage;
