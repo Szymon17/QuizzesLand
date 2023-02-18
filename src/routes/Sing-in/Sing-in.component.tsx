@@ -1,22 +1,46 @@
-import { ChangeEvent, useState } from "react";
-import FormInput from "../../components/Form-input/Form-input.component";
 import "./Sing-in.styles.css";
+import { ChangeEvent, useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Link, useNavigate } from "react-router-dom";
+import { logInEmail } from "../../store/user/user-actions";
+import { selectUser } from "../../store/user/user-selector";
+import FormInput from "../../components/Form-input/Form-input.component";
+import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 
 const SingIn = () => {
-  const [login, setLogin] = useState("");
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-  };
+  const user = useAppSelector(selectUser);
 
+  useEffect(() => {
+    console.log(user);
+    if (user) setTimeout(() => navigate("/"), 500);
+  }, [user]);
+
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+
+  const logInUser = () => {
+    dispatch(logInEmail({ email, password }));
+  };
 
   return (
     <div className="sing-in">
-      <span>Zaloduj się</span>
-      <FormInput onChange={onChangeLogin} description="Login" value={login} />
+      <h2>Zaloguj się</h2>
+      <FormInput onChange={onChangeEmail} description="Login" value={email} />
       <FormInput onChange={onChangePassword} description="Hasło" value={password} />
+      <footer className="footer-container">
+        <Button onClick={logInUser} buttonType={BUTTON_CLASSES.neon_blue}>
+          Zaloguj się
+        </Button>
+        <Link className="sing-up-link" to="/sing-up">
+          Zarejstruj się
+        </Link>
+      </footer>
     </div>
   );
 };

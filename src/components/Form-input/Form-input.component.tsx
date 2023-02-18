@@ -5,7 +5,7 @@ type FormInputPropsTypes = { description: string } & InputHTMLAttributes<HTMLInp
 
 const FormInput: FC<FormInputPropsTypes> = ({ description, ...otherProps }) => {
   return (
-    <div className="group">
+    <div className="form-input-container">
       <input className="form-input" {...otherProps} />
       {description && (
         <label className={`form-input-label ${typeof otherProps.value === "string" && otherProps.value.length > 0 ? "shrink" : ""}`}>
