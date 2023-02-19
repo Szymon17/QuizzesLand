@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs, updateDoc, doc, getDoc, setDoc } from "firebase/firestore";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth, User } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth, User, onAuthStateChanged } from "firebase/auth";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import { userSnapshotType } from "../../store/user/user-types";
 import { v4 } from "uuid";
@@ -65,7 +65,7 @@ export const updateLikes = async (quizz: quizzType) => {
   });
 };
 export const logInWithEmailAndPassword = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
-export const logOut = signOut(auth);
+export const logOut = () => signOut(auth);
 
 export const singUpEmailandPassword = async (email: string, password: string): Promise<User | void> => {
   if (!email || !password) return;
@@ -73,6 +73,19 @@ export const singUpEmailandPassword = async (email: string, password: string): P
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
   return user;
+};
+
+export const getCurrentUser = (): Promise<User | null> => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };
 
 export const addUserToDb = async (user: User, aditionalInformations: { displayName?: string } | void): Promise<void> => {
@@ -83,7 +96,7 @@ export const addUserToDb = async (user: User, aditionalInformations: { displayNa
 
   if (!userSnapshot.exists()) {
     try {
-      await setDoc(docSnapshot, { displayName, email, id: uid, solvedQuizzes: [], ...aditionalInformations });
+      await setDoc(docSnapshot, { displayName, email, id: uid, solvedQuizzes: [], userQuizzes: [], ...aditionalInformations });
     } catch (error) {
       throw new Error(error as any);
     }

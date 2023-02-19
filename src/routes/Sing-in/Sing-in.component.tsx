@@ -17,16 +17,13 @@ const SingIn = () => {
   const user = useAppSelector(selectUser);
 
   useEffect(() => {
-    console.log(user);
     if (user) setTimeout(() => navigate("/"), 500);
-  }, [user]);
+  }, [user, navigate]);
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-  const logInUser = () => {
-    dispatch(logInEmail({ email, password }));
-  };
+  const logInUser = () => dispatch(logInEmail({ email, password }));
 
   return (
     <div className="sing-in">

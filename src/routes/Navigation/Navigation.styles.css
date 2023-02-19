@@ -11,7 +11,8 @@
   float: right;
 }
 
-.Navigation-link {
+.Navigation-link,
+.Navigation-container > .Account-link {
   flex-grow: 1;
   font-size: 2em;
 }
