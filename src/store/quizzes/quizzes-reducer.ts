@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateLikesDB } from "../../utils/firebase/firebase";
 import { quizzType } from "./quizz-types";
 import { fetchQuizes } from "./quizzes-actions";
 
@@ -18,12 +19,13 @@ export const quizzesSlice = createSlice({
   reducers: {
     updateQuizLikes: (state, action) => {
       const quizToUpdate = action.payload;
-      // console.log(quizToUpdate);
       const index = state.quizzes.findIndex(quiz => quiz.uid === quizToUpdate.uid);
+
       state.quizzes[index].likes += 1;
-      // console.log(state.quizzes[index].likes, "tyle ma lików po update");
+      updateLikesDB(quizToUpdate);
     },
   },
+
   extraReducers: builder => {
     builder
       .addCase(fetchQuizes.pending, state => {

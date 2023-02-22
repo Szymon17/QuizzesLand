@@ -8,13 +8,17 @@ describe("quiz test", () => {
     description: "dasdasdsa",
     uid: "dsadas5fdsadas",
     likes: 5,
-    answers: [
+    questions: [
       {
-        1: { text: "this is first answer", correct: true, id: 1 },
+        question: "this is simpre question",
+        answers: [{ text: "this is first answer", correct: true, id: 1 }],
       },
       {
-        1: { text: "this is first answer", correct: true, id: 1 },
-        2: { text: "this is first answer", correct: true, id: 2 },
+        question: "this is simpre question",
+        answers: [
+          { text: "this is first answer", correct: true, id: 1 },
+          { text: "this is first answer", correct: true, id: 2 },
+        ],
       },
     ],
   };
@@ -30,9 +34,10 @@ describe("quiz test", () => {
 
     test("Answers", () => {
       const quizWithoutAnswers = quiz;
-      quizWithoutAnswers.answers = [
+      quizWithoutAnswers.questions = [
         {
-          1: { text: "this is first answer", correct: true, id: 1 },
+          question: "simple question",
+          answers: [{ text: "this is first answer", correct: true, id: 1 }],
         },
       ];
       expect(() => validateQuiz(quizWithoutAnswers)).toThrow(Error);

@@ -19,8 +19,8 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 export const validateQuiz = (Quizz: quizzType) => {
-  if (Quizz.answers.length > 1 && Quizz.title) return true;
-  else if (Quizz.answers.length <= 1) throw Error("You need add more answers");
+  if (Quizz.questions.length > 1 && Quizz.title) return true;
+  else if (Quizz.questions.length <= 1) throw Error("You need add more answers");
   else if (!Quizz.title) throw Error("You forgot about title");
   else if (!Quizz.author || Quizz.authorUID) throw Error("Something is wrong with your loggin session");
   else if (!Quizz.uid) throw Error("something went wrong");
@@ -29,11 +29,13 @@ export const validateQuiz = (Quizz: quizzType) => {
 export const addQuizToDB = (Quizz: quizzType) => {
   if (validateQuiz(Quizz)) {
     const regex = /\w+/g;
+    const uid = v4().match(regex)?.join("");
+    Quizz.uid = uid ? uid : "";
 
-    const colectionRef = collection(db, `quizzes/${v4().match(regex)?.join("")}`);
-    console.log(Quizz);
+    const colectionRef = doc(db, `quizzes/${uid}`);
+
     try {
-      addDoc(colectionRef, Quizz).then(() => alert("dodano"));
+      setDoc(colectionRef, Quizz).then(() => alert("dodano"));
     } catch (error) {
       throw Error(error as any);
     }
@@ -57,13 +59,25 @@ export const getRandomQuiz = async (numberOfdocs: number): Promise<quizzType[] |
   } else throw new Error("max docs to fetch is a 10");
 };
 
-export const updateLikes = async (quizz: quizzType) => {
-  const docRef = doc(db, "quizzes", quizz.uid);
+export const updateLikesDB = async (quiz: quizzType) => {
+  const docRef = doc(db, "quizzes", quiz.uid);
 
   await updateDoc(docRef, {
-    likes: quizz.likes + 1,
+    likes: quiz.likes + 1,
   });
 };
+
+export const updateUserSolvedQuizzes = async (quizUid: string, user: userSnapshotType) => {
+  const docRef = doc(db, "users", user.id);
+
+  const result = [...user.solvedQuizzes];
+  result.push(quizUid);
+
+  await updateDoc(docRef, {
+    solvedQuizzes: result,
+  });
+};
+
 export const logInWithEmailAndPassword = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
 export const logOut = () => signOut(auth);
 

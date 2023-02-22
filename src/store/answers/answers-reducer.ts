@@ -20,9 +20,13 @@ const answersSlice = createSlice({
     addUserAnswer: (state, action: actionType) => {
       state.userAnswers.push(action.payload);
     },
+
+    resetUserAnswers: state => {
+      state.userAnswers = [];
+    },
   },
 });
 
-export const { addUserAnswer } = answersSlice.actions;
+export const { addUserAnswer, resetUserAnswers } = answersSlice.actions;
 
 export default answersSlice.reducer;

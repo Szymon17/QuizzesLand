@@ -1,0 +1,27 @@
+.create-quiz {
+  width: 70%;
+  margin: 0 auto;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-quiz-container {
+  width: clamp(300px, 80%, 1000px);
+}
+
+.create-quiz-container textarea {
+  padding: 30px;
+  height: 100px;
+  resize: none;
+}
+
+.create-quiz-container textarea:focus {
+  outline: none;
+}
+
+.question-header {
+  display: flex;
+  justify-content: center;
+}

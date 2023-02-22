@@ -1,31 +1,40 @@
-.Account-link {
-  cursor: pointer;
+.account-panel {
+  margin: 0 auto;
+  width: 70%;
+  min-height: 92vh;
+  box-shadow: 10px 0 15px -15px rgb(49, 49, 49), -10px 0 15px -15px rgb(49, 49, 49);
 }
 
-.user-name {
+.account-container {
+  padding: 80px 10% 50px 10%;
+}
+
+.account-detail {
+  margin-bottom: 40px;
+}
+
+.account-description {
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.detail-body {
+  font-size: 20px;
+  color: rgb(0, 182, 238);
+  font-weight: 600;
+}
+
+.section-title {
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.user-name::selection {
-  background-color: transparent;
+.account-container > section {
+  padding: 20px 0;
+  border-top: 2px solid white;
 }
 
-.user-actions {
-  padding-left: 15px;
-  list-style: disc;
-}
-
-.Account-link::selection {
-  background-color: transparent;
-}
-
-.Account-panel {
-  padding: 10px 20px;
-  width: calc(50vw / 4);
-  position: absolute;
-  right: 20px;
-  top: 9vh;
-  z-index: 1;
-  border: 2px solid whitesmoke;
-  background: rgb(43, 43, 43);
+.account-container > section:nth-last-child(1) {
+  border-bottom: 2px solid white;
 }

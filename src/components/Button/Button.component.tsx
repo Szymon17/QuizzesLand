@@ -4,6 +4,7 @@ import { FC, ButtonHTMLAttributes } from "react";
 export enum BUTTON_CLASSES {
   base = "base",
   neon_blue = "neon-blue",
+  base_disabled = "base disabled",
 }
 
 type buttonPropsTypes = ButtonHTMLAttributes<HTMLButtonElement> & {

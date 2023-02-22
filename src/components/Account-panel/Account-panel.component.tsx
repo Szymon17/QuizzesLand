@@ -1,32 +1,39 @@
 import "./Account-panel.styles.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
-import { logout } from "../../store/user/user-reducer";
+import Button, { BUTTON_CLASSES } from "../Button/Button.component";
+import { useNavigate } from "react-router";
 
 const AccountPanel = () => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const user = useAppSelector(selectUser);
-  const [accountPanelIsOpen, setAccountPanelState] = useState(false);
+  const userQuizzes = user?.userQuizzes;
 
   return (
     <>
-      <div onClick={() => setAccountPanelState(!accountPanelIsOpen)} className="Account-link">
-        Acc
-      </div>
-
-      {accountPanelIsOpen && (
-        <div className="Account-panel">
-          <h1 className="user-name">{user?.displayName}</h1>
-          <ul className="user-actions">
-            <li>
-              <Link to="account">Moje konto</Link>
-            </li>
-          </ul>
-          <span onClick={() => dispatch(logout())} className="logout">
-            logout
-          </span>
+      {user && (
+        <div className="account-panel">
+          <div className="account-container">
+            <section className="account-details">
+              <h2 className="section-title">Moje dane</h2>
+              <div className="account-detail">
+                <span className="account-description">Nazwa użytkownika: </span>
+                <span className="detail-body">{user.displayName}</span>
+              </div>
+              <div className="account-detail">
+                <span className="account-description">Email: </span>
+                <span className="detail-body">{user.email}</span>
+              </div>
+            </section>
+            <section className="account-quizzes">
+              <h2 className="section-title">Moje quizy</h2>
+              {userQuizzes && userQuizzes.length < 3 ? (
+                <Button onClick={() => navigate("./create-quiz")}>Dodaj nowy quiz</Button>
+              ) : (
+                <Button buttonType={BUTTON_CLASSES.base_disabled}>Dodaj nowy quiz</Button>
+              )}
+            </section>
+          </div>
         </div>
       )}
     </>

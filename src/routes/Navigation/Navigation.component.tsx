@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import SearchBox from "../../components/Search-box/Search-box.component";
 import { useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
-import AccountPanel from "../../components/Account-panel/Account-panel.component";
+import AccountDropdown from "../../components/Account-dropdown/Account-dropdown.component";
 
 const Navigation = () => {
   const user = useAppSelector(selectUser);
@@ -15,6 +15,9 @@ const Navigation = () => {
   return (
     <>
       <div className="Navigation">
+        <Link className="main-page-link" to="/">
+          Main-page
+        </Link>
         <div className="Navigation-container">
           <div className="Navigation-search-box-container">
             <SearchBox onChangeHandler={searchInDatabase} />
@@ -27,7 +30,7 @@ const Navigation = () => {
               Login
             </Link>
           ) : (
-            <AccountPanel />
+            <AccountDropdown />
           )}
         </div>
       </div>

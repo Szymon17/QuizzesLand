@@ -4,6 +4,11 @@
   height: 8vh;
 }
 
+.main-page-link {
+  margin-left: 20px;
+  line-height: 8vh;
+}
+
 .Navigation-container {
   width: 50%;
   line-height: 8vh;

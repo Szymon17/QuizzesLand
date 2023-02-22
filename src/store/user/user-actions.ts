@@ -26,7 +26,7 @@ export const logInEmail = createAsyncThunk("user-login-email&password", async (u
 export const checkUserSession = createAsyncThunk("user-check-session", async () => {
   const user = await getCurrentUser();
 
-  if (!user) return;
+  if (user === null) return null;
 
   try {
     const userSnapshot = getUserSnapshot(user.uid);

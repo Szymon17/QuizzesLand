@@ -35,3 +35,14 @@
   border-color: var(--neon);
   box-shadow: 0 0 15px 0.5px var(--neon);
 }
+
+.base.disabled {
+  background-color: rgb(38, 38, 43);
+  border: 2px solid rgb(54, 54, 58);
+  color: rgb(119, 119, 119);
+  transition: none;
+}
+
+.base.disabled:hover {
+  background-color: rgb(38, 38, 43);
+}

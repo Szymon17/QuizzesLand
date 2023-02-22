@@ -1,0 +1,35 @@
+.Account-link {
+  cursor: pointer;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.user-name::selection {
+  background-color: transparent;
+}
+
+.user-actions {
+  padding-left: 15px;
+  list-style: disc;
+}
+
+.Account-link::selection {
+  background-color: transparent;
+}
+
+.Account-dropdown {
+  padding: 10px 20px;
+  width: clamp(230px, calc(50vw / 3), 250px);
+  position: absolute;
+  right: 20px;
+  top: 9vh;
+  z-index: 2;
+  border: 2px solid whitesmoke;
+  background: rgb(43, 43, 43);
+}
+
+.Account-dropdown .button {
+  margin-left: calc(50% - 190px / 2);
+}

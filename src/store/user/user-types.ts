@@ -1,6 +1,9 @@
+import { quizzType } from "../quizzes/quizz-types";
+
 export type userSnapshotType = {
   displayName: string;
   email: string;
   id: string;
-  solvedQuizzes: [];
+  userQuizzes: quizzType[];
+  solvedQuizzes: [string];
 };

@@ -1,11 +1,12 @@
 export type answerType = {
-  [key: number]:
-    | {
-        text: string;
-        correct: boolean;
-        id: number;
-      }
-    | undefined;
+  text: string;
+  correct: boolean;
+  id: number;
+};
+
+export type questionType = {
+  question: string;
+  answers: answerType[];
 };
 
 export type quizzType = {
@@ -14,6 +15,8 @@ export type quizzType = {
   authorUID: string;
   description: string;
   uid: string;
-  answers: answerType[];
+  questions: questionType[];
   likes: number;
 };
+
+const a: answerType[] = [{ text: "das", correct: true, id: 1 }];

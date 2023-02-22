@@ -1,5 +1,7 @@
 .quiz-result {
   width: 80%;
+  padding: 30px;
+  border: 3px solid rgb(80, 80, 80);
 }
 
 .question {
@@ -17,4 +19,16 @@
 .question-index {
   position: absolute;
   top: 10px;
+}
+
+.quiz-likes-count {
+  margin-right: 10px;
+}
+
+.solved {
+  color: red;
+}
+
+.unresolved {
+  cursor: pointer;
 }
