@@ -19,4 +19,7 @@ export type quizzType = {
   likes: number;
 };
 
-const a: answerType[] = [{ text: "das", correct: true, id: 1 }];
+export type fakeQestionType = {
+  question: string;
+  answers: string[];
+};

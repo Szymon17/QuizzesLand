@@ -1,34 +1,42 @@
 import "./Create-quiz.styles.css";
-import { useState, MouseEvent, ChangeEvent } from "react";
-import FormInput from "../../components/Form-input/Form-input.component";
+import { useState, MouseEvent } from "react";
 import { questionType } from "../../store/quizzes/quizz-types";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectQuestions } from "../../store/create-quiz/create-quiz-selector";
+import { addEmptyQuestion } from "../../store/create-quiz/create-quiz-reducer";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import QuestionPanel from "../../components/Question-panel/Question-panel.component";
+import FormInput from "../../components/Form-input/Form-input.component";
 
-const emptyQuestion = {
+const emptyQuestion: questionType = {
   question: "",
   answers: [{ text: "", correct: false, id: 1 }],
 };
 
 const CreateQuiz = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [questions, setQuestions] = useState<questionType[]>([emptyQuestion]);
+  const dispatch = useAppDispatch();
+
   const [openedQestions, setOpenedQuestions] = useState([true]);
+  const [animEnd, setAnimState] = useState(true);
+  const questions = useAppSelector(selectQuestions);
 
-  const createAnswerInput = (e: MouseEvent<HTMLButtonElement>, questionIndex: number) => {
+  const createNewQuestion = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-  };
 
-  const changeText = (e: ChangeEvent<HTMLInputElement>, questionIndex: number, answerIndex: number) => {
-    console.log(questionIndex, answerIndex, questions);
+    const closedQuestions = openedQestions.map(() => false);
+    closedQuestions.push(true);
 
-    const coppyOfQuestions = questions;
-    const question = questions[questionIndex];
-    question.answers[answerIndex].text = e.target.value;
+    if (animEnd) {
+      setAnimState(false);
+      dispatch(addEmptyQuestion(emptyQuestion));
 
-    coppyOfQuestions[questionIndex] = question;
-
-    setQuestions([...coppyOfQuestions]);
+      setTimeout(() => {
+        setOpenedQuestions(closedQuestions);
+        setAnimState(true);
+      }, 1000);
+    }
   };
 
   const controlOpenState = (index: number) => {
@@ -36,10 +44,15 @@ const CreateQuiz = () => {
     coppyOfArray[index] = !coppyOfArray[index];
 
     if (coppyOfArray.filter(el => el).length > 1) coppyOfArray.forEach(el => (el = false));
-    // coppyOfArray[coppyOfArray.length - 1] = true;
 
-    console.log(coppyOfArray);
     setOpenedQuestions([...coppyOfArray]);
+  };
+
+  const test = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const a = document.querySelectorAll(".question-container input"); //nie query selektor pokombinuj z dodaniem inputów do tablicy
+    console.log(a);
   };
 
   return (
@@ -47,21 +60,24 @@ const CreateQuiz = () => {
       <div className="create-quiz-container">
         <FormInput description="Tytuł" />
         <textarea placeholder="Opis" />
-
+        <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
+          <FontAwesomeIcon icon={faAdd} />
+        </Button>
         <div className="question-container">
           {questions.map((question, questionIndex) => (
             <QuestionPanel
               key={questionIndex}
               question={question}
               questionIndex={questionIndex}
-              changeText={changeText}
-              createAnswerInput={createAnswerInput}
               clickHandler={controlOpenState}
               open={openedQestions[questionIndex]}
             />
           ))}
         </div>
       </div>
+      <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={test}>
+        Stwórz
+      </Button>
     </form>
   );
 };
