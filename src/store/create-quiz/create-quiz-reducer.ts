@@ -6,7 +6,7 @@ type initialStateTypes = {
 };
 
 type answerPayloadType = {
-  index: number;
+  questionIndex: number;
   answer: answerType;
 };
 
@@ -18,12 +18,13 @@ const createQuizSlice = createSlice({
   name: "create-quiz",
   initialState: initialState,
   reducers: {
-    addAnswer: (state, action: PayloadAction<answerPayloadType>) => {
-      const {
-        payload: { index, answer },
-      } = action;
+    newAnswer: (state, action: PayloadAction<number>) => {
+      const { payload } = action;
 
-      state.questions[index].answers.push(answer);
+      const answers = state.questions[payload].answers;
+      const lastId = answers.length > 0 ? answers[answers.length - 1].id : 0;
+      console.log(lastId, { text: "", correct: false, id: lastId + 1 });
+      state.questions[payload].answers.push({ text: "", correct: false, id: lastId + 1 });
     },
 
     addEmptyQuestion: (state, action: PayloadAction<questionType>) => {
@@ -34,6 +35,6 @@ const createQuizSlice = createSlice({
   },
 });
 
-export const { addAnswer, addEmptyQuestion } = createQuizSlice.actions;
+export const { newAnswer, addEmptyQuestion } = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

@@ -4,17 +4,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { questionType } from "../../store/quizzes/quizz-types";
 import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectAnswers } from "../../store/create-quiz/create-quiz-selector";
+import { newAnswer } from "../../store/create-quiz/create-quiz-reducer";
 
 type questionPanelProps = {
-  question: questionType;
   questionIndex: number;
   open: boolean;
   clickHandler: Function;
 };
 
-const QuestionPanel: FC<questionPanelProps> = ({ question, questionIndex, clickHandler, open }) => {
-  const [answers, setAnswers] = useState(question.answers);
-  const emptyQuestionsCount = 4 - question.answers.length;
+const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, open }) => {
+  const dispatch = useAppDispatch();
+  const answers = useAppSelector(selectAnswers(questionIndex));
+
+  const emptyQuestionsCount = 4 - answers.length;
   const arrayWithEmptyAnswers = new Array(emptyQuestionsCount).fill("empty");
 
   const expandQuestion = () => clickHandler(questionIndex);
@@ -22,8 +26,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ question, questionIndex, clickH
   const addNewAnswer = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const answersCoppy = answers;
-    setAnswers(answersCoppy);
+    dispatch(newAnswer(questionIndex));
   };
 
   return (
@@ -41,16 +44,13 @@ const QuestionPanel: FC<questionPanelProps> = ({ question, questionIndex, clickH
             <FormInput description="Question" />
 
             <div className="answer-container">
-              {answers.map((answer, answerIndex) => {
+              {answers.map((___, answerIndex) => {
                 return <FormInput placeholder="dodaj odpowiedź" key={answerIndex} description="" />;
               })}
-              {arrayWithEmptyAnswers.map((answer, index) => (
-                <div key={index}>
-                  <Button onClick={addNewAnswer} buttonType={BUTTON_CLASSES.neon_blue}>
-                    empty
-                  </Button>
-                </div>
-              ))}
+              {arrayWithEmptyAnswers.map((___, index) => {
+                if (index === 0) return <Button key={index} onClick={addNewAnswer} buttonType={BUTTON_CLASSES.neon_blue}></Button>;
+                else return <Button key={index} onClick={e => e.preventDefault()} buttonType={BUTTON_CLASSES.base_disabled}></Button>;
+              })}
             </div>
           </motion.div>
         )}

@@ -1,3 +1,7 @@
 .add-question {
   overflow: hidden;
 }
+
+.answer-container .button {
+  display: block;
+}

@@ -51,8 +51,7 @@ const CreateQuiz = () => {
   const test = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const a = document.querySelectorAll(".question-container input"); //nie query selektor pokombinuj z dodaniem inputów do tablicy
-    console.log(a);
+    console.log("send query with ob to db");
   };
 
   return (
@@ -64,14 +63,8 @@ const CreateQuiz = () => {
           <FontAwesomeIcon icon={faAdd} />
         </Button>
         <div className="question-container">
-          {questions.map((question, questionIndex) => (
-            <QuestionPanel
-              key={questionIndex}
-              question={question}
-              questionIndex={questionIndex}
-              clickHandler={controlOpenState}
-              open={openedQestions[questionIndex]}
-            />
+          {questions.map((___, questionIndex) => (
+            <QuestionPanel key={questionIndex} questionIndex={questionIndex} clickHandler={controlOpenState} open={openedQestions[questionIndex]} />
           ))}
         </div>
       </div>
