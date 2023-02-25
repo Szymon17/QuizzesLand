@@ -2,6 +2,14 @@
   overflow: hidden;
 }
 
-.answer-container .button {
+.answer-container {
+  display: flex;
+}
+
+.answer-container input {
+  width: 80%;
+}
+
+.answers-block .button {
   display: block;
 }

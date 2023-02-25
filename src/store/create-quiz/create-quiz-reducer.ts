@@ -1,13 +1,14 @@
-import { AnyAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { questionType, answerType, quizzType } from "../quizzes/quizz-types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { questionType, answerType } from "../quizzes/quizz-types";
 
 type initialStateTypes = {
   questions: questionType[];
 };
 
-type answerPayloadType = {
+type updateAnswerType = {
   questionIndex: number;
-  answer: answerType;
+  answerIndex: number;
+  params: { text?: string; correct?: boolean };
 };
 
 const initialState: initialStateTypes = {
@@ -32,9 +33,24 @@ const createQuizSlice = createSlice({
 
       state.questions.push(payload);
     },
+
+    updateAnswer: (state, action: PayloadAction<updateAnswerType>) => {
+      const { answerIndex, questionIndex, params } = action.payload;
+      const { text, correct } = params;
+
+      if (text) {
+        state.questions[questionIndex].answers[answerIndex].text = text;
+        return;
+      }
+
+      if (correct !== undefined) {
+        state.questions[questionIndex].answers[answerIndex].correct = correct;
+        return;
+      }
+    },
   },
 });
 
-export const { newAnswer, addEmptyQuestion } = createQuizSlice.actions;
+export const { newAnswer, addEmptyQuestion, updateAnswer } = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

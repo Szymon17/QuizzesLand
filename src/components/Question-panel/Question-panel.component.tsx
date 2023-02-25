@@ -1,12 +1,11 @@
 import "./Question-panel.styles.css";
-import { FC, useState, MouseEvent } from "react";
+import { FC, MouseEvent, ChangeEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { questionType } from "../../store/quizzes/quizz-types";
 import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectAnswers } from "../../store/create-quiz/create-quiz-selector";
-import { newAnswer } from "../../store/create-quiz/create-quiz-reducer";
+import { newAnswer, updateAnswer } from "../../store/create-quiz/create-quiz-reducer";
 
 type questionPanelProps = {
   questionIndex: number;
@@ -29,6 +28,21 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
     dispatch(newAnswer(questionIndex));
   };
 
+  const updateAnswerText = (e: ChangeEvent<HTMLInputElement>, questionIndex: number, answerIndex: number) => {
+    const text = e.target.value;
+
+    if (text.length > 3) {
+      dispatch(updateAnswer({ questionIndex, answerIndex, params: { text } }));
+    }
+  };
+
+  const updateAnswerCorrect = (e: MouseEvent<HTMLButtonElement>, questionIndex: number, answerIndex: number) => {
+    e.preventDefault();
+    const correct = !answers[answerIndex].correct;
+
+    dispatch(updateAnswer({ questionIndex, answerIndex, params: { correct } }));
+  };
+
   return (
     <>
       <div onClick={expandQuestion}>XD</div>
@@ -43,9 +57,14 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
           >
             <FormInput description="Question" />
 
-            <div className="answer-container">
-              {answers.map((___, answerIndex) => {
-                return <FormInput placeholder="dodaj odpowiedź" key={answerIndex} description="" />;
+            <div className="answers-block">
+              {answers.map((answer, answerIndex) => {
+                return (
+                  <div className="answer-container" key={answerIndex}>
+                    <FormInput placeholder="dodaj odpowiedź" onChange={e => updateAnswerText(e, questionIndex, answerIndex)} description="" />
+                    <Button onClick={e => updateAnswerCorrect(e, questionIndex, answerIndex)}>{answer.correct.toString()}</Button>
+                  </div>
+                );
               })}
               {arrayWithEmptyAnswers.map((___, index) => {
                 if (index === 0) return <Button key={index} onClick={addNewAnswer} buttonType={BUTTON_CLASSES.neon_blue}></Button>;
