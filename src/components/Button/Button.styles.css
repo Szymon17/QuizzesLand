@@ -13,7 +13,9 @@
   transition: 0.3s all linear;
 
   --base: rgb(172, 172, 172);
-  --neon: rgb(0, 195, 255);
+  --neon_blue: rgb(0, 195, 255);
+  --neon_green: rgb(0, 238, 59);
+  --neon_red: rgb(255, 0, 0);
 }
 
 .button.base {
@@ -31,9 +33,31 @@
 }
 
 .button.neon-blue:hover {
-  color: var(--neon);
-  border-color: var(--neon);
-  box-shadow: 0 0 15px 0.5px var(--neon);
+  color: var(--neon_blue);
+  border-color: var(--neon_blue);
+  box-shadow: 0 0 15px 0.5px var(--neon_blue);
+}
+
+.button.neon-green {
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.button.neon-green:hover {
+  color: var(--neon_green);
+  border-color: var(--neon_green);
+  box-shadow: 0 0 15px 0.5px var(--neon_green);
+}
+
+.button.neon-red {
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.button.neon-red:hover {
+  color: var(--neon_red);
+  border-color: var(--neon_red);
+  box-shadow: 0 0 15px 0.5px var(--neon_red);
 }
 
 .base.disabled {

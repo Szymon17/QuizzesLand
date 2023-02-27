@@ -5,7 +5,9 @@ import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectAnswers } from "../../store/create-quiz/create-quiz-selector";
-import { newAnswer, updateAnswer } from "../../store/create-quiz/create-quiz-reducer";
+import { newAnswer, updateAnswer, removeAnswer } from "../../store/create-quiz/create-quiz-reducer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faTrashCan, faCheck, faChevronDown, faAdd } from "@fortawesome/free-solid-svg-icons";
 
 type questionPanelProps = {
   questionIndex: number;
@@ -30,10 +32,9 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
 
   const updateAnswerText = (e: ChangeEvent<HTMLInputElement>, questionIndex: number, answerIndex: number) => {
     const text = e.target.value;
+    console.log(answers[answerIndex].text.length);
 
-    if (text.length > 3) {
-      dispatch(updateAnswer({ questionIndex, answerIndex, params: { text } }));
-    }
+    dispatch(updateAnswer({ questionIndex, answerIndex, params: { text } }));
   };
 
   const updateAnswerCorrect = (e: MouseEvent<HTMLButtonElement>, questionIndex: number, answerIndex: number) => {
@@ -43,38 +44,86 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
     dispatch(updateAnswer({ questionIndex, answerIndex, params: { correct } }));
   };
 
+  const removeAnswerHandler = (e: MouseEvent<HTMLButtonElement>, questionIndex: number, answerIndex: number) => {
+    e.preventDefault();
+    dispatch(removeAnswer({ questionIndex, answerIndex }));
+  };
+
   return (
-    <>
-      <div onClick={expandQuestion}>XD</div>
+    <div className="question-container">
+      <div className="extend-question-panel" onClick={expandQuestion}>
+        <FontAwesomeIcon className="extend-icon" icon={faChevronDown} />
+        <span className="question-count">pytanie nr {questionIndex + 1}</span>
+      </div>
       <AnimatePresence mode="wait">
         {open && (
           <motion.div
             className="add-question"
             initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.3 }}
+            animate={{ height: "250px" }}
+            exit={{ height: "20px" }}
+            transition={{ duration: 0.3, ease: "linear" }}
           >
-            <FormInput description="Question" />
+            <FormInput placeholder="Pytanie" description="" />
 
             <div className="answers-block">
               {answers.map((answer, answerIndex) => {
                 return (
                   <div className="answer-container" key={answerIndex}>
-                    <FormInput placeholder="dodaj odpowiedź" onChange={e => updateAnswerText(e, questionIndex, answerIndex)} description="" />
-                    <Button onClick={e => updateAnswerCorrect(e, questionIndex, answerIndex)}>{answer.correct.toString()}</Button>
+                    {answer.text.length <= 3 && answer.text !== "" ? (
+                      <FormInput
+                        incorrect={true}
+                        placeholder="dodaj odpowiedź"
+                        onChange={e => updateAnswerText(e, questionIndex, answerIndex)}
+                        description=""
+                      />
+                    ) : (
+                      <FormInput
+                        value={answer.text}
+                        placeholder="dodaj odpowiedź"
+                        onChange={e => updateAnswerText(e, questionIndex, answerIndex)}
+                        description=""
+                      />
+                    )}
+
+                    <Button
+                      buttonType={answer.correct ? BUTTON_CLASSES.neon_green : BUTTON_CLASSES.neon_red}
+                      onClick={e => updateAnswerCorrect(e, questionIndex, answerIndex)}
+                    >
+                      <FontAwesomeIcon icon={answer.correct ? faCheck : faXmark} />
+                    </Button>
+
+                    {answerIndex !== 0 ? (
+                      <Button buttonType={BUTTON_CLASSES.neon_red} onClick={e => removeAnswerHandler(e, questionIndex, answerIndex)}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </Button>
+                    ) : (
+                      <Button onClick={e => e.preventDefault()} buttonType={BUTTON_CLASSES.base_disabled}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </Button>
+                    )}
                   </div>
                 );
               })}
               {arrayWithEmptyAnswers.map((___, index) => {
-                if (index === 0) return <Button key={index} onClick={addNewAnswer} buttonType={BUTTON_CLASSES.neon_blue}></Button>;
-                else return <Button key={index} onClick={e => e.preventDefault()} buttonType={BUTTON_CLASSES.base_disabled}></Button>;
+                if (index === 0)
+                  return (
+                    <Button key={index} onClick={addNewAnswer} buttonType={BUTTON_CLASSES.neon_blue}>
+                      <FontAwesomeIcon icon={faAdd} />
+                    </Button>
+                  );
+                else
+                  return (
+                    <Button key={index} onClick={e => e.preventDefault()} buttonType={BUTTON_CLASSES.base_disabled}>
+                      <FontAwesomeIcon icon={faAdd} />
+                    </Button>
+                  );
               })}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 

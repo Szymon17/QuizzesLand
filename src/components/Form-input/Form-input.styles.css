@@ -13,6 +13,10 @@
   font-weight: 550;
 }
 
+.form-input.incorrect {
+  border: 2px solid red;
+}
+
 .form-input-label {
   padding: 5px 15px;
   position: absolute;

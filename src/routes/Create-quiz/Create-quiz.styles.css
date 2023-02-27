@@ -13,8 +13,13 @@
 
 .create-quiz-container textarea {
   padding: 30px;
+  width: 100%;
   height: 100px;
   resize: none;
+}
+
+.create-quiz-container > * {
+  margin-bottom: 20px;
 }
 
 .create-quiz-container textarea:focus {
@@ -24,4 +29,10 @@
 .question-header {
   display: flex;
   justify-content: center;
+}
+
+.questions-container {
+  height: 50vh;
+  padding: 0 10px;
+  overflow-y: auto;
 }

@@ -4,6 +4,8 @@ import { FC, ButtonHTMLAttributes } from "react";
 export enum BUTTON_CLASSES {
   base = "base",
   neon_blue = "neon-blue",
+  neon_green = "neon-green",
+  neon_red = "neon-red",
   base_disabled = "base disabled",
 }
 

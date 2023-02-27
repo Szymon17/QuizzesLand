@@ -4,8 +4,6 @@ import { questionType } from "../../store/quizzes/quizz-types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectQuestions } from "../../store/create-quiz/create-quiz-selector";
 import { addEmptyQuestion } from "../../store/create-quiz/create-quiz-reducer";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import QuestionPanel from "../../components/Question-panel/Question-panel.component";
 import FormInput from "../../components/Form-input/Form-input.component";
@@ -60,9 +58,9 @@ const CreateQuiz = () => {
         <FormInput description="Tytuł" />
         <textarea placeholder="Opis" />
         <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
-          <FontAwesomeIcon icon={faAdd} />
+          Dodaj pytanie
         </Button>
-        <div className="question-container">
+        <div className="questions-container">
           {questions.map((___, questionIndex) => (
             <QuestionPanel key={questionIndex} questionIndex={questionIndex} clickHandler={controlOpenState} open={openedQestions[questionIndex]} />
           ))}
