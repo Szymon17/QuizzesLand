@@ -6,3 +6,8 @@ export type questionIndexes = {
 export type updateAnswerType = questionIndexes & {
   params: { text?: string; correct?: boolean };
 };
+
+export type updateQuestionType = {
+  questionIndex: number;
+  text: string;
+};
