@@ -3,10 +3,14 @@ import { questionType } from "../quizzes/quizz-types";
 import { questionIndexes, updateAnswerType, updateQuestionType } from "./create-quiz-types";
 
 type initialStateTypes = {
+  title: string;
+  description: string;
   questions: questionType[];
 };
 
 const initialState: initialStateTypes = {
+  title: "",
+  description: "",
   questions: [{ question: "", answers: [{ text: "", correct: false, id: 1 }] }],
 };
 
@@ -14,6 +18,18 @@ const createQuizSlice = createSlice({
   name: "create-quiz",
   initialState: initialState,
   reducers: {
+    updateTitle: (state, action: PayloadAction<string>) => {
+      const { payload } = action;
+
+      state.title = payload;
+    },
+
+    updateDescription: (state, action: PayloadAction<string>) => {
+      const { payload } = action;
+
+      state.description = payload;
+    },
+
     newAnswer: (state, action: PayloadAction<number>) => {
       const { payload } = action;
 
@@ -27,7 +43,7 @@ const createQuizSlice = createSlice({
       const { answerIndex, questionIndex, params } = action.payload;
       const { text, correct } = params;
 
-      if (text) {
+      if (text !== undefined) {
         state.questions[questionIndex].answers[answerIndex].text = text;
         return;
       }
@@ -62,6 +78,6 @@ const createQuizSlice = createSlice({
   },
 });
 
-export const { newAnswer, addEmptyQuestion, updateAnswer, removeAnswer, updateQuestion } = createQuizSlice.actions;
+export const { newAnswer, addEmptyQuestion, updateAnswer, removeAnswer, updateQuestion, updateDescription, updateTitle } = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

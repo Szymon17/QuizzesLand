@@ -8,7 +8,7 @@ import { selectQuestion } from "../../store/create-quiz/create-quiz-selector";
 import { newAnswer, updateQuestion } from "../../store/create-quiz/create-quiz-reducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faAdd } from "@fortawesome/free-solid-svg-icons";
-import CreatedAnswer from "../created-answer/Created-answer.component";
+import CreatedAnswer from "../Created-answer/Created-answer.component";
 
 type questionPanelProps = {
   questionIndex: number;
@@ -59,6 +59,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
               {answers.map((answer, answerIndex) => (
                 <CreatedAnswer key={answerIndex} questionIndex={questionIndex} answerIndex={answerIndex} answer={answer} />
               ))}
+
               {arrayWithEmptyAnswers.map((___, index) => {
                 if (index === 0)
                   return (

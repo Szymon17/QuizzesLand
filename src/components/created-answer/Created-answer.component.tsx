@@ -1,3 +1,4 @@
+import "./Created-answer.styles.css";
 import { FC, ChangeEvent, MouseEvent } from "react";
 import { faXmark, faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,11 +39,12 @@ const CreatedAnswer: FC<createdAnswerTypes> = ({ questionIndex, answerIndex, ans
 
   return (
     <div className="answer-container">
-      {answer.text.length <= 3 && answer.text !== "" ? (
-        <FormInput incorrect={true} placeholder="dodaj odpowiedź" onChange={e => updateAnswerText(e, questionIndex, answerIndex)} description="" />
-      ) : (
-        <FormInput value={answer.text} placeholder="dodaj odpowiedź" onChange={e => updateAnswerText(e, questionIndex, answerIndex)} description="" />
-      )}
+      <FormInput
+        value={answer.text}
+        placeholder="Dodaj odpowiedź"
+        onChange={e => updateAnswerText(e, questionIndex, answerIndex)}
+        incorrect={answer.text.length < 3 && answer.text.length !== 0}
+      />
 
       <Button
         buttonType={answer.correct ? BUTTON_CLASSES.neon_green : BUTTON_CLASSES.neon_red}

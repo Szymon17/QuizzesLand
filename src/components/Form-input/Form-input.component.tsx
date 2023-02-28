@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, FC } from "react";
 import "./Form-input.styles.css";
 
-type FormInputPropsTypes = { description: string; incorrect?: boolean } & InputHTMLAttributes<HTMLInputElement>;
+type FormInputPropsTypes = { description?: string; incorrect?: boolean } & InputHTMLAttributes<HTMLInputElement>;
 
 const FormInput: FC<FormInputPropsTypes> = ({ description, incorrect, ...otherProps }) => {
   return (

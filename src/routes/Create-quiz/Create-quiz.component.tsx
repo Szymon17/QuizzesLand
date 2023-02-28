@@ -3,7 +3,7 @@ import { useState, MouseEvent } from "react";
 import { questionType } from "../../store/quizzes/quizz-types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectQuestions } from "../../store/create-quiz/create-quiz-selector";
-import { addEmptyQuestion } from "../../store/create-quiz/create-quiz-reducer";
+import { addEmptyQuestion, updateDescription, updateTitle } from "../../store/create-quiz/create-quiz-reducer";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import QuestionPanel from "../../components/Question-panel/Question-panel.component";
 import FormInput from "../../components/Form-input/Form-input.component";
@@ -33,7 +33,7 @@ const CreateQuiz = () => {
       setTimeout(() => {
         setOpenedQuestions(closedQuestions);
         setAnimState(true);
-      }, 1000);
+      }, 500);
     }
   };
 
@@ -55,8 +55,8 @@ const CreateQuiz = () => {
   return (
     <form className="create-quiz">
       <div className="create-quiz-container">
-        <FormInput description="Tytuł" />
-        <textarea placeholder="Opis" />
+        <FormInput description="Tytuł" onChange={e => dispatch(updateTitle(e.target.value))} />
+        <textarea placeholder="Opis" onChange={e => dispatch(updateDescription(e.target.value))} />
         <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
           Dodaj pytanie
         </Button>
