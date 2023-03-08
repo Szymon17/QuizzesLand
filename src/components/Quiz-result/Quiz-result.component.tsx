@@ -18,9 +18,11 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
   const userSolvedQuizzes = user?.solvedQuizzes;
 
   const Like = () => {
-    setLikes(likes + 1);
-    dispatch(updateQuizLikes(quiz));
-    dispatch(updateSolvedQuizzesUid({ quiz, user }));
+    if (user) {
+      setLikes(likes + 1);
+      dispatch(updateQuizLikes(quiz));
+      dispatch(updateSolvedQuizzesUid({ quiz, user }));
+    }
   };
 
   return (
@@ -41,7 +43,6 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
                   if (answer.correct) return <AnswerToDisplay key={i} type={ANSWERS_CLASSES.correct} text={answer.text} />;
                   else return <AnswerToDisplay key={i} type={ANSWERS_CLASSES.incorect} text={answer.text} />;
                 } else return <AnswerToDisplay key={i} text={answer.text} />;
-                <span>XDs</span>;
               } else return <span>something went wrong</span>;
             })}
           </div>

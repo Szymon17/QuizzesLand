@@ -17,6 +17,7 @@ export type quizzType = {
   uid: string;
   questions: questionType[];
   likes: number;
+  index: number;
 };
 
 export type fakeQestionType = {

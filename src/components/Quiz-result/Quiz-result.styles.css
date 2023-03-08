@@ -1,6 +1,8 @@
 .quiz-result {
   width: 80%;
+  min-height: 200px;
   padding: 30px;
+  overflow-y: auto;
   border: 3px solid rgb(80, 80, 80);
 }
 

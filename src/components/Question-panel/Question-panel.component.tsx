@@ -35,6 +35,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
 
   const updateQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+
     dispatch(updateQuestion({ questionIndex, text: e.target.value }));
   };
 
@@ -53,7 +54,12 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
             exit={{ height: "20px" }}
             transition={{ duration: 0.3, ease: "linear" }}
           >
-            <FormInput placeholder="Pytanie" value={question.question} onChange={updateQuestionHandler} description="" />
+            <FormInput
+              incorrect={question.question.length < 5 && question.question.length !== 0}
+              placeholder="Pytanie"
+              value={question.question}
+              onChange={updateQuestionHandler}
+            />
 
             <div className="answers-block">
               {answers.map((answer, answerIndex) => (

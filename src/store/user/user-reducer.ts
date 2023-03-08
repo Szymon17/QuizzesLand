@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userSnapshotType } from "./user-types";
 import { logInEmail, checkUserSession } from "./user-actions";
 import { logOut, updateUserSolvedQuizzes } from "../../utils/firebase/firebase";
+import { quizzType } from "../quizzes/quizz-types";
 
 type initialStateTypes = {
   user: userSnapshotType | null | void;
@@ -22,7 +23,7 @@ const userSlice = createSlice({
       logOut();
     },
 
-    updateSolvedQuizzesUid: (state, action) => {
+    updateSolvedQuizzesUid: (state, action: PayloadAction<{ quiz: quizzType; user: userSnapshotType }>) => {
       const quizUid = action.payload.quiz.uid;
       const user = action.payload.user;
 
@@ -30,6 +31,12 @@ const userSlice = createSlice({
         state.user.solvedQuizzes.push(quizUid);
         updateUserSolvedQuizzes(quizUid, user);
       }
+    },
+
+    updateUserQuizzes: (state, action: PayloadAction<quizzType>) => {
+      const { payload } = action;
+
+      if (state.user) state.user.userQuizzes.push(payload);
     },
   },
   extraReducers: builder => {
@@ -55,6 +62,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, updateSolvedQuizzesUid } = userSlice.actions;
+export const { logout, updateSolvedQuizzesUid, updateUserQuizzes } = userSlice.actions;
 
 export default userSlice.reducer;

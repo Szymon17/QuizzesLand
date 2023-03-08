@@ -5,5 +5,5 @@ export type userSnapshotType = {
   email: string;
   id: string;
   userQuizzes: quizzType[];
-  solvedQuizzes: [string];
+  solvedQuizzes: string[];
 };

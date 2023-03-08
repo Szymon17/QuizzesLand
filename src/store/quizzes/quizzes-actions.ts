@@ -1,10 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getRandomQuiz } from "../../utils/firebase/firebase";
+import { getQuizzesByIndex } from "../../utils/firebase/firebase";
 import { quizzType } from "./quizz-types";
 
-export const fetchQuizes = createAsyncThunk("fetch quizzes", async (numberOfDocs: number = 1): Promise<quizzType[]> => {
-  const response = await getRandomQuiz(numberOfDocs);
+export const replaceFetchQuizzes = createAsyncThunk("fetch and replace quizzes", async (numberOfDocs: number): Promise<quizzType[]> => {
+  const quizzes = await getQuizzesByIndex(numberOfDocs);
 
-  if (response) return response as quizzType[];
+  if (quizzes) return quizzes as quizzType[];
   else return [];
 });
+
+export const addFetchQuizzes = createAsyncThunk(
+  "fetch and add quizzes",
+  async ({ numberOfDocs, fromIndexCount }: { numberOfDocs: number; fromIndexCount: number }): Promise<quizzType[]> => {
+    const quizzes = await getQuizzesByIndex(numberOfDocs, fromIndexCount);
+
+    if (quizzes) return quizzes as quizzType[];
+    else return [];
+  }
+);

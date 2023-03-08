@@ -1,16 +1,29 @@
 import "./Home-page.styles.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchQuizes } from "../../store/quizzes/quizzes-actions";
-import { selectRandomQuizes } from "../../store/quizzes/quizzes-selectors";
+import { replaceFetchQuizzes } from "../../store/quizzes/quizzes-actions";
+import { selectRandomQuizes, selectUserDelayTime } from "../../store/quizzes/quizzes-selectors";
 import QuizCard from "../../components/Quiz-card/Quiz-card.component";
 
 const HomePage = () => {
+  const [once, setOnce] = useState(true);
   const randomQuizzes = useAppSelector(selectRandomQuizes(4));
+  const userDelayTime = useAppSelector(selectUserDelayTime);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (randomQuizzes.length < 1) dispatch(fetchQuizes(4));
+    const actialTime = new Date().getTime();
+
+    if (once) {
+      setOnce(false);
+      if (userDelayTime < actialTime && randomQuizzes.length > 1) {
+        dispatch(replaceFetchQuizzes(10));
+        console.log("*******************", "featched");
+      } else if (randomQuizzes.length === 0) {
+        dispatch(replaceFetchQuizzes(10));
+        console.log("*******************", "empty featched");
+      }
+    }
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import { validateQuiz } from "../firebase/firebase";
+import { validateQuiz } from "../functions/basic-functions";
 
 describe("quiz test", () => {
   const quiz = {
@@ -8,6 +8,7 @@ describe("quiz test", () => {
     description: "dasdasdsa",
     uid: "dsadas5fdsadas",
     likes: 5,
+    index: 5,
     questions: [
       {
         question: "this is simpre question",
@@ -56,6 +57,12 @@ describe("quiz test", () => {
       const quizWithoutUID = quiz;
       quizWithoutUID.uid = "";
       expect(() => validateQuiz(quizWithoutUID)).toThrow(Error);
+    });
+
+    test("Empty Answers", () => {
+      const quizWithEmptyAnswer = quiz;
+      quizWithEmptyAnswer.questions[0].answers[0].text = "";
+      expect(() => validateQuiz(quizWithEmptyAnswer)).toThrow(Error);
     });
   });
 });

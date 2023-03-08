@@ -1,5 +1,5 @@
 import "./Sing-in.styles.css";
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { logInEmail } from "../../store/user/user-actions";
@@ -25,11 +25,15 @@ const SingIn = () => {
 
   const logInUser = () => dispatch(logInEmail({ email, password }));
 
+  const logInUserAfterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") logInUser();
+  };
+
   return (
     <div className="sing-in">
       <h2>Zaloguj się</h2>
       <FormInput onChange={onChangeEmail} description="Login" value={email} />
-      <FormInput onChange={onChangePassword} description="Hasło" value={password} />
+      <FormInput onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
       <footer className="footer-container">
         <Button onClick={logInUser} buttonType={BUTTON_CLASSES.neon_blue}>
           Zaloguj się

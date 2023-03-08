@@ -1,9 +1,22 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore, orderBy, query, limit, getDocs, updateDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getFirestore,
+  orderBy,
+  query,
+  limit,
+  getDocs,
+  updateDoc,
+  doc,
+  getDoc,
+  setDoc,
+  where,
+  getCountFromServer,
+} from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth, User, onAuthStateChanged } from "firebase/auth";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import { userSnapshotType } from "../../store/user/user-types";
-import { v4 } from "uuid";
+import { validateQuiz } from "../functions/basic-functions";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_SECRET_KEY,
@@ -18,28 +31,18 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export const validateQuiz = (Quizz: quizzType) => {
-  if (Quizz.questions.length > 1 && Quizz.title) return true;
-  else if (Quizz.questions.length <= 1) throw Error("You need add more answers");
-  else if (!Quizz.title) throw Error("You forgot about title");
-  else if (!Quizz.author || Quizz.authorUID) throw Error("Something is wrong with your loggin session");
-  else if (!Quizz.uid) throw Error("something went wrong");
-};
+export const addQuizToDB = async (Quizz: quizzType) => {
+  const tryValidateQuiz = validateQuiz(Quizz);
 
-export const addQuizToDB = (Quizz: quizzType) => {
-  if (validateQuiz(Quizz)) {
-    const regex = /\w+/g;
-    const uid = v4().match(regex)?.join("");
-    Quizz.uid = uid ? uid : "";
-
-    const colectionRef = doc(db, `quizzes/${uid}`);
+  if (typeof tryValidateQuiz === "boolean" && tryValidateQuiz === true) {
+    const colectionRef = doc(db, `quizzes/${Quizz.uid}`);
 
     try {
-      setDoc(colectionRef, Quizz).then(() => alert("dodano"));
+      await setDoc(colectionRef, Quizz).then(() => alert("dodano"));
     } catch (error) {
       throw Error(error as any);
     }
-  }
+  } else console.error(tryValidateQuiz);
 };
 
 export const getQuiz = async (uid: string): Promise<quizzType | void> => {
@@ -49,13 +52,22 @@ export const getQuiz = async (uid: string): Promise<quizzType | void> => {
   if (docSnapshot.exists()) return docSnapshot.data() as quizzType;
 };
 
-export const getRandomQuiz = async (numberOfdocs: number): Promise<quizzType[] | void> => {
+export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: number = Infinity): Promise<quizzType[] | void> => {
+  console.log(fromIndexCount);
   if (numberOfdocs <= 10) {
     const collectionQuizzes = collection(db, "quizzes");
-    const q = query(collectionQuizzes, orderBy("title"), limit(numberOfdocs));
-    const quizSnapshot = await getDocs(q);
+    const q = query(collectionQuizzes, orderBy("index", "desc"), where("index", "<", fromIndexCount), limit(numberOfdocs));
 
-    if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data()) as quizzType[];
+    try {
+      const quizSnapshot = await getDocs(q);
+      console.log(
+        quizSnapshot.docs.map(snapshot => snapshot.data()),
+        "getQuizzesByLikes"
+      );
+      if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data()) as quizzType[];
+    } catch (error) {
+      throw Error(error as any);
+    }
   } else throw new Error("max docs to fetch is a 10");
 };
 
@@ -122,4 +134,28 @@ export const getUserSnapshot = async (uid: string): Promise<userSnapshotType | v
   const userSnapshot = await getDoc(docSnapshot);
 
   if (userSnapshot) return userSnapshot.data() as userSnapshotType;
+};
+
+export const updateUserQuizzes = async (userQuiz: quizzType, user: userSnapshotType) => {
+  const docSnapshot = doc(db, "users", user.id);
+
+  const result = [...user.userQuizzes];
+  result.push(userQuiz);
+
+  updateDoc(docSnapshot, {
+    userQuizzes: result,
+  });
+};
+
+export const addNewQuizToDb = async (user: userSnapshotType, quiz: quizzType, handler: Function) => {
+  await addQuizToDB(quiz);
+  await updateUserQuizzes(quiz, user);
+  handler();
+};
+
+export const getDocumentsCount = async (path: string) => {
+  const colectionRef = collection(db, path);
+  const snapshot = await getCountFromServer(colectionRef);
+
+  return snapshot.data().count;
 };
