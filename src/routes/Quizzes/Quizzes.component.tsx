@@ -3,6 +3,7 @@ import { UIEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectQuizzes, selectStatus } from "../../store/quizzes/quizzes-selectors";
 import { addFetchQuizzes } from "../../store/quizzes/quizzes-actions";
+import QuizItem from "../../components/Quiz-Item/QuizItem.component";
 
 const Quizzes = () => {
   const dispatch = useAppDispatch();
@@ -21,14 +22,17 @@ const Quizzes = () => {
       if (lastIndexConunt - fetchQuizesCount > 0) {
         console.log("fetch");
         console.log(lastIndexConunt);
-        dispatch(addFetchQuizzes({ numberOfDocs: fetchQuizesCount, fromIndexCount: lastIndexConunt }));
 
-        setDelayScrollEvent(true);
-        setTimeout(() => setDelayScrollEvent(false), 1000);
+        dispatch(addFetchQuizzes({ numberOfDocs: fetchQuizesCount, fromIndexCount: lastIndexConunt }));
       } else if (lastIndexConunt > 0) {
-        console.log(lastIndexConunt, "xD");
-        dispatch(addFetchQuizzes({ numberOfDocs: lastIndexConunt + 1, fromIndexCount: lastIndexConunt })); //przetestować to bo coś może być nie tak z ostatbnim indexem bo fetchuje go kilka razy
+        console.log("fetch");
+        console.log(lastIndexConunt);
+
+        dispatch(addFetchQuizzes({ numberOfDocs: lastIndexConunt + 1, fromIndexCount: lastIndexConunt }));
       }
+
+      setDelayScrollEvent(true);
+      setTimeout(() => setDelayScrollEvent(false), 1000);
     }
   };
 
@@ -36,9 +40,7 @@ const Quizzes = () => {
     <div className="Quizzes">
       <div onScroll={scrollFetch} className="quizzes-container">
         {quizzes.map((quiz, index) => (
-          <div className="quiz-item" key={index}>
-            {quiz.title}
-          </div>
+          <QuizItem quiz={quiz} key={index} />
         ))}
       </div>
     </div>

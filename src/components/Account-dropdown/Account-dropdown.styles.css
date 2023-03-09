@@ -1,5 +1,14 @@
 .Account-link {
+  position: relative;
   cursor: pointer;
+}
+
+.user-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
 }
 
 .user-name {

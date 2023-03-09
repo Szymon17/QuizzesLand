@@ -11,6 +11,7 @@ import SingUp from "./components/Sing-up/Sing-up.component";
 import AccountPanel from "./routes/Account-panel/Account-panel.component";
 import CreateQuiz from "./routes/Create-quiz/Create-quiz.component";
 import Quizzes from "./routes/Quizzes/Quizzes.component";
+import { changeDropdownOpenState } from "./store/user-dropdown/user-dropdown-reducer";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="App" onClick={() => dispatch(changeDropdownOpenState(false))}>
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<HomePage />} />

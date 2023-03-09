@@ -4,6 +4,8 @@ import SearchBox from "../../components/Search-box/Search-box.component";
 import { useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
 import AccountDropdown from "../../components/Account-dropdown/Account-dropdown.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
   const user = useAppSelector(selectUser);
@@ -12,11 +14,13 @@ const Navigation = () => {
     console.log("search");
   };
 
+  console.log("render");
+
   return (
     <>
       <div className="Navigation">
         <Link className="main-page-link" to="/">
-          Main-page
+          <FontAwesomeIcon icon={faHouse} />
         </Link>
         <div className="Navigation-container">
           <div className="Navigation-search-box-container">
