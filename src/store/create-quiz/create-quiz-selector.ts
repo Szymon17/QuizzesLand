@@ -7,6 +7,10 @@ export const selectQuiz = createSelector([selectReducer], createQuiz => createQu
 
 export const selectQuestions = createSelector([selectReducer], createQuiz => createQuiz.questions);
 
+export const selectArrayWithCreatedQuizIndexes = createSelector([selectReducer], createQuiz => {
+  return Array.from(Array(createQuiz.questions.length).keys());
+});
+
 export const selectQuestion = (questionIndex: number) => createSelector([selectReducer], createQuiz => createQuiz.questions[questionIndex]);
 
 export const selectAnswers = (questionIndex: number) => createSelector([selectReducer], createQuiz => createQuiz.questions[questionIndex].answers);
