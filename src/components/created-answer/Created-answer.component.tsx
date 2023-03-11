@@ -4,10 +4,10 @@ import { faXmark, faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { answerType } from "../../store/quizzes/quizz-types";
-import Button, { BUTTON_CLASSES } from "../Button/Button.component";
-import FormInput from "../Form-input/Form-input.component";
 import { updateAnswer, removeAnswer } from "../../store/create-quiz/create-quiz-reducer";
 import { selectAnswers } from "../../store/create-quiz/create-quiz-selector";
+import Button, { BUTTON_CLASSES } from "../Button/Button.component";
+import FormInput from "../Form-input/Form-input.component";
 
 type createdAnswerTypes = {
   questionIndex: number;

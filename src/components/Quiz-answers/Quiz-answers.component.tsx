@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { answerType } from "../../store/quizzes/quizz-types";
-import Answer from "../Answer/Answer.component";
+import UserAnswer from "../User-answer/User-answer.component";
 
 type QuizAnswersTypes = {
   quizAnswers: answerType[];
@@ -12,8 +12,8 @@ const QuizAnswers: FC<QuizAnswersTypes> = ({ quizAnswers, fakeAnswersState, clic
   return (
     <>
       {Object.values(quizAnswers).map((answer, index) => {
-        if (answer && !fakeAnswersState) return <Answer key={index} changeAnsweredState={clickHandler} answer={answer} />;
-        else if (answer && fakeAnswersState) return <Answer key={index} fake={true} answer={answer} />;
+        if (answer && !fakeAnswersState) return <UserAnswer key={index} changeAnsweredState={clickHandler} answer={answer} />;
+        else if (answer && fakeAnswersState) return <UserAnswer key={index} fake={true} answer={answer} />;
         return <span>something went wrong</span>;
       })}
     </>

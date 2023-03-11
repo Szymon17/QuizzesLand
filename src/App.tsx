@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { checkUserSession } from "./store/user/user-actions";
+import { changeDropdownOpenState } from "./store/user-dropdown/user-dropdown-reducer";
 import { useAppDispatch } from "./store/hooks";
 import Navigation from "./routes/Navigation/Navigation.component";
 import HomePage from "./routes/Home-page/Home-page.component";
@@ -11,7 +12,6 @@ import SingUp from "./components/Sing-up/Sing-up.component";
 import AccountPanel from "./routes/Account-panel/Account-panel.component";
 import CreateQuiz from "./routes/Create-quiz/Create-quiz.component";
 import Quizzes from "./routes/Quizzes/Quizzes.component";
-import { changeDropdownOpenState } from "./store/user-dropdown/user-dropdown-reducer";
 
 function App() {
   const dispatch = useAppDispatch();

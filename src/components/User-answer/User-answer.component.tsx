@@ -1,4 +1,4 @@
-import "./Answer.styles.css";
+import "./User-answer.styles.css";
 import { FC, MouseEventHandler } from "react";
 import { addUserAnswer } from "../../store/answers/answers-reducer";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
@@ -19,7 +19,7 @@ type fakeAnswerPropTypes = {
   fake: boolean;
 };
 
-const Answer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeAnsweredState, fake }) => {
+const UserAnswer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeAnsweredState, fake }) => {
   const dispatch = useAppDispatch();
   const userAnswers = useAppSelector(selectUserAnswers);
   const userAnswer = userAnswers[userAnswers.length - 1];
@@ -36,23 +36,23 @@ const Answer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeAnswe
   return (
     <>
       {!fake ? (
-        <div className="Answer">
+        <div className="User-answer">
           <Button buttonType={BUTTON_CLASSES.base} onClick={onClickHandler}>
             {answerToDisplay.text}
           </Button>
         </div>
       ) : userAnswer.id === answerToDisplay.id ? (
         answerToDisplay.correct ? (
-          <div className="Answer">
+          <div className="User-answer">
             <AnswerToDisplay type={ANSWERS_CLASSES.correct} text={answerToDisplay.text} />
           </div>
         ) : (
-          <div className="Answer">
+          <div className="User-answer">
             <AnswerToDisplay type={ANSWERS_CLASSES.incorect} text={answerToDisplay.text} />
           </div>
         )
       ) : (
-        <div className="Answer">
+        <div className="User-answer">
           <AnswerToDisplay text={answerToDisplay.text} />
         </div>
       )}
@@ -60,4 +60,4 @@ const Answer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeAnswe
   );
 };
 
-export default Answer;
+export default UserAnswer;
