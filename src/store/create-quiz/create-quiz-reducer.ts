@@ -76,11 +76,24 @@ const createQuizSlice = createSlice({
       state.questions[questionIndex].question = text;
     },
 
+    replaceQuestions: (state, action: PayloadAction<questionType[]>) => {
+      state.questions = [...action.payload];
+    },
+
     resetCreateQuizState: () => initialState,
   },
 });
 
-export const { newAnswer, addEmptyQuestion, updateAnswer, removeAnswer, updateQuestion, updateDescription, updateTitle, resetCreateQuizState } =
-  createQuizSlice.actions;
+export const {
+  newAnswer,
+  addEmptyQuestion,
+  updateAnswer,
+  removeAnswer,
+  updateQuestion,
+  updateDescription,
+  updateTitle,
+  resetCreateQuizState,
+  replaceQuestions,
+} = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

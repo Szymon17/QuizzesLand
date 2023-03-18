@@ -40,7 +40,9 @@ const AccountDropdown = () => {
             <h1 className="user-name">{user?.displayName}</h1>
             <ul className="user-actions">
               <li>
-                <Link to="account">Moje konto</Link>
+                <Link onClick={() => dispatch(changeDropdownOpenState(false))} to="account">
+                  Moje konto
+                </Link>
               </li>
             </ul>
             <Button onClick={() => dispatch(logout())}>logout</Button>

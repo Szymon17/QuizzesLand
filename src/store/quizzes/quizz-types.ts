@@ -24,3 +24,9 @@ export type fakeQestionType = {
   question: string;
   answers: string[];
 };
+
+export type updateQuizParams = {
+  title: string;
+  description: string;
+  questions: questionType[];
+};

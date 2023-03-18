@@ -10,6 +10,7 @@ import { addNewQuizToDb, getDocumentsCount } from "../../utils/firebase/firebase
 import { useNavigate } from "react-router";
 import { updateUserQuizzes } from "../../store/user/user-reducer";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
+import { addQuizToReducer } from "../../store/quizzes/quizzes-reducer";
 
 const SendCreatedQuiz = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const SendCreatedQuiz = () => {
           dispatch(resetCreateQuizState());
         });
         dispatch(updateUserQuizzes(quiz));
+        dispatch(addQuizToReducer(quiz));
       } else console.error(tryValidate);
     }
   };

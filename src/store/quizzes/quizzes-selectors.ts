@@ -8,6 +8,8 @@ export const selectStatus = createSelector([selectQuizzesStore], ({ status }) =>
 
 export const selectQuizzes = createSelector([selectQuizzesStore], ({ quizzes }) => quizzes);
 
+export const selectQuizById = (uid: string) => createSelector([selectQuizzesStore], ({ quizzes }) => quizzes.find(quiz => quiz.uid === uid));
+
 export const selectRandomQuizes = (howManyQuizes: number = 1) => createSelector([selectQuizzes], quizzes => getRandomQuizes(howManyQuizes, quizzes));
 
-export const selectUserDelayTime = createSelector([selectQuizzesStore], store => store.user_delay_time);
+export const selectUserDelayTime = createSelector([selectQuizzesStore], store => store.user_fetch_delay_time);

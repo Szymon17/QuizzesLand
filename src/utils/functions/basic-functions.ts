@@ -1,4 +1,4 @@
-import { questionType, quizzType } from "../../store/quizzes/quizz-types";
+import { questionType, quizzType, updateQuizParams } from "../../store/quizzes/quizz-types";
 
 export const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
 
@@ -43,9 +43,15 @@ export const findEmptyTextInQuestions = (questions: questionType[]) => {
   }, []);
 };
 
-export const validateQuiz = (Quiz: quizzType): string | boolean => {
-  console.log(Quiz);
+export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
+  if (params.questions.length <= 1) return "You need add more answers";
+  else if (!params.title && params.title.length <= 25) return "You forgot about title or your title have more than 25 leeters";
+  else if (findEmptyTextInAnswers(params.questions).length > 0) return "your answers are empty";
+  else if (findEmptyTextInQuestions(params.questions).length > 0) return "your questions are empty";
+  else return true;
+};
 
+export const validateQuiz = (Quiz: quizzType): string | boolean => {
   if (Quiz.questions.length <= 1) return "You need add more answers";
   else if (!Quiz.title && Quiz.title.length <= 25) return "You forgot about title or your title have more than 25 leeters";
   else if (!Quiz.author || !Quiz.authorUID) return "Something is wrong with your loggin session";

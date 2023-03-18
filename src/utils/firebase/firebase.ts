@@ -14,7 +14,7 @@ import {
   getCountFromServer,
 } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth, User, onAuthStateChanged } from "firebase/auth";
-import { quizzType } from "../../store/quizzes/quizz-types";
+import { quizzType, updateQuizParams } from "../../store/quizzes/quizz-types";
 import { userSnapshotType } from "../../store/user/user-types";
 import { validateQuiz } from "../functions/basic-functions";
 
@@ -71,25 +71,6 @@ export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: nu
   } else throw new Error("max docs to fetch is a 10");
 };
 
-export const updateLikesDB = async (quiz: quizzType) => {
-  const docRef = doc(db, "quizzes", quiz.uid);
-
-  await updateDoc(docRef, {
-    likes: quiz.likes + 1,
-  });
-};
-
-export const updateUserSolvedQuizzes = async (quizUid: string, user: userSnapshotType) => {
-  const docRef = doc(db, "users", user.id);
-
-  const result = [...user.solvedQuizzes];
-  result.push(quizUid);
-
-  await updateDoc(docRef, {
-    solvedQuizzes: result,
-  });
-};
-
 export const logInWithEmailAndPassword = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
 export const logOut = () => signOut(auth);
 
@@ -136,20 +117,52 @@ export const getUserSnapshot = async (uid: string): Promise<userSnapshotType | v
   if (userSnapshot) return userSnapshot.data() as userSnapshotType;
 };
 
-export const updateUserQuizzes = async (userQuiz: quizzType, user: userSnapshotType) => {
+export const updateLikesDB = async (quiz: quizzType) => {
+  const docRef = doc(db, "quizzes", quiz.uid);
+
+  await updateDoc(docRef, {
+    likes: quiz.likes + 1,
+  });
+};
+
+export const updateUserSolvedQuizzes = async (quizUid: string, user: userSnapshotType) => {
+  const docRef = doc(db, "users", user.id);
+
+  const result = [...user.solvedQuizzes];
+  result.push(quizUid);
+
+  await updateDoc(docRef, {
+    solvedQuizzes: result,
+  });
+};
+
+export const updateUserQuizzes = async (quizSnapshot: { uid: string; title: string }, user: userSnapshotType) => {
   const docSnapshot = doc(db, "users", user.id);
 
   const result = [...user.userQuizzes];
-  result.push(userQuiz);
+  result.push(quizSnapshot);
 
   updateDoc(docSnapshot, {
     userQuizzes: result,
   });
 };
 
+export const updateQuiz = async (params: updateQuizParams, uid: string, handler?: Function) => {
+  const docSnapshot = doc(db, "quizzes", uid);
+  console.log(params);
+
+  await updateDoc(docSnapshot, {
+    title: params.title,
+    description: params.description,
+    questions: params.questions,
+  });
+
+  if (handler) handler();
+};
+
 export const addNewQuizToDb = async (user: userSnapshotType, quiz: quizzType, handler: Function) => {
   await addQuizToDB(quiz);
-  await updateUserQuizzes(quiz, user);
+  await updateUserQuizzes({ uid: quiz.uid, title: quiz.title }, user);
   handler();
 };
 

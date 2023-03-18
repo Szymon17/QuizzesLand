@@ -12,6 +12,7 @@ import SingUp from "./components/Sing-up/Sing-up.component";
 import AccountPanel from "./routes/Account-panel/Account-panel.component";
 import CreateQuiz from "./routes/Create-quiz/Create-quiz.component";
 import Quizzes from "./routes/Quizzes/Quizzes.component";
+import EditQuiz from "./routes/Edit-quiz/Edit-quiz.component";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,8 +30,9 @@ function App() {
           <Route path="/sing-in" element={<SingIn />} />
           <Route path="/sing-up" element={<SingUp />} />
           <Route path="/account" element={<AccountPanel />} />
-          <Route path="/account/create-quiz" element={<CreateQuiz />} />
           <Route path="/quizzes" element={<Quizzes />} />
+          <Route path="/account/create-quiz" element={<CreateQuiz />} />
+          <Route path="/account/edit-quiz/*" element={<EditQuiz />} />
         </Route>
       </Routes>
     </div>

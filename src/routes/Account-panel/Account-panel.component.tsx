@@ -11,7 +11,7 @@ const AccountPanel = () => {
   const userQuizzes = user?.userQuizzes;
 
   useEffect(() => {
-    if (!user) navigate("/");
+    if (user === null) navigate("/");
   }, []);
 
   return (
@@ -37,8 +37,14 @@ const AccountPanel = () => {
                   <div key={index} className="user-quiz">
                     <span className="account-description">Quiz {index + 1}: </span>
                     <span className="detail-body">{quiz.title}</span>
-                    <span className="delete-user-quiz"></span>
-                    <span className="edit-user-quiz"></span>
+                    <div className="account-quiz-buttons">
+                      <span className="edit-user-quiz">
+                        <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
+                      </span>
+                      <span className="delete-user-quiz">
+                        <Button>Usuń</Button>
+                      </span>
+                    </div>
                   </div>
                 ))}
               {userQuizzes && userQuizzes.length < 3 ? (

@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getDocumentsCount, updateLikesDB } from "../../utils/firebase/firebase";
-import { quizzType } from "./quizz-types";
+import { quizzType, updateQuizParams } from "./quizz-types";
 import { addFetchQuizzes, replaceFetchQuizzes } from "./quizzes-actions";
 
 type initialStateType = {
-  user_delay_time: number;
+  user_fetch_delay_time: number;
   quizzes: quizzType[];
   status: "idle" | "loading" | "failed";
 };
 
 const initialState: initialStateType = {
-  user_delay_time: 0,
+  user_fetch_delay_time: 0,
   quizzes: [],
   status: "idle",
 };
@@ -25,6 +25,22 @@ export const quizzesSlice = createSlice({
 
       state.quizzes[index].likes += 1;
       updateLikesDB(quizToUpdate);
+    },
+
+    addQuizToReducer: (state, action: PayloadAction<quizzType>) => {
+      state.quizzes.push(action.payload);
+    },
+
+    updateQuizParamsInReducer: (state, action: PayloadAction<{ params: updateQuizParams; uid: string }>) => {
+      const {
+        payload: { uid, params },
+      } = action;
+
+      const index = state.quizzes.findIndex(quiz => quiz.uid === uid);
+
+      state.quizzes[index].title = params.title;
+      state.quizzes[index].description = params.description;
+      state.quizzes[index].questions = params.questions;
     },
   },
 
@@ -42,7 +58,7 @@ export const quizzesSlice = createSlice({
         if (state.quizzes.length >= 50) state.quizzes = initialState.quizzes;
         state.quizzes = [...action.payload];
 
-        state.user_delay_time = actualTime + delayTime;
+        state.user_fetch_delay_time = actualTime + delayTime;
       })
 
       .addCase(replaceFetchQuizzes.rejected, state => {
@@ -62,7 +78,7 @@ export const quizzesSlice = createSlice({
         if (state.quizzes.length >= 50) state.quizzes = initialState.quizzes;
         state.quizzes = [...state.quizzes, ...action.payload];
 
-        state.user_delay_time = actualTime + delayTime;
+        state.user_fetch_delay_time = actualTime + delayTime;
       })
       .addCase(addFetchQuizzes.rejected, state => {
         state.status = "failed";
@@ -70,6 +86,6 @@ export const quizzesSlice = createSlice({
   },
 });
 
-export const { updateQuizLikes } = quizzesSlice.actions;
+export const { updateQuizLikes, addQuizToReducer, updateQuizParamsInReducer } = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;

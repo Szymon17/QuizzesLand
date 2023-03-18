@@ -47,3 +47,7 @@
 .user-quiz {
   padding: 20px 20px;
 }
+
+.account-quiz-buttons .button {
+  width: 130px;
+}

@@ -4,6 +4,6 @@ export type userSnapshotType = {
   displayName: string;
   email: string;
   id: string;
-  userQuizzes: quizzType[];
+  userQuizzes: { uid: string; title: string }[];
   solvedQuizzes: string[];
 };

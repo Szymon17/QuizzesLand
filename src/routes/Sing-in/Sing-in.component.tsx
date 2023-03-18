@@ -32,8 +32,8 @@ const SingIn = () => {
   return (
     <div className="sing-in">
       <h2>Zaloguj się</h2>
-      <FormInput onChange={onChangeEmail} description="Login" value={email} />
-      <FormInput onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
+      <FormInput onChange={onChangeEmail} description="Email" value={email} />
+      <FormInput type="password" onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
       <footer className="footer-container">
         <Button onClick={logInUser} buttonType={BUTTON_CLASSES.neon_blue}>
           Zaloguj się
