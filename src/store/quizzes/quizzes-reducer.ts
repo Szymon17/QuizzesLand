@@ -5,15 +5,21 @@ import { addFetchQuizzes, replaceFetchQuizzes } from "./quizzes-actions";
 
 type initialStateType = {
   user_fetch_delay_time: number;
+  user_edit_time_delay: number;
+  user_delete_time_delay: number;
   quizzes: quizzType[];
   status: "idle" | "loading" | "failed";
 };
 
 const initialState: initialStateType = {
   user_fetch_delay_time: 0,
+  user_edit_time_delay: 0,
+  user_delete_time_delay: 0,
   quizzes: [],
   status: "idle",
 };
+
+const delayTime = 5 * 60 * 1000;
 
 export const quizzesSlice = createSlice({
   name: "quizzesSlice",
@@ -41,6 +47,18 @@ export const quizzesSlice = createSlice({
       state.quizzes[index].title = params.title;
       state.quizzes[index].description = params.description;
       state.quizzes[index].questions = params.questions;
+
+      const actualTime = new Date().getTime();
+      state.user_edit_time_delay = actualTime + delayTime;
+    },
+
+    deleteQuizFromReducer: (state, action: PayloadAction<string>) => {
+      const uid = action.payload;
+
+      state.quizzes = state.quizzes.filter(quiz => quiz.uid !== uid);
+
+      const actualTime = new Date().getTime();
+      state.user_delete_time_delay = actualTime + delayTime;
     },
   },
 
@@ -51,7 +69,6 @@ export const quizzesSlice = createSlice({
       })
 
       .addCase(replaceFetchQuizzes.fulfilled, (state, action) => {
-        const delayTime = 5 * 60 * 1000;
         const actualTime = new Date().getTime();
 
         state.status = "idle";
@@ -86,6 +103,6 @@ export const quizzesSlice = createSlice({
   },
 });
 
-export const { updateQuizLikes, addQuizToReducer, updateQuizParamsInReducer } = quizzesSlice.actions;
+export const { updateQuizLikes, addQuizToReducer, updateQuizParamsInReducer, deleteQuizFromReducer } = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;

@@ -12,10 +12,11 @@ import {
   setDoc,
   where,
   getCountFromServer,
+  deleteDoc,
 } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth, User, onAuthStateChanged } from "firebase/auth";
 import { quizzType, updateQuizParams } from "../../store/quizzes/quizz-types";
-import { userSnapshotType } from "../../store/user/user-types";
+import { userQuizSnapshot, userSnapshotType } from "../../store/user/user-types";
 import { validateQuiz } from "../functions/basic-functions";
 
 const firebaseConfig = {
@@ -149,7 +150,6 @@ export const updateUserQuizzes = async (quizSnapshot: { uid: string; title: stri
 
 export const updateQuiz = async (params: updateQuizParams, uid: string, handler?: Function) => {
   const docSnapshot = doc(db, "quizzes", uid);
-  console.log(params);
 
   await updateDoc(docSnapshot, {
     title: params.title,
@@ -160,10 +160,21 @@ export const updateQuiz = async (params: updateQuizParams, uid: string, handler?
   if (handler) handler();
 };
 
-export const addNewQuizToDb = async (user: userSnapshotType, quiz: quizzType, handler: Function) => {
-  await addQuizToDB(quiz);
-  await updateUserQuizzes({ uid: quiz.uid, title: quiz.title }, user);
-  handler();
+export const updateUserSnapshotQuiz = (title: string, quizUid: string, user: userSnapshotType) => {
+  const docSnapshot = doc(db, "users", user.id);
+
+  const userQuizzes: userQuizSnapshot[] = [];
+
+  user.userQuizzes.forEach(quiz => {
+    userQuizzes.push({ ...quiz });
+  });
+
+  const quizIndex = userQuizzes.findIndex(quizSnapshot => quizSnapshot.uid === quizUid);
+  userQuizzes[quizIndex].title = title;
+
+  updateDoc(docSnapshot, {
+    userQuizzes: userQuizzes,
+  });
 };
 
 export const getDocumentsCount = async (path: string) => {
@@ -171,4 +182,35 @@ export const getDocumentsCount = async (path: string) => {
   const snapshot = await getCountFromServer(colectionRef);
 
   return snapshot.data().count;
+};
+
+export const deleteQuiz = async (quizUid: string) => {
+  const docRef = doc(db, "quizzes", quizUid);
+
+  await deleteDoc(docRef);
+};
+
+export const deleteUserQuiz = async (quizUid: string, user: userSnapshotType) => {
+  const docSnapshot = doc(db, "users", user.id);
+  const userQuizzes: userQuizSnapshot[] = [];
+
+  user.userQuizzes.forEach(quiz => {
+    if (quiz.uid !== quizUid) userQuizzes.push({ ...quiz });
+  });
+
+  await updateDoc(docSnapshot, {
+    userQuizzes: userQuizzes,
+  });
+};
+
+export const addNewQuizToDb = async (user: userSnapshotType, quiz: quizzType, handler?: Function) => {
+  await addQuizToDB(quiz);
+  await updateUserQuizzes({ uid: quiz.uid, title: quiz.title }, user);
+  if (handler) handler();
+};
+
+export const deleteQuizFromDb = async (quizUid: string, user: userSnapshotType, handler?: Function) => {
+  await deleteQuiz(quizUid);
+  await deleteUserQuiz(quizUid, user);
+  if (handler) handler();
 };

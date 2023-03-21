@@ -47,6 +47,14 @@ const userSlice = createSlice({
         state.user.userQuizzes[index].title = title;
       }
     },
+
+    deleteUserQuizFromReducer: (state, action: PayloadAction<string>) => {
+      const uid = action.payload;
+
+      if (state.user) {
+        state.user.userQuizzes = state.user.userQuizzes.filter(quiz => quiz.uid !== uid);
+      }
+    },
   },
   extraReducers: builder => {
     builder
@@ -71,6 +79,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, updateSolvedQuizzesUid, updateUserQuizzes, updateUserQuiz } = userSlice.actions;
+export const { logout, updateSolvedQuizzesUid, updateUserQuizzes, updateUserQuiz, deleteUserQuizFromReducer } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,18 +1,46 @@
 import "./Account-panel.styles.css";
-import { useEffect } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import { useNavigate } from "react-router";
+import { selectUserDelayTime, selectUserDeleteDelayTime, selectUserEditDelayTime } from "../../store/quizzes/quizzes-selectors";
+import { deleteQuizFromDb, deleteUserQuiz } from "../../utils/firebase/firebase";
+import { deleteUserQuizFromReducer } from "../../store/user/user-reducer";
+import { deleteQuizFromReducer } from "../../store/quizzes/quizzes-reducer";
 
 const AccountPanel = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const userEditDelayTime = useAppSelector(selectUserEditDelayTime);
+  const userDeleteDelayTime = useAppSelector(selectUserDeleteDelayTime);
   const userQuizzes = user?.userQuizzes;
+
+  const [actualTime, setActualTime] = useState(new Date().getTime());
+  const [editTime, setEditTime] = useState(userEditDelayTime - actualTime);
+  const [deleteTime, setDeleteTime] = useState(userDeleteDelayTime - actualTime);
 
   useEffect(() => {
     if (user === null) navigate("/");
   }, []);
+
+  const deleteQuiz = (quizUid: string) => {
+    if (user) {
+      deleteQuizFromDb(quizUid, user);
+      dispatch(deleteUserQuizFromReducer(quizUid));
+      dispatch(deleteQuizFromReducer(quizUid));
+    }
+  };
+
+  const calculateTime = (time: number) => {
+    const difference = time - actualTime;
+
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    console.log(minutes, seconds);
+  };
 
   return (
     <>
@@ -39,10 +67,22 @@ const AccountPanel = () => {
                     <span className="detail-body">{quiz.title}</span>
                     <div className="account-quiz-buttons">
                       <span className="edit-user-quiz">
-                        <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
+                        {userEditDelayTime < actualTime ? (
+                          <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
+                        ) : (
+                          <Button onClick={() => console.log("set message state")} buttonType={BUTTON_CLASSES.base_disabled}>
+                            Niedostępne
+                          </Button>
+                        )}
                       </span>
                       <span className="delete-user-quiz">
-                        <Button>Usuń</Button>
+                        {userDeleteDelayTime < actualTime ? (
+                          <Button onClick={() => deleteQuiz(quiz.uid)}>Usuń</Button>
+                        ) : (
+                          <Button onClick={() => calculateTime(userDeleteDelayTime)} buttonType={BUTTON_CLASSES.base_disabled}>
+                            Niedostępne
+                          </Button>
+                        )}
                       </span>
                     </div>
                   </div>
