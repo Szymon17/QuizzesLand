@@ -18,11 +18,16 @@ const AccountPanel = () => {
   const userQuizzes = user?.userQuizzes;
 
   const [actualTime, setActualTime] = useState(new Date().getTime());
-  const [editTime, setEditTime] = useState(userEditDelayTime - actualTime);
-  const [deleteTime, setDeleteTime] = useState(userDeleteDelayTime - actualTime);
 
   useEffect(() => {
     if (user === null) navigate("/");
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      setActualTime(now);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const deleteQuiz = (quizUid: string) => {
@@ -39,7 +44,7 @@ const AccountPanel = () => {
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    console.log(minutes, seconds);
+    return { minutes, seconds };
   };
 
   return (
@@ -70,7 +75,7 @@ const AccountPanel = () => {
                         {userEditDelayTime < actualTime ? (
                           <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
                         ) : (
-                          <Button onClick={() => console.log("set message state")} buttonType={BUTTON_CLASSES.base_disabled}>
+                          <Button onClick={() => console.log(calculateTime(userEditDelayTime))} buttonType={BUTTON_CLASSES.base_disabled}>
                             Niedostępne
                           </Button>
                         )}

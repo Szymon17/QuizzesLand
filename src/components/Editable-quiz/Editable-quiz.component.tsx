@@ -19,19 +19,29 @@ const emptyQuestion: questionType = {
   answers: [{ text: "", correct: false, id: 1 }],
 };
 
+const newOpenState = (numberOfQuestions: number) => {
+  return Array(numberOfQuestions)
+    .fill(false)
+    .map((el, index) => {
+      if (index === numberOfQuestions - 1) return !el;
+      else return el;
+    });
+};
+
 const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
   const dispatch = useAppDispatch();
   const indexesArray = useAppSelector(selectArrayWithCreatedQuizIndexes);
   const [title, setTitle] = useState(quiz ? quiz.title : "");
   const [description, setDescription] = useState(quiz ? quiz.description : "");
-  const [openedQestions, setOpenedQuestions] = useState([true]);
   const [animEnd, setAnimState] = useState(true);
+  const [openedQestions, setOpenedQuestions] = useState(quiz ? newOpenState(quiz.questions.length) : [true]);
 
   useEffect(() => {
     if (quiz) {
       dispatch(replaceQuestions(quiz.questions));
       dispatch(updateTitle(quiz.title));
       dispatch(updateDescription(quiz.description));
+      setOpenedQuestions(newOpenState(quiz.questions.length));
     }
 
     return () => {
@@ -52,15 +62,15 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
   const createNewQuestion = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const closedQuestions = openedQestions.map(() => false);
-    closedQuestions.push(true);
+    const closeQuestions = openedQestions.map(() => false);
+    closeQuestions.push(true);
 
     if (animEnd) {
       setAnimState(false);
       dispatch(addEmptyQuestion(emptyQuestion));
 
       setTimeout(() => {
-        setOpenedQuestions(closedQuestions);
+        setOpenedQuestions(closeQuestions);
         setAnimState(true);
       }, 500);
     }

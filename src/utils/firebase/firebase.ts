@@ -54,7 +54,6 @@ export const getQuiz = async (uid: string): Promise<quizzType | void> => {
 };
 
 export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: number = Infinity): Promise<quizzType[] | void> => {
-  console.log(fromIndexCount);
   if (numberOfdocs <= 10) {
     const collectionQuizzes = collection(db, "quizzes");
     const q = query(collectionQuizzes, orderBy("index", "desc"), where("index", "<", fromIndexCount), limit(numberOfdocs));

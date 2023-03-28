@@ -22,6 +22,8 @@ const AccountDropdown = () => {
     dispatch(changeDropdownOpenState(!userDropdownState));
   };
 
+  console.log("render account dropdown");
+
   return (
     <>
       <div onClick={switchDropdownState} className="Account-link">

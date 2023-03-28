@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { logInEmail } from "../../store/user/user-actions";
 import { selectUser } from "../../store/user/user-selector";
+import { setAlert } from "../../store/alert/alert-reducer";
 import FormInput from "../../components/Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 
@@ -23,7 +24,7 @@ const SingIn = () => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-  const logInUser = () => dispatch(logInEmail({ email, password }));
+  const logInUser = () => dispatch(logInEmail({ email, password, handler: () => dispatch(setAlert("Logowanie udane")) }));
 
   const logInUserAfterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") logInUser();

@@ -59,6 +59,8 @@ export const quizzesSlice = createSlice({
 
       const actualTime = new Date().getTime();
       state.user_delete_time_delay = actualTime + delayTime;
+
+      console.log(actualTime + delayTime);
     },
   },
 

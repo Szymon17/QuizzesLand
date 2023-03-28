@@ -10,12 +10,13 @@ export const registerUser = async (email: string, password: string, displayName:
   }
 };
 
-export const logInEmail = createAsyncThunk("user-login-email&password", async (userData: { email: string; password: string }) => {
-  const { email, password } = userData;
+export const logInEmail = createAsyncThunk("user-login-email&password", async (params: { email: string; password: string; handler?: Function }) => {
+  const { email, password, handler } = params;
 
   try {
     const { user } = await logInWithEmailAndPassword(email, password);
     const userSnapshot = await getUserSnapshot(user.uid);
+    if (handler) handler();
 
     return userSnapshot;
   } catch (error) {
