@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectQuestion } from "../../store/create-quiz/create-quiz-selector";
-import { newAnswer, updateQuestion } from "../../store/create-quiz/create-quiz-reducer";
+import { selectQuestion, selectQuestions } from "../../store/create-quiz/create-quiz-selector";
+import { newAnswer, removeQuestion, setNewOpenState, updateQuestion } from "../../store/create-quiz/create-quiz-reducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faAdd } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CreatedAnswer from "../Created-answer/Created-answer.component";
 
 type questionPanelProps = {
@@ -39,11 +39,17 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
     dispatch(updateQuestion({ questionIndex, text: e.target.value }));
   };
 
+  const deleteQuestion = (e: MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+    dispatch(removeQuestion(questionIndex));
+  };
+
   return (
     <div className="question-container">
       <div className="extend-question-panel" onClick={expandQuestion}>
         <FontAwesomeIcon className="extend-icon" icon={faChevronDown} />
         <span className="question-count">pytanie nr {questionIndex + 1}</span>
+        <FontAwesomeIcon className="delete-question-icon" onClick={e => deleteQuestion(e)} icon={faTrash}></FontAwesomeIcon>
       </div>
       <AnimatePresence mode="wait">
         {open && (

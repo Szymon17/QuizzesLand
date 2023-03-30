@@ -2,13 +2,15 @@ import "./Editable-quiz.styles.css";
 import { useState, MouseEvent, FC, useEffect, ChangeEvent } from "react";
 import { questionType, quizzType } from "../../store/quizzes/quizz-types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectArrayWithCreatedQuizIndexes } from "../../store/create-quiz/create-quiz-selector";
+import { selectArrayWithCreatedQuizIndexes, selectOpenStateArray } from "../../store/create-quiz/create-quiz-selector";
+import { newOpenState } from "../../utils/functions/basic-functions";
 import {
   addEmptyQuestion,
   replaceQuestions,
   updateDescription,
   updateTitle,
   resetCreateQuizState,
+  setNewOpenState,
 } from "../../store/create-quiz/create-quiz-reducer";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import QuestionPanel from "../Question-panel/Question-panel.component";
@@ -19,29 +21,22 @@ const emptyQuestion: questionType = {
   answers: [{ text: "", correct: false, id: 1 }],
 };
 
-const newOpenState = (numberOfQuestions: number) => {
-  return Array(numberOfQuestions)
-    .fill(false)
-    .map((el, index) => {
-      if (index === numberOfQuestions - 1) return !el;
-      else return el;
-    });
-};
-
 const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
   const dispatch = useAppDispatch();
   const indexesArray = useAppSelector(selectArrayWithCreatedQuizIndexes);
+  const openStateArray = [...useAppSelector(selectOpenStateArray)];
+
   const [title, setTitle] = useState(quiz ? quiz.title : "");
   const [description, setDescription] = useState(quiz ? quiz.description : "");
   const [animEnd, setAnimState] = useState(true);
-  const [openedQestions, setOpenedQuestions] = useState(quiz ? newOpenState(quiz.questions.length) : [true]);
 
   useEffect(() => {
+    dispatch(setNewOpenState(newOpenState(indexesArray.length)));
+
     if (quiz) {
       dispatch(replaceQuestions(quiz.questions));
       dispatch(updateTitle(quiz.title));
       dispatch(updateDescription(quiz.description));
-      setOpenedQuestions(newOpenState(quiz.questions.length));
     }
 
     return () => {
@@ -62,7 +57,7 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
   const createNewQuestion = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const closeQuestions = openedQestions.map(() => false);
+    const closeQuestions = openStateArray.map(() => false);
     closeQuestions.push(true);
 
     if (animEnd) {
@@ -70,19 +65,19 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
       dispatch(addEmptyQuestion(emptyQuestion));
 
       setTimeout(() => {
-        setOpenedQuestions(closeQuestions);
+        dispatch(setNewOpenState(closeQuestions));
         setAnimState(true);
       }, 500);
     }
   };
 
-  const controlOpenState = (index: number) => {
-    const coppyOfArray = openedQestions;
+  const expandQuestion = (index: number) => {
+    const coppyOfArray = openStateArray;
     coppyOfArray[index] = !coppyOfArray[index];
 
     if (coppyOfArray.filter(el => el).length > 1) coppyOfArray.forEach(el => (el = false));
 
-    setOpenedQuestions([...coppyOfArray]);
+    dispatch(setNewOpenState([...coppyOfArray]));
   };
 
   return (
@@ -96,7 +91,7 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
           </Button>
           <div className="questions-container">
             {indexesArray.map(questionIndex => (
-              <QuestionPanel key={questionIndex} questionIndex={questionIndex} clickHandler={controlOpenState} open={openedQestions[questionIndex]} />
+              <QuestionPanel key={questionIndex} questionIndex={questionIndex} clickHandler={expandQuestion} open={openStateArray[questionIndex]} />
             ))}
           </div>
         </div>

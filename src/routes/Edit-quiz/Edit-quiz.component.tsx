@@ -12,6 +12,7 @@ import { updateUserQuiz } from "../../store/user/user-reducer";
 import { selectUser } from "../../store/user/user-selector";
 import EditableQuiz from "../../components/Editable-quiz/Editable-quiz.component";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
+import { setAlert } from "../../store/alert/alert-reducer";
 
 const EditQuiz = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const EditQuiz = () => {
         updateUserSnapshotQuiz(paramsToUpdate.title, quiz.uid, user);
         dispatch(updateUserQuiz({ title: paramsToUpdate.title, uid: quiz.uid }));
         dispatch(updateQuizParamsInReducer({ params: paramsToUpdate, uid: quiz.uid }));
-      } else console.error(validateState);
+      } else if (typeof validateState === "string") dispatch(setAlert(validateState));
     }
   };
 

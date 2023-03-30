@@ -43,7 +43,7 @@ const CreatedAnswer: FC<createdAnswerTypes> = ({ questionIndex, answerIndex, ans
         value={answer.text}
         placeholder="Dodaj odpowiedź"
         onChange={e => updateAnswerText(e, questionIndex, answerIndex)}
-        incorrect={answer.text.length < 3 && answer.text.length !== 0}
+        incorrect={answer.text.length < 2 && answer.text.length !== 0}
       />
 
       <Button

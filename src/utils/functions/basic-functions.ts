@@ -37,26 +37,38 @@ export const findEmptyTextInAnswers = (questions: questionType[]) => {
 
 export const findEmptyTextInQuestions = (questions: questionType[]) => {
   return questions.reduce((acc: number[], question, index) => {
-    if (question.question.length === 0) acc.push(index);
+    if (question.question.length < 5) acc.push(index);
 
     return acc;
   }, []);
 };
 
 export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
-  if (params.questions.length <= 1) return "You need add more answers";
-  else if (!params.title && params.title.length <= 25) return "You forgot about title or your title have more than 25 leeters";
-  else if (findEmptyTextInAnswers(params.questions).length > 0) return "your answers are empty";
-  else if (findEmptyTextInQuestions(params.questions).length > 0) return "your questions are empty";
+  if (params.questions.length <= 1) return "Potrzebujesz więcej odpowiedzi";
+  else if (!params.title && params.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
+  else if (findEmptyTextInAnswers(params.questions).length > 0) return "Wszystie odpowiedzi muszą być wypełnione";
+  else if (findEmptyTextInQuestions(params.questions).length > 0) return "Wszystkie pytania muszą zawierać więcej niż 5 liter";
   else return true;
 };
 
 export const validateQuiz = (Quiz: quizzType): string | boolean => {
-  if (Quiz.questions.length <= 1) return "You need add more answers";
-  else if (!Quiz.title && Quiz.title.length <= 25) return "You forgot about title or your title have more than 25 leeters";
-  else if (!Quiz.author || !Quiz.authorUID) return "Something is wrong with your loggin session";
-  else if (!Quiz.uid) return "something went wrong";
-  else if (findEmptyTextInAnswers(Quiz.questions).length > 0) return "your answers are empty";
-  else if (findEmptyTextInQuestions(Quiz.questions).length > 0) return "your questions are empty";
+  if (Quiz.questions.length <= 1) return "Potrzebujesz więcej odpowiedzi";
+  else if (!Quiz.title && Quiz.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
+  else if (!Quiz.author || !Quiz.authorUID) return "Zaloguj się aby uzyskać dostęp";
+  else if (!Quiz.uid) return "Coś poszło nie tak";
+  else if (findEmptyTextInAnswers(Quiz.questions).length > 0) return "Wszystie odpowiedzi muszą być wypełnione";
+  else if (findEmptyTextInQuestions(Quiz.questions).length > 0) return "Wszystkie pytania muszą zawierać więcej niż 5 liter";
   else return true;
+};
+
+export const newOpenState = (numberOfQuestions: number) => {
+  return Array(numberOfQuestions + 1)
+    .fill(false)
+    .map((el, index) => {
+      console.log(el, index, "tutaj 2");
+      if (index === numberOfQuestions) {
+        console.log(el, "tutaj3");
+        return !el;
+      } else return el;
+    });
 };

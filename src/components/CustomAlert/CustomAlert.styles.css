@@ -2,11 +2,11 @@
   padding: 10px 20px;
   position: absolute;
   top: 10vh;
-  right: 10px;
+  left: calc(99vw - 200px);
   width: 200px;
   text-align: center;
   border: 2px solid white;
   border-radius: 10px;
-  word-break: break-all;
+  word-break: inherit;
   overflow: hidden;
 }

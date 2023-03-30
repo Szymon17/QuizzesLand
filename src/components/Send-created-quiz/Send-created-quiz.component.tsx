@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { updateUserQuizzes } from "../../store/user/user-reducer";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { addQuizToReducer } from "../../store/quizzes/quizzes-reducer";
+import { setAlert } from "../../store/alert/alert-reducer";
 
 const SendCreatedQuiz = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const SendCreatedQuiz = () => {
         });
         dispatch(updateUserQuizzes(quiz));
         dispatch(addQuizToReducer(quiz));
-      } else console.error(tryValidate);
+      } else if (typeof tryValidate === "string") dispatch(setAlert(tryValidate));
     }
   };
 

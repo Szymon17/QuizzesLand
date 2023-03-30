@@ -38,13 +38,13 @@ const Navigation = () => {
           <div className="Navigation-search-box-container">
             <SearchBox onChangeHandler={searchInDatabase} />
           </div>
-          <Link className="Navigation-link" to="/quizzes">
-            Quizy
-          </Link>
+          <div className="Navigation-link">
+            <Link to="/quizzes">Quizy</Link>
+          </div>
           {user === null ? (
-            <Link className="Navigation-link" to="/sing-in">
-              Login
-            </Link>
+            <div className="Navigation-link">
+              <Link to="/sing-in">Login</Link>
+            </div>
           ) : (
             <AccountDropdown />
           )}
