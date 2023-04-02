@@ -10,16 +10,6 @@
   justify-content: space-between;
 }
 
-.extend-question-panel {
-  height: 30px;
-  display: flex;
-  padding: 5px 10px;
-  background-color: #535353;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  cursor: pointer;
-}
-
 .question-count {
   margin-left: 30px;
   pointer-events: none;

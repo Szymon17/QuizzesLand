@@ -26,7 +26,7 @@ const QuizCard: FC<QuizCardParamsType> = ({ quiz }) => {
           <FontAwesomeIcon icon={faHeart} />
           <span className="quizz-likes-count">{quiz.likes}</span>
         </span>
-        <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={navigateHandler}>
+        <Button buttonType={BUTTON_CLASSES.base_reverse} onClick={navigateHandler}>
           Przejdź do quizu
         </Button>
       </footer>

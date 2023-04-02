@@ -17,6 +17,11 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
   const user = useAppSelector(selectUser);
   const userSolvedQuizzes = user?.solvedQuizzes;
 
+  const correctAnswersCount = userAnswers.reduce((acc, answer) => {
+    if (answer.correct) acc++;
+    return acc;
+  }, 0);
+
   const Like = () => {
     if (user) {
       setLikes(likes + 1);
@@ -48,14 +53,17 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
           </div>
         );
       })}
-      <div className="quiz-likes">
-        <span className="quiz-likes-count">{likes}</span>
-        {likes === quiz.likes && userSolvedQuizzes && userSolvedQuizzes.filter(uid => uid === quiz.uid).length === 0 ? (
-          <FontAwesomeIcon className="unresolved" onClick={Like} icon={faHeart} />
-        ) : (
-          <FontAwesomeIcon className="solved" icon={faHeart} />
-        )}
-      </div>
+      <footer className="quiz-result-footer">
+        <div className="quiz-likes">
+          <span className="quiz-likes-count">{likes}</span>
+          {likes === quiz.likes && userSolvedQuizzes && userSolvedQuizzes.filter(uid => uid === quiz.uid).length === 0 ? (
+            <FontAwesomeIcon className="unresolved" onClick={Like} icon={faHeart} />
+          ) : (
+            <FontAwesomeIcon className="solved" icon={faHeart} />
+          )}
+        </div>
+        <span className="quiz-result__correct-answers">{`${correctAnswersCount}/${userAnswers.length}`}</span>
+      </footer>
     </div>
   );
 };

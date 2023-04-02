@@ -10,7 +10,7 @@
 }
 
 .Navigation-container {
-  width: 50%;
+  width: 30%;
   line-height: 8vh;
   display: flex;
   float: right;
@@ -20,12 +20,4 @@
 .Navigation-container > .Account-link {
   flex-grow: 1;
   font-size: 2em;
-}
-
-.Navigation-search-box-container {
-  flex-grow: 2;
-}
-
-.Navigation-search-box-container > .search-box {
-  width: 70%;
 }

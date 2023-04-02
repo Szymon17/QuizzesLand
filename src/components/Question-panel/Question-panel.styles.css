@@ -18,3 +18,14 @@
 .answers-block > .button {
   width: 15%;
 }
+
+.extend-question-panel {
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  background-color: #535353;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  cursor: pointer;
+}

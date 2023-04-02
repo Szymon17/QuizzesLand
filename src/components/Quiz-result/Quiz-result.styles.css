@@ -15,7 +15,7 @@
   width: 100%;
   padding: 50px 30px 30px 30px;
   margin-bottom: 50px;
-  border: 2px solid rgb(204, 204, 204);
+  border: 2px solid rgb(80, 80, 80);
 }
 
 .question-index {
@@ -33,4 +33,16 @@
 
 .unresolved {
   cursor: pointer;
+}
+
+.quiz-result-footer {
+  width: calc(50% + 25px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.quiz-result__correct-answers {
+  width: 50px;
+  font-size: 20px;
+  text-align: right;
 }

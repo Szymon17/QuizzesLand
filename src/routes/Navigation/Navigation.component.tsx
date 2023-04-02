@@ -8,7 +8,6 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { selectAlertText } from "../../store/alert/alert-selectors";
 import { hideAlert } from "../../store/alert/alert-reducer";
 import { AnimatePresence } from "framer-motion";
-import SearchBox from "../../components/Search-box/Search-box.component";
 import AccountDropdown from "../../components/Account-dropdown/Account-dropdown.component";
 import CustomAlert from "../../components/CustomAlert/CustomAlert.component";
 
@@ -21,10 +20,6 @@ const Navigation = () => {
     if (alertText.length > 1) setTimeout(() => dispatch(hideAlert()), 5000);
   }, [alertText]);
 
-  const searchInDatabase = (): void => {
-    console.log("search");
-  };
-
   console.log("render");
   console.log(alertText, "alert");
 
@@ -35,9 +30,6 @@ const Navigation = () => {
           <FontAwesomeIcon icon={faHouse} />
         </Link>
         <div className="Navigation-container">
-          <div className="Navigation-search-box-container">
-            <SearchBox onChangeHandler={searchInDatabase} />
-          </div>
           <div className="Navigation-link">
             <Link to="/quizzes">Quizy</Link>
           </div>

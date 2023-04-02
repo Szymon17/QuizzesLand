@@ -2,6 +2,9 @@
   width: 80%;
   text-align: center;
   margin-bottom: 30px;
+
+  --neon_green: rgb(0, 238, 59);
+  --neon_red: rgb(255, 0, 0);
 }
 
 .answer-to-display:last-child {
@@ -9,6 +12,7 @@
 }
 
 .answer-to-display > .fake-button {
+  position: relative;
   display: block;
   width: 100%;
   height: 40px;
@@ -28,10 +32,23 @@
   background-color: transparent;
 }
 
-.answer-correct {
-  background-color: rgb(0, 196, 33);
+.display-answer-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
 }
 
-.answer-incorect {
-  background-color: rgb(252, 8, 0);
+.display-answer-icon.correct {
+  color: var(--neon_green);
+  border-color: var(--neon_green);
+  box-shadow: 0 0 5px 0.5px var(--neon_green);
+}
+.display-answer-icon.incorrect {
+  color: var(--neon_red);
+  border-color: var(--neon_red);
+  box-shadow: 0 0 5px 0.5px var(--neon_red);
 }
