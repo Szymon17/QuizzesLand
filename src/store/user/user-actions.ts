@@ -37,10 +37,9 @@ export const logInEmail = createAsyncThunk("user-login-email&password", async (p
     return userSnapshot;
   } catch (error: any) {
     if (dispatch) {
-      if (error.code === "auth/wrong-password") dispatch(setAlert("Podałeś błędny email lub hasło"));
       if (error.code === "auth/too-many-requests") dispatch(setAlert("Zbyt wielę prób logowań"));
+      else dispatch(setAlert("Podałeś błędny email lub hasło"));
     }
-
     throw Error(error);
   }
 });
