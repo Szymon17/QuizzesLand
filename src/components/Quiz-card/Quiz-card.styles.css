@@ -7,6 +7,7 @@
   max-width: 700px;
   height: 30vh;
   border-radius: 10px;
+  box-shadow: 0 0 20px 0.5px rgba(128, 128, 128, 0.3);
 }
 
 .quiz-card-title-container {
@@ -17,8 +18,8 @@
 .quiz-card-title-container::before {
   display: block;
   content: " ";
-  width: calc(100% + 2px);
-  transform: translateX(-1px);
+  width: calc(100% + 3px);
+  transform: translateX(-1.5px);
   height: 20%;
   position: absolute;
   top: 0;

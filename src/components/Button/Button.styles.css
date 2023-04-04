@@ -1,5 +1,6 @@
 .button {
   width: 190px;
+  min-width: 150px;
   height: 40px;
   padding: 5px 10px;
   color: whitesmoke;
@@ -7,7 +8,7 @@
   border-radius: 3px;
   border: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 500;
   letter-spacing: 2px;
   transition: 0.3s all linear;
@@ -22,6 +23,7 @@
 .button.base {
   border: 2px solid var(--base);
   background-color: transparent;
+  font-weight: 500;
 }
 
 .button.base:hover {
@@ -83,4 +85,22 @@
 
 .base.disabled:hover {
   background-color: rgb(38, 38, 43);
+}
+
+@media (max-width: 1200px) {
+  .button {
+    width: 145px;
+    min-width: 145px;
+    font-size: 14px;
+    letter-spacing: 0.11em;
+  }
+}
+
+@media (max-width: 900px) {
+  .button {
+    width: 120px;
+    min-width: 120px;
+    font-size: 14px;
+    letter-spacing: 0.11em;
+  }
 }

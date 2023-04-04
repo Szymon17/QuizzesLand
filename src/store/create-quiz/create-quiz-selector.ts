@@ -14,7 +14,7 @@ export const selectQuiz = createSelector([selectReducer], createQuiz => {
 export const selectQuestions = createSelector([selectReducer], createQuiz => createQuiz.questions);
 
 export const selectArrayWithCreatedQuizIndexes = createSelector([selectReducer], createQuiz => {
-  return Array.from(Array(createQuiz.questions.length).keys());
+  return createQuiz.questions.map((___, index) => index);
 });
 
 export const selectQuestion = (questionIndex: number) => createSelector([selectReducer], createQuiz => createQuiz.questions[questionIndex]);

@@ -62,11 +62,12 @@ export const validateQuiz = (Quiz: quizzType): string | boolean => {
 };
 
 export const newOpenState = (numberOfQuestions: number) => {
-  return Array(numberOfQuestions + 1)
+  console.log(numberOfQuestions);
+  return Array(numberOfQuestions)
     .fill(false)
     .map((el, index) => {
       console.log(el, index, "tutaj 2");
-      if (index === numberOfQuestions) {
+      if (index === numberOfQuestions - 1) {
         console.log(el, "tutaj3");
         return !el;
       } else return el;

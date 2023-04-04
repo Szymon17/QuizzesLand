@@ -47,7 +47,7 @@ const AccountDropdown = () => {
                 </Link>
               </li>
             </ul>
-            <Button onClick={() => dispatch(logout())}>logout</Button>
+            <Button onClick={() => dispatch(logout())}>Wyloguj</Button>
           </motion.div>
         )}
       </AnimatePresence>

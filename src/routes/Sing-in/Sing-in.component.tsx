@@ -1,12 +1,11 @@
 import "./Sing-in.styles.css";
 import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logInEmail } from "../../store/user/user-actions";
 import { selectUser } from "../../store/user/user-selector";
-import { setAlert } from "../../store/alert/alert-reducer";
 import FormInput from "../../components/Form-input/Form-input.component";
-import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
+import Button from "../../components/Button/Button.component";
 
 const SingIn = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +23,7 @@ const SingIn = () => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-  const logInUser = () => dispatch(logInEmail({ email, password, handler: () => dispatch(setAlert("Logowanie udane")) }));
+  const logInUser = () => dispatch(logInEmail({ email, password, dispatch: dispatch }));
 
   const logInUserAfterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") logInUser();
@@ -36,12 +35,8 @@ const SingIn = () => {
       <FormInput onChange={onChangeEmail} description="Email" value={email} />
       <FormInput type="password" onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
       <footer className="footer-container">
-        <Button onClick={logInUser} buttonType={BUTTON_CLASSES.neon_blue}>
-          Zaloguj się
-        </Button>
-        <Link className="sing-up-link" to="/sing-up">
-          Zarejstruj się
-        </Link>
+        <Button onClick={logInUser}>Zaloguj się</Button>
+        <Button onClick={() => navigate("/sing-up")}>Zarejstruj się</Button>
       </footer>
     </div>
   );

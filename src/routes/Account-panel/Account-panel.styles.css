@@ -50,4 +50,9 @@
 
 .account-quiz-buttons .button {
   width: 130px;
+  margin-top: 10px;
+}
+
+.create-quiz-button {
+  text-align: right;
 }

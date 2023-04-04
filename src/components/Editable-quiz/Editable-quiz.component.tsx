@@ -31,12 +31,13 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
   const [animEnd, setAnimState] = useState(true);
 
   useEffect(() => {
-    dispatch(setNewOpenState(newOpenState(indexesArray.length)));
-
     if (quiz) {
       dispatch(replaceQuestions(quiz.questions));
       dispatch(updateTitle(quiz.title));
       dispatch(updateDescription(quiz.description));
+      dispatch(setNewOpenState(newOpenState(quiz.questions.length)));
+    } else {
+      dispatch(setNewOpenState(newOpenState(indexesArray.length)));
     }
 
     return () => {

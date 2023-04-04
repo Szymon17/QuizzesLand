@@ -105,13 +105,15 @@ const AccountPanel = () => {
                     </div>
                   </div>
                 ))}
-              {userQuizzes && userQuizzes.length < 3 ? (
-                <Button onClick={() => navigate("./create-quiz")}>Dodaj nowy quiz</Button>
-              ) : (
-                <>
-                  <Button buttonType={BUTTON_CLASSES.base_disabled}>Nie możesz dodać więcej quizów</Button>
-                </>
-              )}
+              <div className="create-quiz-button">
+                {userQuizzes && userQuizzes.length < 3 ? (
+                  <Button onClick={() => navigate("./create-quiz")}>Dodaj nowy quiz</Button>
+                ) : (
+                  <>
+                    <Button buttonType={BUTTON_CLASSES.base_disabled}>Nie możesz dodać więcej quizów</Button>
+                  </>
+                )}
+              </div>
             </section>
           </div>
         </div>

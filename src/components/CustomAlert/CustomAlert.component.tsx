@@ -13,23 +13,23 @@ const CustomAlert = () => {
       animate={{
         width: [0, 200],
         y: [0, 50],
-        maxHeight: "500px",
+        maxHeight: "200px",
 
         transition: {
           y: {
-            duration: 0.9,
+            duration: 0.3,
           },
           width: {
-            delay: 0.7,
+            delay: 0.4,
             duration: 0.25,
           },
           maxHeight: {
-            delay: 1,
+            delay: 0.4 + 0.25,
             duration: 0.25,
           },
         },
       }}
-      exit={{ left: "100%", width: 0 }}
+      exit={{ left: "100%" }}
     >
       <div className="alert-text">{text}</div>
     </motion.div>
