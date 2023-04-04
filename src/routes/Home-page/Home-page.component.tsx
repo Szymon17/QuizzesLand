@@ -19,10 +19,8 @@ const HomePage = () => {
       setOnce(false);
       if (userDelayTime < actialTime && randomQuizzes.length > 1) {
         dispatch(replaceFetchQuizzes(10));
-        console.log("*******************", "featched");
       } else if (randomQuizzes.length === 0) {
         dispatch(replaceFetchQuizzes(10));
-        console.log("*******************", "empty featched");
       }
     }
   }, []);
