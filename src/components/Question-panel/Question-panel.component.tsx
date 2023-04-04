@@ -8,7 +8,7 @@ import { selectQuestion } from "../../store/create-quiz/create-quiz-selector";
 import { newAnswer, removeQuestion, updateQuestion } from "../../store/create-quiz/create-quiz-reducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
-import CreatedAnswer from "../Created-answer/Created-answer.component";
+import CreatedAnswer from "../New-answer/New-answer.component";
 
 type questionPanelProps = {
   questionIndex: number;

@@ -1,4 +1,4 @@
-import "./Created-answer.styles.css";
+import "./New-answer.styles.css";
 import { FC, ChangeEvent, MouseEvent } from "react";
 import { faXmark, faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
