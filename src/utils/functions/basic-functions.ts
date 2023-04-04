@@ -44,7 +44,7 @@ export const findEmptyTextInQuestions = (questions: questionType[]) => {
 };
 
 export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
-  if (params.questions.length <= 1) return "Potrzebujesz więcej odpowiedzi";
+  if (params.questions.length <= 1) return "Potrzebujesz więcej pytań";
   else if (!params.title && params.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
   else if (findEmptyTextInAnswers(params.questions).length > 0) return "Wszystie odpowiedzi muszą być wypełnione";
   else if (findEmptyTextInQuestions(params.questions).length > 0) return "Wszystkie pytania muszą zawierać więcej niż 5 liter";
@@ -52,7 +52,7 @@ export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
 };
 
 export const validateQuiz = (Quiz: quizzType): string | boolean => {
-  if (Quiz.questions.length <= 1) return "Potrzebujesz więcej odpowiedzi";
+  if (Quiz.questions.length <= 1) return "Potrzebujesz więcej pytań";
   else if (!Quiz.title && Quiz.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
   else if (!Quiz.author || !Quiz.authorUID) return "Zaloguj się aby uzyskać dostęp";
   else if (!Quiz.uid) return "Coś poszło nie tak";
@@ -62,13 +62,10 @@ export const validateQuiz = (Quiz: quizzType): string | boolean => {
 };
 
 export const newOpenState = (numberOfQuestions: number) => {
-  console.log(numberOfQuestions);
   return Array(numberOfQuestions)
     .fill(false)
     .map((el, index) => {
-      console.log(el, index, "tutaj 2");
       if (index === numberOfQuestions - 1) {
-        console.log(el, "tutaj3");
         return !el;
       } else return el;
     });

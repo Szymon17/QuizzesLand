@@ -12,7 +12,6 @@ const HomePage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(process.env.NODE_ENV);
     const actialTime = new Date().getTime();
 
     if (once) {

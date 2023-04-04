@@ -60,10 +60,7 @@ export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: nu
 
     try {
       const quizSnapshot = await getDocs(q);
-      console.log(
-        quizSnapshot.docs.map(snapshot => snapshot.data()),
-        "getQuizzesByLikes"
-      );
+
       if (quizSnapshot) return quizSnapshot.docs.map(snapshot => snapshot.data()) as quizzType[];
     } catch (error) {
       throw Error(error as any);
