@@ -89,8 +89,6 @@ const createQuizSlice = createSlice({
 
     setNewOpenState: (state, action: PayloadAction<boolean[]>) => {
       state.openState = [...action.payload];
-
-      console.log("działa");
     },
 
     resetCreateQuizState: () => initialState,
