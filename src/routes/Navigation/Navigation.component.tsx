@@ -20,9 +20,6 @@ const Navigation = () => {
     if (alertText.length > 1) setTimeout(() => dispatch(hideAlert()), 5000);
   }, [alertText]);
 
-  console.log("render");
-  console.log(alertText, "alert");
-
   return (
     <>
       <div className="Navigation">
