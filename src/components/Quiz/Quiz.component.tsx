@@ -32,8 +32,6 @@ const Quiz: FC<quizPropsTypes> = ({ quiz }) => {
     }, howLongVisible - 100);
   };
 
-  console.log(quizQuestion);
-
   return (
     <div className="Quiz">
       {!startAnim && (
