@@ -93,7 +93,7 @@ const AccountPanel = () => {
                         ) : (
                           <Button
                             onClick={() => {
-                              const { minutes, seconds } = calculateTime(userEditDelayTime);
+                              const { minutes, seconds } = calculateTime(userDeleteDelayTime);
                               dispatch(setAlert(`Możesz użyć tę opcję za ${minutes} min: ${seconds} sec`));
                             }}
                             buttonType={BUTTON_CLASSES.base_disabled}

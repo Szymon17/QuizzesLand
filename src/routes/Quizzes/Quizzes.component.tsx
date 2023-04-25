@@ -20,14 +20,8 @@ const Quizzes = () => {
 
     if (userScroll > scrollHeight - 100 && !delayScrollEvent && quizzesFetchStatus !== "loading") {
       if (lastIndexConunt - fetchQuizesCount > 0) {
-        console.log("fetch");
-        console.log(lastIndexConunt);
-
         dispatch(addFetchQuizzes({ numberOfDocs: fetchQuizesCount, fromIndexCount: lastIndexConunt }));
       } else if (lastIndexConunt > 0) {
-        console.log("fetch");
-        console.log(lastIndexConunt);
-
         dispatch(addFetchQuizzes({ numberOfDocs: lastIndexConunt + 1, fromIndexCount: lastIndexConunt }));
       }
 
