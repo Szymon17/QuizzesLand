@@ -5,6 +5,7 @@
   background-color: rgb(212, 212, 212);
   color: black;
   max-width: 700px;
+  min-width: 330px;
   height: 30vh;
   border-radius: 10px;
   box-shadow: 0 0 20px 0.5px rgba(128, 128, 128, 0.3);
@@ -34,6 +35,7 @@
   top: 5%;
   left: 10px;
   z-index: 1;
+  font-size: 1.3em;
 }
 
 .quiz-description {
@@ -55,17 +57,16 @@
   margin-left: 10px;
 }
 
-@media (max-width: 600px) {
-  .quiz-card {
-    width: 90%;
-  }
-}
-
 @media (max-width: 900px) {
   .quiz-card {
+    width: 90%;
     height: 50vh;
     max-height: 300px;
     margin-bottom: 30px;
+  }
+
+  .quiz-card-title {
+    font-size: 1.2em;
   }
 
   .quizz-footer .button {

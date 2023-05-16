@@ -5,3 +5,10 @@
   height: 87vh;
   overflow-y: auto;
 }
+
+@media (max-width: 900px) {
+  .quizzes-container {
+    width: 99%;
+    padding: 0 20px;
+  }
+}

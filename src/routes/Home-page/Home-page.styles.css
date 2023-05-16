@@ -21,15 +21,30 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 1200px) {
+  .recomended-quizzes {
+    height: 92vh;
+    flex-basis: 100%;
+    padding: 50px;
+  }
+  .recomended-quizzez-container {
+    width: 100%;
+  }
+  .last-quizzes {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .recomended-quizzes {
     margin-top: calc(50vh - 8vh - 30vh);
     height: 150vh;
-    flex-basis: 90%;
+    flex-basis: 100%;
   }
 
   .recomended-quizzez-container {
-    width: 90%;
+    width: 100%;
+    justify-content: center;
   }
 }
 

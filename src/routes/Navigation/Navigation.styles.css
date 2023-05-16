@@ -21,3 +21,10 @@
   flex-grow: 1;
   font-size: 2em;
 }
+
+@media (max-width: 900px) {
+  .Navigation-container {
+    width: 50%;
+    font-size: 0.8em;
+  }
+}

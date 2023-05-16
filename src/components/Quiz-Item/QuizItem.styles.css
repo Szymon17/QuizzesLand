@@ -24,3 +24,9 @@
   height: 80%;
   color: beige;
 }
+
+@media (max-width: 900px) {
+  .quiz-item-title {
+    height: 30%;
+  }
+}
