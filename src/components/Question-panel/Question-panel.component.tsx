@@ -48,7 +48,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
       <div className="extend-question-panel" onClick={expandQuestion}>
         <div>
           <FontAwesomeIcon className="extend-icon" icon={faChevronDown} />
-          <span className="question-count">pytanie nr {questionIndex + 1}</span>
+          <span className="question-count">Pytanie nr {questionIndex + 1}</span>
         </div>
         <FontAwesomeIcon className="delete-question-icon" onClick={e => deleteQuestion(e)} icon={faTrash}></FontAwesomeIcon>
       </div>

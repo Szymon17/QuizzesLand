@@ -56,3 +56,7 @@
 .create-quiz-button {
   text-align: right;
 }
+
+.create-quiz-button > .button.disabled {
+  height: 60px;
+}

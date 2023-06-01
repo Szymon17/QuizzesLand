@@ -2,9 +2,12 @@
 
 #dev
 /toDo.txt
+/.firebaserc
+/firebase.json
 
 # dependencies
 /node_modules
+/.firebase
 /.pnp
 .pnp.js
 

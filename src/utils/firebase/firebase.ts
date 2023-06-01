@@ -180,6 +180,18 @@ export const getDocumentsCount = async (path: string) => {
   return snapshot.data().count;
 };
 
+export const getLastQuizIndex = async (): Promise<number | void> => {
+  const collectionQuizzes = collection(db, "quizzes");
+  const q = query(collectionQuizzes, orderBy("index", "desc"), limit(1));
+
+  try {
+    const docSnapshot = await getDocs(q);
+    if (docSnapshot) return docSnapshot.docs[0].data().index;
+  } catch (error) {
+    throw Error(error as any);
+  }
+};
+
 export const deleteQuiz = async (quizUid: string) => {
   const docRef = doc(db, "quizzes", quizUid);
 

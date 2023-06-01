@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { singUpEmailandPassword, addUserToDb, logInWithEmailAndPassword, getUserSnapshot, getCurrentUser } from "../../utils/firebase/firebase";
 import { setAlert } from "../alert/alert-reducer";
+import { validateNewUser } from "../../utils/functions/basic-functions";
 
 export const registerUser = async (email: string, password: string, confirmedPassword: string, displayName: string, dispatch?: Function) => {
-  if (dispatch) {
-    if (email === "") dispatch(setAlert("Nie podałeś emailu"));
-    else if (displayName === "") dispatch(setAlert("Nie podałeś nazwy użytkownika"));
-    else if (password === "") dispatch(setAlert("Nie podałeś hasła"));
-    else if (password !== confirmedPassword) dispatch(setAlert("Hasła nie są takie same"));
+  const validateUser = validateNewUser(email, password, confirmedPassword, displayName);
+
+  if (dispatch && validateUser) {
+    dispatch(setAlert(validateUser));
+    return;
   }
 
   try {

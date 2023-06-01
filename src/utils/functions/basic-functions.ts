@@ -56,6 +56,7 @@ export const validateQuiz = (Quiz: quizzType): string | boolean => {
   else if (!Quiz.title && Quiz.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
   else if (!Quiz.author || !Quiz.authorUID) return "Zaloguj się aby uzyskać dostęp";
   else if (!Quiz.uid) return "Coś poszło nie tak";
+  else if (Quiz.index < 0) return "Błąd połączenia z bazą danych";
   else if (findEmptyTextInAnswers(Quiz.questions).length > 0) return "Wszystie odpowiedzi muszą być wypełnione";
   else if (findEmptyTextInQuestions(Quiz.questions).length > 0) return "Wszystkie pytania muszą zawierać więcej niż 5 liter";
   else return true;
@@ -69,4 +70,11 @@ export const newOpenState = (numberOfQuestions: number) => {
         return !el;
       } else return el;
     });
+};
+
+export const validateNewUser = (email: string, password: string, confirmedPassword: string, displayName: string): string | void => {
+  if (email === "") return "Nie podałeś emailu";
+  else if (displayName === "") return "Nie podałeś nazwy użytkownika";
+  else if (password === "") return "Nie podałeś hasła";
+  else if (password !== confirmedPassword) return "Hasła nie są takie same";
 };

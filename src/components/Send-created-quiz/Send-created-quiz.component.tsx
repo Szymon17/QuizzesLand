@@ -6,7 +6,7 @@ import { quizzType } from "../../store/quizzes/quizz-types";
 import { v4 } from "uuid";
 import { validateQuiz } from "../../utils/functions/basic-functions";
 import { resetCreateQuizState } from "../../store/create-quiz/create-quiz-reducer";
-import { addNewQuizToDb, getDocumentsCount } from "../../utils/firebase/firebase";
+import { addNewQuizToDb, getLastQuizIndex } from "../../utils/firebase/firebase";
 import { useNavigate } from "react-router";
 import { updateUserQuizzes } from "../../store/user/user-reducer";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
@@ -18,6 +18,12 @@ const SendCreatedQuiz = () => {
   const dispatch = useAppDispatch();
   const quizSnapshot = useAppSelector(selectQuiz);
   const user = useAppSelector(selectUser);
+
+  const setNewIndex = async (): Promise<number> => {
+    const newIndex = await getLastQuizIndex();
+    if (typeof newIndex === "number") return newIndex + 1;
+    else return -1;
+  };
 
   const sendQuizToDB = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -34,7 +40,7 @@ const SendCreatedQuiz = () => {
         uid: quizUid ? quizUid : "",
         questions: quizSnapshot.questions,
         likes: 0,
-        index: await getDocumentsCount("quizzes"),
+        index: await setNewIndex(),
       };
 
       const tryValidate = validateQuiz(quiz);

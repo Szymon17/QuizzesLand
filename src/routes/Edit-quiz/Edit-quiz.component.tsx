@@ -30,6 +30,11 @@ const EditQuiz = () => {
   const actualTime = new Date().getTime();
 
   useEffect(() => {
+    if ((!quiz && !user) || quiz?.authorUID !== user?.id) {
+      navigate("/");
+      return;
+    }
+
     const fetchQuiz = async () => {
       if (quizUid) {
         const featchedQuiz = await getQuiz(quizUid);

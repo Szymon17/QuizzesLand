@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:deploy": "env-cmd -f .env.local npm run build && firebase deploy -P quizzes-95ef3",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@types/redux-logger": "^3.0.9",
-    "@types/redux-persist": "^4.3.1"
+    "@types/redux-persist": "^4.3.1",
+    "env-cmd": "^10.1.0"
   }
 }

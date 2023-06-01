@@ -36,9 +36,7 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
       dispatch(updateTitle(quiz.title));
       dispatch(updateDescription(quiz.description));
       dispatch(setNewOpenState(newOpenState(quiz.questions.length)));
-    } else {
-      dispatch(setNewOpenState(newOpenState(indexesArray.length)));
-    }
+    } else dispatch(setNewOpenState(newOpenState(indexesArray.length)));
 
     return () => {
       dispatch(resetCreateQuizState());
@@ -85,11 +83,13 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
     <>
       <form className="editable-quiz">
         <div className="editable-quiz-container">
-          <FormInput placeholder="Tytuł" value={title} onChange={changeTitle} />
-          <textarea placeholder="Opis" value={description} onChange={changeDescription} />
-          <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
-            Dodaj pytanie
-          </Button>
+          <div className="editable-quiz__top-panel">
+            <FormInput placeholder="Tytuł" value={title} onChange={changeTitle} />
+            <textarea placeholder="Opis" value={description} onChange={changeDescription} />
+            <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
+              Dodaj pytanie
+            </Button>
+          </div>
           <div className="questions-container">
             {indexesArray.map(questionIndex => (
               <QuestionPanel key={questionIndex} questionIndex={questionIndex} clickHandler={expandQuestion} open={openStateArray[questionIndex]} />

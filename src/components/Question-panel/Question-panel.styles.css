@@ -20,11 +20,11 @@
 }
 
 .extend-question-panel {
-  height: 35px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   padding: 5px 10px;
-  background-color: #535353;
+  background-color: #000000;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   cursor: pointer;

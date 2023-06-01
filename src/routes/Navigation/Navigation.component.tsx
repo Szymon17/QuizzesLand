@@ -10,6 +10,7 @@ import { hideAlert } from "../../store/alert/alert-reducer";
 import { AnimatePresence } from "framer-motion";
 import AccountDropdown from "../../components/Account-dropdown/Account-dropdown.component";
 import CustomAlert from "../../components/CustomAlert/CustomAlert.component";
+import CustomLink from "../../components/CustomLink/CustomLink.component";
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -23,16 +24,16 @@ const Navigation = () => {
   return (
     <>
       <div className="Navigation">
-        <Link className="main-page-link" to="/">
+        <CustomLink cssClass="main-page-link" to="/">
           <FontAwesomeIcon icon={faHouse} />
-        </Link>
+        </CustomLink>
         <div className="Navigation-container">
           <div className="Navigation-link">
-            <Link to="/quizzes">Quizy</Link>
+            <CustomLink to="/quizzes">Quizy</CustomLink>
           </div>
           {user === null ? (
             <div className="Navigation-link">
-              <Link to="/sing-in">Login</Link>
+              <CustomLink to="/sing-in">Login</CustomLink>
             </div>
           ) : (
             <AccountDropdown />

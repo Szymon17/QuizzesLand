@@ -1,5 +1,5 @@
 import "./Account-panel.styles.css";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
@@ -8,7 +8,6 @@ import { selectUserDeleteDelayTime, selectUserEditDelayTime } from "../../store/
 import { deleteQuizFromDb, deleteUserQuiz } from "../../utils/firebase/firebase";
 import { deleteUserQuizFromReducer } from "../../store/user/user-reducer";
 import { deleteQuizFromReducer } from "../../store/quizzes/quizzes-reducer";
-import { setAlert } from "../../store/alert/alert-reducer";
 
 const AccountPanel = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +47,12 @@ const AccountPanel = () => {
     return { minutes, seconds };
   };
 
+  const displayTime = (time: number) => {
+    const { minutes, seconds } = calculateTime(time);
+
+    return `${minutes} : ${seconds > 10 ? seconds : "0" + seconds}`;
+  };
+
   return (
     <>
       {user && (
@@ -76,14 +81,8 @@ const AccountPanel = () => {
                         {userEditDelayTime < actualTime ? (
                           <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
                         ) : (
-                          <Button
-                            onClick={() => {
-                              const { minutes, seconds } = calculateTime(userEditDelayTime);
-                              dispatch(setAlert(`Możesz użyć tę opcję za ${minutes} min: ${seconds} sec`));
-                            }}
-                            buttonType={BUTTON_CLASSES.base_disabled}
-                          >
-                            Niedostępne
+                          <Button onClick={() => null} buttonType={BUTTON_CLASSES.base_disabled}>
+                            {displayTime(userEditDelayTime)}
                           </Button>
                         )}
                       </span>
@@ -91,14 +90,8 @@ const AccountPanel = () => {
                         {userDeleteDelayTime < actualTime ? (
                           <Button onClick={() => deleteQuiz(quiz.uid)}>Usuń</Button>
                         ) : (
-                          <Button
-                            onClick={() => {
-                              const { minutes, seconds } = calculateTime(userDeleteDelayTime);
-                              dispatch(setAlert(`Możesz użyć tę opcję za ${minutes} min: ${seconds} sec`));
-                            }}
-                            buttonType={BUTTON_CLASSES.base_disabled}
-                          >
-                            Niedostępne
+                          <Button onClick={() => null} buttonType={BUTTON_CLASSES.base_disabled}>
+                            {displayTime(userDeleteDelayTime)}
                           </Button>
                         )}
                       </span>

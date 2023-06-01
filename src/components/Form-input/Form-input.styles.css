@@ -11,6 +11,8 @@
   height: 35px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 550;
+  border: none;
+  border-radius: 5px;
 }
 
 .form-input.incorrect {

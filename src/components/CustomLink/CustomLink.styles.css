@@ -1,0 +1,27 @@
+.custom__link {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  display: inline-block;
+}
+
+.custom__link > a {
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.custom__link > a > svg {
+  z-index: 0;
+  color: whitesmoke;
+}
+
+.custom__link__underline {
+  height: 2px;
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+}
