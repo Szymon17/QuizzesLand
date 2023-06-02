@@ -45,7 +45,7 @@ export const findEmptyTextInQuestions = (questions: questionType[]) => {
 
 export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
   if (params.questions.length <= 1) return "Potrzebujesz więcej pytań";
-  else if (!params.title && params.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
+  else if ((!params.title && params.title.length <= 25) || params.title.length < 3) return "Tytuł musi zawierać od 3 do 25 znaków";
   else if (findEmptyTextInAnswers(params.questions).length > 0) return "Wszystie odpowiedzi muszą być wypełnione";
   else if (findEmptyTextInQuestions(params.questions).length > 0) return "Wszystkie pytania muszą zawierać więcej niż 5 liter";
   else return true;
@@ -53,7 +53,7 @@ export const validateQuizParamsToUpdate = (params: updateQuizParams) => {
 
 export const validateQuiz = (Quiz: quizzType): string | boolean => {
   if (Quiz.questions.length <= 1) return "Potrzebujesz więcej pytań";
-  else if (!Quiz.title && Quiz.title.length <= 25) return "Tytuł musi zawierać maxymalnie 25 liter";
+  else if ((!Quiz.title && Quiz.title.length <= 25) || Quiz.title.length < 3) return "Tytuł musi zawierać od 3 do 25 znaków";
   else if (!Quiz.author || !Quiz.authorUID) return "Zaloguj się aby uzyskać dostęp";
   else if (!Quiz.uid) return "Coś poszło nie tak";
   else if (Quiz.index < 0) return "Błąd połączenia z bazą danych";

@@ -1,13 +1,13 @@
 import "./Account-panel.styles.css";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
-import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import { useNavigate } from "react-router";
 import { selectUserDeleteDelayTime, selectUserEditDelayTime } from "../../store/quizzes/quizzes-selectors";
-import { deleteQuizFromDb, deleteUserQuiz } from "../../utils/firebase/firebase";
+import { deleteQuizFromDb } from "../../utils/firebase/firebase";
 import { deleteUserQuizFromReducer } from "../../store/user/user-reducer";
 import { deleteQuizFromReducer } from "../../store/quizzes/quizzes-reducer";
+import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 
 const AccountPanel = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,9 @@ const AccountPanel = () => {
 
   useEffect(() => {
     if (user === null) navigate("/");
+  }, [user, navigate]);
 
+  useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
       setActualTime(now);

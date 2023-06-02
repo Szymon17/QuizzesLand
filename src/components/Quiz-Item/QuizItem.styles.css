@@ -3,11 +3,12 @@
   height: 200px;
   margin-bottom: 30px;
   padding: 10px 30px;
-  background-color: rgb(71, 71, 71);
-  color: black;
+  background-color: transparent;
+  color: whitesmoke;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  box-shadow: 2px 2px 5px -1px black, -1px -1px 5px -2px white;
 }
 
 .quiz-item-left {

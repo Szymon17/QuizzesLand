@@ -1,9 +1,9 @@
 import "./QuizItem.styles.css";
 import { FC, useState } from "react";
 import { quizzType } from "../../store/quizzes/quizz-types";
-import Button from "../Button/Button.component";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
+import Button from "../Button/Button.component";
 
 type quizProps = {
   quiz: quizzType;

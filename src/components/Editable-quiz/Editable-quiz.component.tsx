@@ -84,7 +84,7 @@ const EditableQuiz: FC<{ quiz?: quizzType }> = ({ quiz }) => {
       <form className="editable-quiz">
         <div className="editable-quiz-container">
           <div className="editable-quiz__top-panel">
-            <FormInput placeholder="Tytuł" value={title} onChange={changeTitle} />
+            <FormInput incorrect={title.length < 3 && title.length !== 0} placeholder="Tytuł" value={title} onChange={changeTitle} />
             <textarea placeholder="Opis" value={description} onChange={changeDescription} />
             <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={createNewQuestion}>
               Dodaj pytanie
