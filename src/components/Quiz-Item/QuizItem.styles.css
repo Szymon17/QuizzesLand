@@ -26,7 +26,7 @@
   color: beige;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .quiz-item-title {
     height: 30%;
   }

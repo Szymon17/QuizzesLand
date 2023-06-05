@@ -6,9 +6,15 @@
   overflow-y: auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .quizzes-container {
-    width: 99%;
+    width: 90%;
     padding: 0 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .quizzes-container {
+    width: 100%;
   }
 }

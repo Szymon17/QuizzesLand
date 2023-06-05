@@ -60,3 +60,9 @@
 .create-quiz-button > .button.disabled {
   height: 60px;
 }
+
+@media (max-width: 600px) {
+  .account-panel {
+    width: 100%;
+  }
+}

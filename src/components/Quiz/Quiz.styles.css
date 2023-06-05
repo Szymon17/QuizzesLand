@@ -12,3 +12,12 @@
   font-size: 30px;
   transform: translateY(-100px);
 }
+
+@media (max-width: 1000px) {
+  .Quiz-container {
+    width: 100%;
+  }
+  .quiz-question {
+    padding-left: 20px;
+  }
+}

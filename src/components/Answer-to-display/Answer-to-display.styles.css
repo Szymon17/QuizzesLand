@@ -22,7 +22,6 @@
   border-radius: 3px;
   border: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 1.1em;
   font-weight: 500;
   letter-spacing: 2px;
   border: 2px solid rgb(172, 172, 172);
@@ -48,8 +47,15 @@
   border-color: var(--neon_green);
   box-shadow: 0 0 5px 0.5px var(--neon_green);
 }
+
 .display-answer-icon.incorrect {
   color: var(--neon_red);
   border-color: var(--neon_red);
   box-shadow: 0 0 5px 0.5px var(--neon_red);
+}
+
+@media (max-width: 1000px) {
+  .fake-button {
+    font-size: 14px;
+  }
 }

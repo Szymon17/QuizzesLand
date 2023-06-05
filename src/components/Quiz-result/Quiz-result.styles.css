@@ -21,6 +21,9 @@
 .question-index {
   position: absolute;
   top: 10px;
+  color: rgb(177, 115, 0);
+  text-align: center;
+  font-weight: 700;
 }
 
 .quiz-likes-count {
@@ -45,4 +48,15 @@
   width: 50px;
   font-size: 20px;
   text-align: right;
+}
+
+@media (max-width: 1000px) {
+  .quiz-result {
+    padding: 10px;
+    width: 100%;
+    border: none;
+  }
+  .question-index {
+    font-size: 12px;
+  }
 }

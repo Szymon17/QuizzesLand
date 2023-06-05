@@ -1,9 +1,9 @@
 .alert {
   padding: 10px 20px;
   position: absolute;
+  width: 200px;
   top: 10vh;
   left: calc(99vw - 200px);
-  width: 200px;
   text-align: center;
   border: 2px solid white;
   border-radius: 10px;
