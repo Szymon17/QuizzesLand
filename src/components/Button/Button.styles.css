@@ -5,7 +5,7 @@
   padding: 5px 10px;
   color: whitesmoke;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 5px;
   border: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 1.1em;
@@ -13,8 +13,7 @@
   letter-spacing: 2px;
   transition: 0.3s all linear;
 
-  --base: rgb(172, 172, 172);
-  --base_reverse: rgb(56, 56, 56);
+  --base: rgb(204, 122, 0);
   --neon_blue: rgb(0, 195, 255);
   --neon_green: rgb(0, 238, 59);
   --neon_red: rgb(255, 0, 0);
@@ -27,7 +26,7 @@
 }
 
 .button.base:hover {
-  background: rgb(56, 56, 56);
+  background: rgb(29, 29, 29);
 }
 
 .button.neon-blue {
@@ -39,19 +38,6 @@
   color: var(--neon_blue);
   border-color: var(--neon_blue);
   box-shadow: 0 0 15px 0.5px var(--neon_blue);
-}
-
-.button.base_reverse {
-  background-color: transparent;
-  border: 2px solid var(--base_reverse);
-  color: black;
-}
-
-.button.base_reverse:hover {
-  border-color: var(--base_reverse);
-  background-color: var(--base_reverse);
-  box-shadow: 0 0 15px 0.5px var(--base_reverse);
-  color: white;
 }
 
 .button.neon-green {

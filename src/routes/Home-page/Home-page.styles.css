@@ -1,11 +1,8 @@
 .Homepage {
-  min-width: 100%;
+  width: 100%;
   min-height: 92vh;
   display: flex;
-}
-
-.last-quizzes {
-  flex-basis: 20%;
+  justify-content: center;
 }
 
 .recomended-quizzes {
@@ -13,6 +10,7 @@
 }
 
 .recomended-quizzez-container {
+  margin: 0 auto;
   width: 80%;
   height: 100%;
   display: flex;
@@ -55,11 +53,6 @@
 
   .Homepage {
     flex-direction: column;
-  }
-
-  .last-quizzes {
-    width: 100%;
-    flex-basis: 10vh;
   }
 
   .recomended-quizzez-container {

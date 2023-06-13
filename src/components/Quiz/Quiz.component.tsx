@@ -13,7 +13,6 @@ export type quizPropsTypes = {
 };
 
 const Quiz: FC<quizPropsTypes> = ({ quiz }) => {
-  const [startAnim, setAnimState] = useState(false);
   const [renderFakeButtons, setFakeButtonsState] = useState(false);
   const [quizQuestion, setQuizQuestion] = useState(quiz.questions[0]);
   const progress = useAppSelector(selectProgress);
@@ -26,26 +25,21 @@ const Quiz: FC<quizPropsTypes> = ({ quiz }) => {
     setTimeout(() => {
       setFakeButtonsState(false);
       setQuizQuestion(quiz.questions[progress + 1]);
-
-      setAnimState(true);
-      setTimeout(() => setAnimState(false), 100);
     }, howLongVisible - 100);
   };
 
   return (
     <div className="Quiz">
-      {!startAnim && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="Quiz-container">
-          {quizQuestion ? (
-            <>
-              <span className="quiz-question">{quizQuestion.question}</span>
-              <QuizAnswers quizAnswers={quizQuestion.answers} fakeAnswersState={renderFakeButtons} clickHandler={showCorrectOrIncorrect} />
-            </>
-          ) : (
-            <QuizResult quiz={quiz} />
-          )}
-        </motion.div>
-      )}
+      <div className="Quiz-container">
+        {quizQuestion ? (
+          <>
+            <span className="quiz-question">{quizQuestion.question}</span>
+            <QuizAnswers quizAnswers={quizQuestion.answers} fakeAnswersState={renderFakeButtons} clickHandler={showCorrectOrIncorrect} />
+          </>
+        ) : (
+          <QuizResult quiz={quiz} />
+        )}
+      </div>
     </div>
   );
 };

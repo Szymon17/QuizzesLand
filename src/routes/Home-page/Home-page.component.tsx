@@ -26,7 +26,6 @@ const HomePage = () => {
 
   return (
     <div className="Homepage">
-      <aside className="last-quizzes"></aside>
       <div className="recomended-quizzes">
         <div className="recomended-quizzez-container">
           {randomQuizzes.map((quiz, index) => (

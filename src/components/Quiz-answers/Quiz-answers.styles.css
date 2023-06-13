@@ -1,0 +1,10 @@
+.quiz__answers-box {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quiz__answer-box {
+  width: 100%;
+}

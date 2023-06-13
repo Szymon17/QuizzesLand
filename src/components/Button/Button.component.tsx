@@ -3,7 +3,6 @@ import { FC, ButtonHTMLAttributes } from "react";
 
 export enum BUTTON_CLASSES {
   base = "base",
-  base_reverse = "base_reverse",
   neon_blue = "neon-blue",
   neon_green = "neon-green",
   neon_red = "neon-red",
