@@ -1,5 +1,5 @@
 import "./Question-panel.styles.css";
-import { FC, MouseEvent, ChangeEvent } from "react";
+import { FC, MouseEvent, ChangeEvent, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
@@ -44,7 +44,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
   };
 
   return (
-    <div className="question-container">
+    <motion.div className="question-container" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <div className="extend-question-panel" onClick={expandQuestion}>
         <div>
           <FontAwesomeIcon className="extend-icon" icon={faChevronDown} />
@@ -57,7 +57,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
           <motion.div
             className="add-question"
             initial={{ height: 0 }}
-            animate={{ height: "250px" }}
+            animate={{ height: "270px" }}
             exit={{ height: "20px" }}
             transition={{ duration: 0.3, ease: "linear" }}
           >
@@ -91,7 +91,7 @@ const QuestionPanel: FC<questionPanelProps> = ({ questionIndex, clickHandler, op
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

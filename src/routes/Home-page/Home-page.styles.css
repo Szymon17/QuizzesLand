@@ -19,6 +19,10 @@
   flex-wrap: wrap;
 }
 
+.homepage__card-box {
+  width: 45%;
+}
+
 @media (max-width: 1200px) {
   .recomended-quizzes {
     height: 92vh;
@@ -44,10 +48,19 @@
     width: 100%;
     justify-content: center;
   }
+
+  .homepage__card-box {
+    width: 90%;
+    height: 50vh;
+    max-height: 300px;
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 600px) {
   .recomended-quizzes {
+    padding: 0;
+    padding-top: 50px;
     margin-top: 0;
   }
 
