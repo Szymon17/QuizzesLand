@@ -1,7 +1,7 @@
 import "./New-answer.styles.css";
-import { FC, ChangeEvent, MouseEvent } from "react";
-import { faXmark, faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faXmark, faTrashCan, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FC, ChangeEvent, MouseEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { answerType } from "../../store/quizzes/quizz-types";
 import { updateAnswer, removeAnswer } from "../../store/create-quiz/create-quiz-reducer";
@@ -39,6 +39,7 @@ const CreatedAnswer: FC<createdAnswerTypes> = ({ questionIndex, answerIndex, ans
 
   return (
     <div className="answer-container">
+      <FontAwesomeIcon className="answer-container__icon icon" icon={faPencil} />
       <FormInput
         value={answer.text}
         placeholder="Dodaj odpowiedź"

@@ -10,9 +10,8 @@ import { quizzType, updateQuizParams } from "../../store/quizzes/quizz-types";
 import { selectQuiz } from "../../store/create-quiz/create-quiz-selector";
 import { updateUserQuiz } from "../../store/user/user-reducer";
 import { selectUser } from "../../store/user/user-selector";
-import EditableQuiz from "../../components/Editable-quiz/Editable-quiz.component";
-import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 import { setAlert } from "../../store/alert/alert-reducer";
+import EditableQuiz from "../../components/Editable-quiz/Editable-quiz.component";
 
 const EditQuiz = () => {
   const navigate = useNavigate();
@@ -51,8 +50,11 @@ const EditQuiz = () => {
     else if (quizUid) fetchQuiz();
   }, []);
 
-  const sendQuizToDb = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const sendQuizToDb = () => {
+    if (editDelayTime > actualTime) {
+      dispatch(setAlert("musisz odczekać chwilę po edycji następnego quizu"));
+      return;
+    }
 
     if (quizToSend && quiz) {
       const paramsToUpdate: updateQuizParams = {
@@ -75,14 +77,7 @@ const EditQuiz = () => {
 
   return (
     <div className="edit-quiz">
-      <EditableQuiz quiz={quiz} />
-      {buttonActive && editDelayTime < actualTime ? (
-        <Button onClick={sendQuizToDb}>Aktualizuj</Button>
-      ) : (
-        <Button buttonType={BUTTON_CLASSES.base_disabled} onClick={() => null}>
-          Aktualizuj
-        </Button>
-      )}
+      <EditableQuiz handler={sendQuizToDb} quiz={quiz} />
     </div>
   );
 };

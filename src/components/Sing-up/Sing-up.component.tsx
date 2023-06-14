@@ -31,7 +31,7 @@ const SingUp = () => {
       <FormInput onChange={onChangeName} description="Nazwa" value={displayName} />
       <FormInput type="password" onChange={onChangePassword} description="Hasło" value={password} />
       <FormInput type="password" onChange={onChangeConfirmedPassword} description="Powtórz hasło" value={confirmedPassword} />
-      <Button onClick={registerUserHandler} buttonType={BUTTON_CLASSES.neon_blue}>
+      <Button onClick={registerUserHandler} buttonType={BUTTON_CLASSES.neon_orange}>
         Zarejstruj się
       </Button>
     </div>

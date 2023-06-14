@@ -4,6 +4,7 @@ import { quizzType } from "../../store/quizzes/quizz-types";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../Button/Button.component";
+import { isMobile } from "../../utils/functions/mobile-check";
 
 type quizProps = {
   quiz: quizzType;
@@ -14,7 +15,13 @@ const QuizItem: FC<quizProps> = ({ quiz }) => {
   const navigate = useNavigate();
 
   return (
-    <motion.div whileHover={{ scale: 1.03 }} onHoverStart={() => setOpenState(true)} onHoverEnd={() => setOpenState(false)} className="quiz-item">
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      onHoverStart={() => (isMobile ? null : setOpenState(true))}
+      onHoverEnd={() => (isMobile ? null : setOpenState(false))}
+      onTap={() => (isMobile ? (isOpen ? setOpenState(false) : setOpenState(true)) : null)}
+      className="quiz-item"
+    >
       <div className="quiz-item-left">
         <h1 className="quiz-item-title">{quiz.title}</h1>
         <p className="quiz-item-description">{quiz.description}</p>

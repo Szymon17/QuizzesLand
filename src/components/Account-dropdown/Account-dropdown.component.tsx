@@ -1,6 +1,6 @@
 import "./Account-dropdown.styles.css";
 import { MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectUser } from "../../store/user/user-selector";
 import { logout } from "../../store/user/user-reducer";
@@ -12,6 +12,7 @@ import Button from "../Button/Button.component";
 import { changeDropdownOpenState } from "../../store/user-dropdown/user-dropdown-reducer";
 
 const AccountDropdown = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const userDropdownState = useAppSelector(selectDropdownOpenState);
@@ -20,6 +21,11 @@ const AccountDropdown = () => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(changeDropdownOpenState(!userDropdownState));
+  };
+
+  const userLogOut = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -45,7 +51,7 @@ const AccountDropdown = () => {
                 </Link>
               </li>
             </ul>
-            <Button onClick={() => dispatch(logout())}>Wyloguj</Button>
+            <Button onClick={userLogOut}>Wyloguj</Button>
           </motion.div>
         )}
       </AnimatePresence>

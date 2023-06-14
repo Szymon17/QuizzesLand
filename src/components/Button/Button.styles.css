@@ -14,6 +14,7 @@
   transition: 0.3s all linear;
 
   --base: rgb(204, 122, 0);
+  --neon_orange: rgb(204, 122, 0);
   --neon_blue: rgb(0, 195, 255);
   --neon_green: rgb(0, 238, 59);
   --neon_red: rgb(255, 0, 0);
@@ -26,7 +27,8 @@
 }
 
 .button.base:hover {
-  background: rgb(29, 29, 29);
+  background-color: var(--base);
+  color: black;
 }
 
 .button.neon-blue {
@@ -38,6 +40,17 @@
   color: var(--neon_blue);
   border-color: var(--neon_blue);
   box-shadow: 0 0 15px 0.5px var(--neon_blue);
+}
+
+.button.neon-orange {
+  background-color: transparent;
+  color: whitesmoke;
+  border: 2px solid var(--neon_orange);
+}
+
+.button.neon-orange:hover {
+  box-shadow: 0 0 15px 0.5px var(--neon_orange);
+  color: var(--neon_orange);
 }
 
 .button.neon-green {

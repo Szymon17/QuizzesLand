@@ -1,3 +1,10 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(190, 167, 135) inset;
+}
+
 .form-input-container {
   position: relative;
   width: 100%;
@@ -13,10 +20,14 @@
   font-weight: 550;
   border: none;
   border-radius: 5px;
+  background-color: rgb(190, 167, 135);
+  box-shadow: inset 0px 0px 2px 0.1px rgb(0, 0, 0);
 }
 
 .form-input.incorrect {
-  border: 2px solid red;
+  border-radius: 0;
+  border-bottom: 1px solid red;
+  transition: border 0.5s linear;
 }
 
 .form-input-label {

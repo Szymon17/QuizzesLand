@@ -20,5 +20,3 @@ export const selectArrayWithCreatedQuizIndexes = createSelector([selectReducer],
 export const selectQuestion = (questionIndex: number) => createSelector([selectReducer], createQuiz => createQuiz.questions[questionIndex]);
 
 export const selectAnswers = (questionIndex: number) => createSelector([selectReducer], createQuiz => createQuiz.questions[questionIndex].answers);
-
-export const selectOpenStateArray = createSelector([selectReducer], reducer => reducer.openState);

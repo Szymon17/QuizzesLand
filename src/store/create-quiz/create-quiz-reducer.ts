@@ -6,14 +6,12 @@ type initialStateTypes = {
   title: string;
   description: string;
   questions: questionType[];
-  openState: boolean[];
 };
 
 const initialState: initialStateTypes = {
   title: "",
   description: "",
   questions: [{ question: "", answers: [{ text: "", correct: false, id: 1 }] }],
-  openState: [],
 };
 
 const createQuizSlice = createSlice({
@@ -80,15 +78,10 @@ const createQuizSlice = createSlice({
 
     removeQuestion: (state, action: PayloadAction<number>) => {
       state.questions.splice(action.payload, 1);
-      state.openState.splice(action.payload, 1);
     },
 
     replaceQuestions: (state, action: PayloadAction<questionType[]>) => {
       state.questions = [...action.payload];
-    },
-
-    setNewOpenState: (state, action: PayloadAction<boolean[]>) => {
-      state.openState = [...action.payload];
     },
 
     resetCreateQuizState: () => initialState,
@@ -106,7 +99,6 @@ export const {
   resetCreateQuizState,
   replaceQuestions,
   removeQuestion,
-  setNewOpenState,
 } = createQuizSlice.actions;
 
 export default createQuizSlice.reducer;

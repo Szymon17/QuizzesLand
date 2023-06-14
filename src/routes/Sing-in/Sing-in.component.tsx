@@ -1,4 +1,6 @@
 import "./Sing-in.styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useNavigate } from "react-router-dom";
@@ -31,13 +33,16 @@ const SingIn = () => {
 
   return (
     <div className="sing-in">
-      <h2>Zaloguj się</h2>
-      <FormInput onChange={onChangeEmail} description="Email" value={email} />
-      <FormInput type="password" onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
-      <footer className="footer-container">
-        <Button onClick={logInUser}>Zaloguj się</Button>
-        <Button onClick={() => navigate("/sing-up")}>Zarejstruj się</Button>
-      </footer>
+      <div className="sing-in__container">
+        <h2>Zaloguj się</h2>
+        <FontAwesomeIcon className="sing-in__icon" icon={faUser} />
+        <FormInput onChange={onChangeEmail} description="Email" value={email} />
+        <FormInput type="password" onKeyUp={logInUserAfterKeyPress} onChange={onChangePassword} description="Hasło" value={password} />
+        <footer className="footer-container">
+          <Button onClick={logInUser}>Zaloguj się</Button>
+          <Button onClick={() => navigate("/sing-up")}>Zarejstruj się</Button>
+        </footer>
+      </div>
     </div>
   );
 };

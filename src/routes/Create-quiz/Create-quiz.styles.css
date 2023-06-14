@@ -1,6 +1,13 @@
 .create-quiz {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-height: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.create-quiz > .button {
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
 }

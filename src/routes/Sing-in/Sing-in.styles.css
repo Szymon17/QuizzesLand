@@ -1,17 +1,23 @@
 .sing-in {
-  width: clamp(350px, 40vw, 800px);
-  height: clamp(300px, 30vh, 400px);
+  width: clamp(350px, 70vw, 700px);
+  height: clamp(300px, 60vh, 700px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid rgb(255, 153, 0);
+  text-align: center;
+}
+
+.sing-in__container {
+  width: 100%;
+  height: 90%;
+  margin-top: 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 3px solid rgb(219, 219, 219);
-  text-align: center;
 }
 
 .footer-container {
@@ -24,4 +30,15 @@
 .sing-up-link {
   color: rgb(0, 172, 184);
   font-weight: 600;
+}
+
+.sing-in__icon {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%);
+  padding: clamp(10px, 1.1vw, 40px);
+  font-size: clamp(20px, 3vw, 70px);
+  border-radius: 50%;
+  border: 0.3vw solid whitesmoke;
 }
