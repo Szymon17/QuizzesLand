@@ -21,7 +21,7 @@ const emptyQuestion: questionType = {
   answers: [{ text: "", correct: false, id: 1 }],
 };
 
-const EditableQuiz: FC<{ quiz?: quizzType; handler: Function }> = ({ quiz, handler }) => {
+const EditableQuiz: FC<{ quiz?: quizzType; handler: Function; handlerName: string }> = ({ quiz, handler, handlerName }) => {
   const dispatch = useAppDispatch();
   const indexesArray = useAppSelector(selectArrayWithCreatedQuizIndexes);
 
@@ -80,7 +80,7 @@ const EditableQuiz: FC<{ quiz?: quizzType; handler: Function }> = ({ quiz, handl
             ))}
           </div>
           <Button onClick={handleEvent} buttonType={BUTTON_CLASSES.neon_orange}>
-            Aktualizuj
+            {handlerName}
           </Button>
         </div>
       </form>

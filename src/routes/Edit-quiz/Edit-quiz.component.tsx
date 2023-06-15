@@ -23,7 +23,6 @@ const EditQuiz = () => {
   const editDelayTime = useAppSelector(selectUserEditDelayTime);
   const user = useAppSelector(selectUser);
 
-  const [buttonActive, setButtonState] = useState(true);
   const [quiz, setQuiz] = useState(quizFromReducer);
 
   const actualTime = new Date().getTime();
@@ -66,7 +65,6 @@ const EditQuiz = () => {
       const validateState = validateQuizParamsToUpdate(paramsToUpdate);
 
       if (validateState === true && user) {
-        setButtonState(false);
         updateQuiz(paramsToUpdate, quiz.uid, () => navigate("/"));
         updateUserSnapshotQuiz(paramsToUpdate.title, quiz.uid, user);
         dispatch(updateUserQuiz({ title: paramsToUpdate.title, uid: quiz.uid }));
@@ -77,7 +75,7 @@ const EditQuiz = () => {
 
   return (
     <div className="edit-quiz">
-      <EditableQuiz handler={sendQuizToDb} quiz={quiz} />
+      <EditableQuiz handler={sendQuizToDb} handlerName="Edytuj Quiz" quiz={quiz} />
     </div>
   );
 };

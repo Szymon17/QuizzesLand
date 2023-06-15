@@ -7,7 +7,7 @@ type InitialStateTypes = {
 
 const initialState: InitialStateTypes = {
   text: "",
-  visibleTime: 1000,
+  visibleTime: 5000,
 };
 
 const alertSlice = createSlice({

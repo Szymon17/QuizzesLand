@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userSnapshotType } from "./user-types";
 import { logInEmail, checkUserSession } from "./user-actions";
 import { logOut, updateUserSolvedQuizzes } from "../../utils/firebase/firebase";
-import { quizzType, updateQuizParams } from "../quizzes/quizz-types";
+import { quizzType } from "../quizzes/quizz-types";
 
 type initialStateTypes = {
   user: userSnapshotType | null | void;

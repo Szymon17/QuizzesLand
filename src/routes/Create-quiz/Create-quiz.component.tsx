@@ -63,7 +63,7 @@ const CreateQuiz = () => {
 
   return (
     <div className="create-quiz">
-      <EditableQuiz handler={sendQuizToDB} />
+      <EditableQuiz handler={sendQuizToDB} handlerName="Stwórz Quiz" />
     </div>
   );
 };
