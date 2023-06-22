@@ -55,7 +55,7 @@ const HomePage = () => {
               transition={{ delay: 0.2 * index, duration: 0.3 }}
               className="homepage__card-box"
             >
-              <QuizCard quiz={quiz} />
+              <QuizCard quiz={quiz} animationType={window.innerWidth > 1500 ? "topScale" : "scale"} />
             </motion.div>
           ))}
         </div>

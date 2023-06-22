@@ -3,7 +3,7 @@ import { UIEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectQuizzes, selectStatus } from "../../store/quizzes/quizzes-selectors";
 import { addFetchQuizzes } from "../../store/quizzes/quizzes-actions";
-import QuizItem from "../../components/Quiz-Item/QuizItem.component";
+import QuizCard from "../../components/Quiz-card/Quiz-card.component";
 
 const Quizzes = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +34,9 @@ const Quizzes = () => {
     <div className="Quizzes">
       <div onScroll={scrollFetch} className="quizzes-container">
         {quizzes.map((quiz, index) => (
-          <QuizItem quiz={quiz} key={index} />
+          <div className="quizzes__quiz-box">
+            <QuizCard quiz={quiz} animationType="scale" key={index} />
+          </div>
         ))}
       </div>
     </div>

@@ -2,38 +2,20 @@
   position: relative;
   padding: 20px 20px;
   width: 100%;
+  min-width: 330px;
+  height: 100%;
   color: rgb(255, 255, 255);
   background-color: rgba(0, 0, 0, 0.7);
-  max-width: 700px;
-  min-width: 330px;
-  height: 30vh;
-  border-radius: 10px;
-  box-shadow: 0 0 20px 0.5px rgba(189, 138, 0, 0.3);
+  border-radius: 15px;
+  box-shadow: 0 0 5px -1px rgb(94, 94, 94);
 }
 
 .quiz-card-title-container {
   height: 20%;
-  color: rgb(19, 17, 17);
-}
-
-.quiz-card-title-container::before {
-  display: block;
-  content: " ";
-  width: calc(100% + 3px);
-  transform: translateX(-1.5px);
-  height: 18%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(167, 100, 0);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  color: rgb(255, 255, 255);
 }
 
 .quiz-card-title {
-  position: absolute;
-  top: 5%;
-  left: 10px;
   z-index: 1;
   font-size: 1.3em;
 }

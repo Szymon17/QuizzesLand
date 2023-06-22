@@ -5,18 +5,30 @@ import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 type QuizCardParamsType = {
   quiz: quizzType;
+  animationType?: "topScale" | "scale" | "null";
 };
 
-const QuizCard: FC<QuizCardParamsType> = ({ quiz }) => {
+const variants = {
+  topScale: {
+    scale: 1.1,
+    y: -50,
+  },
+  scale: {
+    scale: 1.05,
+  },
+};
+
+const QuizCard: FC<QuizCardParamsType> = ({ quiz, animationType = "null" }) => {
   const navigate = useNavigate();
 
   const navigateHandler = () => navigate(`/quiz/${quiz.uid}`);
 
   return (
-    <div className="quiz-card">
+    <motion.div variants={variants} whileHover={animationType} className="quiz-card">
       <div className="quiz-card-title-container">
         <h1 className="quiz-card-title">{quiz.title}</h1>
       </div>
@@ -26,11 +38,11 @@ const QuizCard: FC<QuizCardParamsType> = ({ quiz }) => {
           <FontAwesomeIcon icon={faHeart} />
           <span className="quizz-likes-count">{quiz.likes}</span>
         </span>
-        <Button buttonType={BUTTON_CLASSES.base} onClick={navigateHandler}>
+        <Button buttonType={BUTTON_CLASSES.white} onClick={navigateHandler}>
           Przejdź do quizu
         </Button>
       </footer>
-    </div>
+    </motion.div>
   );
 };
 

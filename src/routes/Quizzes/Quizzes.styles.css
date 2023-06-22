@@ -1,9 +1,15 @@
 .quizzes-container {
   width: 70vw;
-  padding: 10px 30px;
+  padding: 10px 50px;
   margin: 20px auto;
   height: 87vh;
   overflow-y: auto;
+}
+
+.quizzes__quiz-box {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 1000px) {

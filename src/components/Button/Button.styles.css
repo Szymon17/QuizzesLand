@@ -13,7 +13,7 @@
   letter-spacing: 2px;
   transition: 0.3s all linear;
 
-  --base: rgb(204, 122, 0);
+  --white: rgb(219, 219, 219);
   --neon_orange: rgb(204, 122, 0);
   --neon_blue: rgb(0, 195, 255);
   --neon_green: rgb(0, 238, 59);
@@ -21,13 +21,24 @@
 }
 
 .button.base {
-  border: 2px solid var(--base);
+  border: 2px solid var(--neon_orange);
   background-color: transparent;
   font-weight: 500;
 }
 
 .button.base:hover {
-  background-color: var(--base);
+  background-color: var(--neon_orange);
+  color: black;
+}
+
+.button.white {
+  border: 2px solid var(--white);
+  background-color: transparent;
+  font-weight: 500;
+}
+
+.button.white:hover {
+  background-color: var(--white);
   color: black;
 }
 
