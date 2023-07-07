@@ -38,7 +38,14 @@
   top: 5%;
   transform: translateX(-50%);
   padding: clamp(10px, 1.1vw, 40px);
-  font-size: clamp(20px, 3vw, 70px);
+  font-size: clamp(20px, 3vw, 35px);
   border-radius: 50%;
-  border: 0.3vw solid whitesmoke;
+  border: 0.25vw solid whitesmoke;
+}
+
+@media (orientation: portrait) {
+  .sing-in__icon {
+    font-size: clamp(20px, 10vw, 35px);
+    border: 0.7vw solid whitesmoke;
+  }
 }

@@ -38,6 +38,13 @@ input:focus {
 body {
   font-family: "Zilla Slab", serif, "Times New Roman", Times, serif;
   background-image: url("./assets/background.jpg");
+  background-size: 100%;
   color: #d0d0d0;
   overflow-x: hidden;
+}
+
+@media (max-width: 1920px) {
+  body {
+    background-size: auto;
+  }
 }
