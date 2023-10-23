@@ -21,6 +21,7 @@ const QuizItem: FC<quizProps> = ({ quiz }) => {
           {quiz.likes}
         </span>
       </div>
+      <span className="quizItem__questionCount">Ilość pytań: {quiz.questions.length}</span>
       <p className="quizItem__description">{quiz.description}</p>
       <footer className="quizItem__footer">
         <Button onClick={() => navigate(`/quiz/${quiz.uid}`)}>Przejdź do quizu</Button>

@@ -29,7 +29,7 @@
 }
 
 .quizItem__description {
-  flex-grow: 2;
+  flex-grow: 1;
 }
 
 .quizItem__footer {
