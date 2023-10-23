@@ -5,7 +5,6 @@ import { checkUserSession } from "./store/user/user-actions";
 import { changeDropdownOpenState } from "./store/user-dropdown/user-dropdown-reducer";
 import { useAppDispatch } from "./store/hooks";
 import Navigation from "./routes/Navigation/Navigation.component";
-import HomePage from "./routes/Home-page/Home-page.component";
 import QuizPage from "./routes/Quiz-page/Quiz-page.component";
 import SingIn from "./routes/Sing-in/Sing-in.component";
 import SingUp from "./components/Sing-up/Sing-up.component";
