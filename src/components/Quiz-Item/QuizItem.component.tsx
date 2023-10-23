@@ -1,32 +1,32 @@
 import "./QuizItem.styles.css";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { quizzType } from "../../store/quizzes/quizz-types";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button.component";
 
-type quizProps = {
-  quiz: quizzType;
-};
+type quizProps = { quiz: quizzType };
 
 const QuizItem: FC<quizProps> = ({ quiz }) => {
-  const [isOpen, setOpenState] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <motion.div whileHover={{ scale: 1.03 }} onHoverStart={() => setOpenState(true)} onHoverEnd={() => setOpenState(false)} className="quiz-item">
-      <div className="quiz-item-left">
-        <h1 className="quiz-item-title">{quiz.title}</h1>
-        <p className="quiz-item-description">{quiz.description}</p>
+    <div className="quizItem">
+      <div className="quizItem__title">
+        <h1 className="quizItem__title-title">{quiz.title}</h1>
+        <span className="quizItem__title-heart">
+          <FontAwesomeIcon className="heart-icon" icon={faHeart} />
+          {quiz.likes}
+        </span>
       </div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="quiz-item-right">
-            <Button onClick={() => navigate(`/quiz/${quiz.uid}`)}>Przejdź do quizu</Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <p className="quizItem__description">{quiz.description}</p>
+      <footer className="quizItem__footer">
+        <Button onClick={() => navigate(`/quiz/${quiz.uid}`)}>Przejdź do quizu</Button>
+        <span className="quizItem__questionCount">Ilość pytań: {quiz.questions.length}</span>
+      </footer>
+    </div>
   );
 };
 

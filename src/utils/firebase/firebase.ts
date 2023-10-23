@@ -54,7 +54,7 @@ export const getQuiz = async (uid: string): Promise<quizzType | void> => {
 };
 
 export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: number = Infinity): Promise<quizzType[] | void> => {
-  if (numberOfdocs <= 10) {
+  if (numberOfdocs <= 18) {
     const collectionQuizzes = collection(db, "quizzes");
     const q = query(collectionQuizzes, orderBy("index", "desc"), where("index", "<", fromIndexCount), limit(numberOfdocs));
 
@@ -65,7 +65,7 @@ export const getQuizzesByIndex = async (numberOfdocs: number, fromIndexCount: nu
     } catch (error) {
       throw Error(error as any);
     }
-  } else throw new Error("max docs to fetch is a 10");
+  } else throw new Error("max docs to fetch is a 18");
 };
 
 export const logInWithEmailAndPassword = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
