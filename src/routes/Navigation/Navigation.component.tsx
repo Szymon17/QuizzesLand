@@ -29,7 +29,7 @@ const Navigation = () => {
         </CustomLink>
         <div className="Navigation-container">
           <div className="Navigation-link">
-            <CustomLink to="/quizzes">Quizy</CustomLink>
+            <CustomLink to="/">Quizy</CustomLink>
           </div>
           {user === null ? (
             <div className="Navigation-link">

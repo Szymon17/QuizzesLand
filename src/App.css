@@ -37,7 +37,6 @@ input:focus {
 
 body {
   font-family: "Zilla Slab", serif, "Times New Roman", Times, serif;
-  background-image: url("./assets/background.jpg");
   color: #d0d0d0;
   overflow-x: hidden;
 }

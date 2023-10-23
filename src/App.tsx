@@ -25,12 +25,11 @@ function App() {
     <div className="App" onClick={() => dispatch(changeDropdownOpenState(false))}>
       <Routes>
         <Route path="/" element={<Navigation />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<Quizzes />} />
           <Route path="/quiz/*" element={<QuizPage />} />
           <Route path="/sing-in" element={<SingIn />} />
           <Route path="/sing-up" element={<SingUp />} />
           <Route path="/account" element={<AccountPanel />} />
-          <Route path="/quizzes" element={<Quizzes />} />
           <Route path="/account/create-quiz" element={<CreateQuiz />} />
           <Route path="/account/edit-quiz/*" element={<EditQuiz />} />
         </Route>
