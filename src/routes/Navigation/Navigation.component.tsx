@@ -27,13 +27,18 @@ const Navigation = () => {
         <CustomLink cssClass="main-page-link" to="/">
           <FontAwesomeIcon icon={faHouse} />
         </CustomLink>
-        <div className="Navigation-container">
-          <div className="Navigation-link">
+        <div className="Navigation__container">
+          <div className="Navigation__link">
             <CustomLink to="/">Quizy</CustomLink>
           </div>
           {user === null ? (
-            <div className="Navigation-link">
-              <CustomLink to="/sing-in">Login</CustomLink>
+            <div className="Navigation__logIn-links">
+              <div className="Navigation-link">
+                <CustomLink to="/sing-in">Zaloguj się</CustomLink>
+              </div>
+              <div className="Navigation__link-blue">
+                <CustomLink to="/sing-up">Zarejstuj się</CustomLink>
+              </div>
             </div>
           ) : (
             <AccountDropdown />

@@ -1,8 +1,8 @@
 .Navigation {
   width: 100%;
   height: 8vh;
-  background-color: rgba(17, 17, 17, 0.8);
-  border-bottom: 2px solid rgb(255, 153, 0);
+  background-color: #ffffff;
+  border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 .main-page-link {
@@ -10,7 +10,7 @@
   line-height: 8vh;
 }
 
-.Navigation-container {
+.Navigation__container {
   width: 30%;
   height: 100%;
   display: flex;
@@ -18,10 +18,25 @@
   float: right;
 }
 
-.Navigation-link,
-.Navigation-container > .Account-link {
+.Navigation__logIn-links {
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 2;
+  font-size: 20px;
+}
+
+.Navigation__link,
+.Navigation__container > .Account-link {
   flex-grow: 1;
   font-size: 2em;
+}
+
+.Navigation__link-blue a {
+  color: #005ce5;
+}
+
+.Navigation__link-blue .custom__link__underline {
+  background-color: #005ce5;
 }
 
 @media (max-width: 900px) {
