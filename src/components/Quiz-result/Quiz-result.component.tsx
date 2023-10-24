@@ -6,10 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faNoteSticky, faClipboardQuestion, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { selectUserAnswers } from "../../store/answers/answers-selectors";
 import { selectUser } from "../../store/user/user-selector";
-import AnswerToDisplay, { ANSWERS_CLASSES } from "../Answer-to-display/Answer-to-display.component";
 import { updateQuizLikes } from "../../store/quizzes/quizzes-reducer";
 import { updateSolvedQuizzesUid } from "../../store/user/user-reducer";
 import { motion } from "framer-motion";
+
+import AnswerToDisplay, { ANSWERS_CLASSES } from "../Answer-to-display/Answer-to-display.component";
 
 const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
   const dispatch = useAppDispatch();
@@ -54,7 +55,7 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
                 <ul className="quiz-result__questions-answers">
                   {questionMap.map((answer, i) => {
                     const userAnswer = userAnswers[index];
-                    console.log(answer.id === userAnswer.id && userAnswer);
+
                     return (
                       <li key={i} className="quiz-result__answer">
                         <FontAwesomeIcon className="quiz-result__icon" icon={faPencil} />
@@ -80,7 +81,7 @@ const QuizResult: FC<quizPropsTypes> = ({ quiz }) => {
               <FontAwesomeIcon className="solved" icon={faHeart} />
             )}
           </div>
-          <span className="quiz-result__correct-answers">{`${correctAnswersCount}/${userAnswers.length}`}</span>
+          <span className="quiz-result__correct-answers">{`Poprawne odpowiedzi: ${correctAnswersCount}/${userAnswers.length}`}</span>
         </footer>
       </div>
     </motion.div>

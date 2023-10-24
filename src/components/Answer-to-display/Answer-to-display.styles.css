@@ -1,6 +1,7 @@
 .answer {
   width: 100%;
   margin-bottom: 30px;
+  height: 100%;
 
   --neon_green: rgb(0, 238, 59);
   --neon_red: rgb(255, 0, 0);

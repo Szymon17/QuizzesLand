@@ -4,7 +4,6 @@ import { quizzType } from "../../store/quizzes/quizz-types";
 import { useAppSelector } from "../../store/hooks";
 import { selectProgress } from "../../store/answers/answers-selectors";
 
-import { motion } from "framer-motion";
 import QuizAnswers from "../Quiz-answers/Quiz-answers.component";
 import QuizResult from "../Quiz-result/Quiz-result.component";
 
