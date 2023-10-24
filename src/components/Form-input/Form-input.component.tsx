@@ -5,10 +5,10 @@ type FormInputPropsTypes = { description?: string; incorrect?: boolean } & Input
 
 const FormInput: FC<FormInputPropsTypes> = ({ description, incorrect, ...otherProps }) => {
   return (
-    <div className="form-input-container">
-      <input className={`form-input ${incorrect ? "incorrect" : "input"}`} {...otherProps} />
+    <div className="formInput">
+      <input className={`formInput__field ${incorrect ? "incorrect" : "input"}`} {...otherProps} />
       {description && (
-        <label className={`form-input-label ${typeof otherProps.value === "string" && otherProps.value.length > 0 ? "shrink" : ""}`}>
+        <label className={`formInput__field__label ${typeof otherProps.value === "string" && otherProps.value.length > 0 ? "shrink" : ""}`}>
           {description}
         </label>
       )}
