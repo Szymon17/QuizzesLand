@@ -1,5 +1,5 @@
-.sing-up {
-  width: clamp(350px, 40vw, 1000px);
+.singUp {
+  width: clamp(300px, 90vw, 800px);
   height: clamp(450px, 75vh, 1300px);
   display: flex;
   flex-direction: column;
@@ -10,6 +10,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 3px solid rgb(219, 219, 219);
+  border-radius: 10px;
+  background-color: white;
   text-align: center;
+}
+
+.singUp .button {
+  width: 150px;
+}
+
+@media (max-width: 600px) {
+  .singUp {
+    padding: 0 10px;
+  }
 }

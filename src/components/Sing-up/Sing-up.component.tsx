@@ -28,13 +28,13 @@ const SingUp = () => {
   };
 
   return (
-    <div className="sing-up">
+    <div className="singUp">
       <h2>Zarejstruj się</h2>
       <FormInput onChange={onChangeEmail} description="Email" value={email} />
       <FormInput onChange={onChangeName} description="Nazwa" value={displayName} />
       <FormInput type="password" onChange={onChangePassword} description="Hasło" value={password} />
       <FormInput type="password" onChange={onChangeConfirmedPassword} description="Powtórz hasło" value={confirmedPassword} />
-      <Button onClick={registerUserHandler} buttonType={BUTTON_CLASSES.neon_blue}>
+      <Button onClick={registerUserHandler} buttonType={BUTTON_CLASSES.base}>
         Zarejstruj się
       </Button>
     </div>
