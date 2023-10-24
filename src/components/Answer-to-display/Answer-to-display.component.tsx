@@ -16,11 +16,11 @@ type AnswersPropsTypes = {
 
 const AnswerToDisplay: FC<AnswersPropsTypes> = ({ type = ANSWERS_CLASSES.neutral, text }) => {
   return (
-    <div className={`answer-to-display ${type}`}>
-      <div className="fake-button">
-        <span>{text}</span>
-        {type === ANSWERS_CLASSES.incorect && <FontAwesomeIcon className="display-answer-icon incorrect" icon={faXmark} />}
-        {type === ANSWERS_CLASSES.correct && <FontAwesomeIcon className="display-answer-icon correct" icon={faCheck} />}
+    <div className={`answer ${type}`}>
+      <div className="answer__button">
+        <span className="answer__text">{text}</span>
+        {type === ANSWERS_CLASSES.incorect && <FontAwesomeIcon className="answer__icon incorrect" icon={faXmark} />}
+        {type === ANSWERS_CLASSES.correct && <FontAwesomeIcon className="answer__icon correct" icon={faCheck} />}
       </div>
     </div>
   );

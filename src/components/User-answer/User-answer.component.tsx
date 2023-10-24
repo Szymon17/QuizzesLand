@@ -25,7 +25,7 @@ const UserAnswer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeA
   const userAnswer = userAnswers[userAnswers.length - 1];
   const answerToDisplay = answer;
 
-  const onClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
+  const onClickHandler: MouseEventHandler<HTMLDivElement> = () => {
     if (changeAnsweredState) changeAnsweredState();
 
     if (answer) {
@@ -36,10 +36,8 @@ const UserAnswer: FC<answerPropTypes | fakeAnswerPropTypes> = ({ answer, changeA
   return (
     <>
       {!fake ? (
-        <div className="User-answer">
-          <Button buttonType={BUTTON_CLASSES.base} onClick={onClickHandler}>
-            {answerToDisplay.text}
-          </Button>
+        <div onClick={onClickHandler} className="User-answer action">
+          <AnswerToDisplay type={ANSWERS_CLASSES.neutral} text={answerToDisplay.text} />
         </div>
       ) : userAnswer.id === answerToDisplay.id ? (
         answerToDisplay.correct ? (

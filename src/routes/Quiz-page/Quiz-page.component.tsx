@@ -1,3 +1,4 @@
+import "./Quiz-page.styles.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Spiner from "../../components/Spiner/Spiner.component";
