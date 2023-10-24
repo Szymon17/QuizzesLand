@@ -1,10 +1,12 @@
 import "./Sing-up.styles.css";
 import { useState, ChangeEvent } from "react";
-import FormInput from "../Form-input/Form-input.component";
-import Button, { BUTTON_CLASSES } from "../Button/Button.component";
+import { userRegisterData } from "../../store/user/user-types";
 import { registerUser } from "../../store/user/user-actions";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../store/hooks";
+
+import FormInput from "../Form-input/Form-input.component";
+import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 
 const SingUp = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +22,8 @@ const SingUp = () => {
   const onChangeConfirmedPassword = (e: ChangeEvent<HTMLInputElement>) => setConfirmedPassword(e.target.value);
 
   const registerUserHandler = async () => {
-    const register = await registerUser(email, password, confirmedPassword, displayName, dispatch);
+    const userData: userRegisterData = { email, password, confirmedPassword, displayName };
+    const register = await registerUser(userData, dispatch);
     if (register) navigate("/sing-in");
   };
 

@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { singUpEmailandPassword, addUserToDb, logInWithEmailAndPassword, getUserSnapshot, getCurrentUser } from "../../utils/firebase/firebase";
 import { setAlert } from "../alert/alert-reducer";
 import { validateNewUser } from "../../utils/functions/basic-functions";
+import { userRegisterData } from "./user-types";
 
-export const registerUser = async (email: string, password: string, confirmedPassword: string, displayName: string, dispatch?: Function) => {
+export const registerUser = async ({ email, password, confirmedPassword, displayName }: userRegisterData, dispatch?: Function) => {
   const validateUser = validateNewUser(email, password, confirmedPassword, displayName);
 
   if (dispatch && validateUser) {
