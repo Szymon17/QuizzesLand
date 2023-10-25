@@ -1,50 +1,49 @@
-.Account-link {
+.AccountLink {
   position: relative;
   cursor: pointer;
 }
 
-.user-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+.AccountLink::selection {
+  background-color: transparent;
+}
+
+.userIcon {
+  margin-right: 50px;
   font-size: 25px;
 }
 
-.user-name {
-  text-align: center;
-}
-
-.user-name::selection {
-  background-color: transparent;
-}
-
-.user-actions {
-  margin-top: 30px;
-  padding-left: 15px;
-  list-style: disc;
-}
-
-.Account-link::selection {
-  background-color: transparent;
-}
-
-.Account-dropdown {
-  padding: 10px 20px;
-  width: clamp(230px, calc(50vw / 3), 250px);
-  height: 250px;
+.AccountDropdown {
+  padding: 20px 20px;
+  width: clamp(260px, 90vw, 350px);
+  height: 180px;
   position: absolute;
   right: 20px;
   top: 9vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  border: 2px solid rgb(255, 153, 0);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   z-index: 2;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.Account-dropdown .button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+.AccountDropdown__userName {
+  font-weight: 550;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.AccountDropdown__userName::selection {
+  background-color: transparent;
+}
+
+.AccountDropdown__userActions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.AccountDropdown .button {
+  width: 40%;
 }

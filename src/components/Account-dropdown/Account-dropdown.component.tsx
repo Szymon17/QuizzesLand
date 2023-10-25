@@ -1,17 +1,19 @@
 import "./Account-dropdown.styles.css";
 import { MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectDropdownOpenState } from "../../store/user-dropdown/user-dropdown-selector";
+import { changeDropdownOpenState } from "../../store/user-dropdown/user-dropdown-reducer";
 import { selectUser } from "../../store/user/user-selector";
 import { logout } from "../../store/user/user-reducer";
-import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { selectDropdownOpenState } from "../../store/user-dropdown/user-dropdown-selector";
+
 import Button from "../Button/Button.component";
-import { changeDropdownOpenState } from "../../store/user-dropdown/user-dropdown-reducer";
 
 const AccountDropdown = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const userDropdownState = useAppSelector(selectDropdownOpenState);
@@ -22,30 +24,32 @@ const AccountDropdown = () => {
     dispatch(changeDropdownOpenState(!userDropdownState));
   };
 
+  const userAccountAction = () => {
+    navigate("account");
+    dispatch(changeDropdownOpenState(false));
+  };
+
   return (
     <>
-      <div onClick={switchDropdownState} className="Account-link">
-        <FontAwesomeIcon className="user-icon" icon={faUser} />
+      <div onClick={switchDropdownState} className="AccountLink">
+        <FontAwesomeIcon className="userIcon" icon={faUser} />
       </div>
 
       <AnimatePresence mode="wait">
         {userDropdownState && (
           <motion.div
             onClick={e => e.stopPropagation()}
-            className="Account-dropdown"
+            className="AccountDropdown"
             initial={{ opacity: 0, x: 300 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
           >
-            <h1 className="user-name">{user?.displayName}</h1>
-            <ul className="user-actions">
-              <li>
-                <Link onClick={() => dispatch(changeDropdownOpenState(false))} to="account">
-                  Moje konto
-                </Link>
-              </li>
-            </ul>
-            <Button onClick={() => dispatch(logout())}>Wyloguj</Button>
+            <h1 className="AccountDropdown__userName">Witaj {user?.displayName}</h1>
+
+            <div className="AccountDropdown__userActions">
+              <Button onClick={userAccountAction}>Konto</Button>
+              <Button onClick={() => dispatch(logout())}>Wyloguj</Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
