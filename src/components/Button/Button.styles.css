@@ -4,7 +4,6 @@
   height: 35px;
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 5px;
   border: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 1em;
@@ -13,7 +12,7 @@
   transition: 0.3s all linear;
 
   --base: rgb(255, 255, 255);
-  --neon_blue: rgb(0, 195, 255);
+  --neon_blue: rgb(0, 153, 255);
   --neon_green: rgb(0, 238, 59);
   --neon_red: rgb(255, 0, 0);
 }
@@ -23,7 +22,6 @@
   background-color: transparent;
   font-weight: 500;
   border: 1px solid black;
-  border-radius: 0;
 }
 
 .button.base:hover {
@@ -33,7 +31,7 @@
 
 .button.neon-blue {
   background-color: transparent;
-  border: 2px solid white;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 .button.neon-blue:hover {
@@ -72,7 +70,7 @@
 }
 
 .base.disabled:hover {
-  background-color: rgb(38, 38, 43);
+  color: rgb(119, 119, 119);
 }
 
 @media (max-width: 1200px) {

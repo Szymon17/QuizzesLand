@@ -1,52 +1,61 @@
-.editable-quiz {
+.editablQuiz {
   width: 70%;
   margin: 0 auto;
-  padding-top: 30px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.editable-quiz-container {
+.editablQuiz__container {
   width: clamp(300px, 80%, 1000px);
 }
 
-.editable-quiz__top-panel input,
-.editable-quiz__top-panel textarea {
-  margin: 0;
-  padding: 5px 10px;
-  min-height: 40px;
-  color: whitesmoke;
+.editablQuiz__topPanel {
+  margin-bottom: 50px;
+  padding: 10px 20px;
+  border-left: 5px solid rgb(185, 18, 226);
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.editablQuiz input {
+  padding: 0;
   background-color: transparent;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid whitesmoke;
+  box-shadow: none;
   border-radius: 0;
 }
 
-.editable-quiz__top-panel .form-input.incorrect {
-  border: none;
-  border-bottom: 1px solid rgb(255, 0, 0);
+.editablQuiz__topPanel input {
+  font-size: 1.7em;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
 }
 
-.editable-quiz-container textarea {
+.editablQuiz input:focus {
+  border-bottom: 2px solid rgb(190, 3, 228);
+}
+
+.editablQuiz__topPanel textarea {
+  margin-top: 50px;
   width: 100%;
-  resize: none;
   height: 70px;
-  padding: 20px 30px;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  font-size: 1em;
 }
 
-.editable-quiz-container > .question-container {
+.editablQuiz__topPanel textarea:focus {
+  border-bottom: 2px solid rgb(190, 3, 228);
+}
+
+.editablQuiz__container > .question-container {
   margin-bottom: 20px;
 }
 
-.editable-quiz-container textarea:focus {
+.editablQuiz__container textarea:focus {
   outline: none;
-}
-
-.question-header {
-  display: flex;
-  justify-content: center;
 }
 
 .questions-container {
@@ -56,31 +65,23 @@
   overflow-y: auto;
 }
 
-.editable-quiz__top-panel {
-  width: 97%;
-  margin: 0 auto 40px auto;
-  box-shadow: inset 4px 4px 10px -3px black, inset -2px -2px 10px -5px white;
-  border-radius: 10px;
-  padding: 20px 30px;
+.editablQuiz__container > .button {
+  float: right;
 }
 
-.editable-quiz__top-panel .button {
-  margin-top: 25px;
-  margin-left: 100%;
-  width: 150px;
-  height: 40px;
-  line-height: 20px;
-  transform: translateX(-100%);
+.editableQuiz__buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 1000px) {
-  .editable-quiz {
+  .editablQuiz {
     width: 100%;
   }
 }
 
 @media (max-width: 600px) {
-  .editable-quiz {
+  .editablQuiz {
     width: 100%;
   }
 }

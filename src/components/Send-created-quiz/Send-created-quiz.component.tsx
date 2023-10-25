@@ -9,9 +9,10 @@ import { resetCreateQuizState } from "../../store/create-quiz/create-quiz-reduce
 import { addNewQuizToDb, getLastQuizIndex } from "../../utils/firebase/firebase";
 import { useNavigate } from "react-router";
 import { updateUserQuizzes } from "../../store/user/user-reducer";
-import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import { addQuizToReducer } from "../../store/quizzes/quizzes-reducer";
 import { setAlert } from "../../store/alert/alert-reducer";
+
+import Button from "../Button/Button.component";
 
 const SendCreatedQuiz = () => {
   const navigate = useNavigate();
@@ -56,11 +57,7 @@ const SendCreatedQuiz = () => {
     }
   };
 
-  return (
-    <Button buttonType={BUTTON_CLASSES.neon_blue} onClick={sendQuizToDB}>
-      Stwórz
-    </Button>
-  );
+  return <Button onClick={sendQuizToDB}>Stwórz</Button>;
 };
 
 export default SendCreatedQuiz;

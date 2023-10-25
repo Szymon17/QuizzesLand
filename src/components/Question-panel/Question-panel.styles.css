@@ -1,32 +1,35 @@
-.add-question {
-  overflow: hidden;
+.question {
+  padding: 10px 20px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border-left: 3px solid rgb(185, 18, 226);
 }
 
-.answers-block .button {
-  display: block;
+.question__questionNumber {
+  font-weight: 600;
+  font-size: 1.1em;
 }
 
-.form-input-container,
-.answers-block > .button {
-  margin-bottom: 10px;
-}
-
-.answers-block > .answer-container > .form-input-container {
-  width: 70%;
-}
-
-.answers-block > .button {
-  width: 15%;
-}
-
-.extend-question-panel {
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 10px;
-  background-color: #000000;
-  box-shadow: -1px -1px 5px -1px white;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+.question__deleteIcon {
+  float: right;
   cursor: pointer;
+  transition: scale 0.2s;
+}
+
+.question__deleteIcon:hover {
+  scale: 1.1;
+}
+
+.question__addQuestion input[name="question"] {
+  font-weight: 550;
+  font-size: 1.2em;
+}
+
+.question__addQuestion {
+  margin-top: 20px;
+}
+
+.question__answersBlock {
+  margin-top: 30px;
 }

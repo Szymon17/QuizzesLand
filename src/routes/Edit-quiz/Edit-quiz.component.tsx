@@ -74,8 +74,7 @@ const EditQuiz = () => {
   };
 
   return (
-    <div className="edit-quiz">
-      <EditableQuiz quiz={quiz} />
+    <EditableQuiz quiz={quiz}>
       {buttonActive && editDelayTime < actualTime ? (
         <Button onClick={sendQuizToDb}>Aktualizuj</Button>
       ) : (
@@ -83,7 +82,7 @@ const EditQuiz = () => {
           Aktualizuj
         </Button>
       )}
-    </div>
+    </EditableQuiz>
   );
 };
 

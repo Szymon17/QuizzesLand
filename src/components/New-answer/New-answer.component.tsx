@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { answerType } from "../../store/quizzes/quizz-types";
 import { updateAnswer, removeAnswer } from "../../store/create-quiz/create-quiz-reducer";
 import { selectAnswers } from "../../store/create-quiz/create-quiz-selector";
+
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 import FormInput from "../Form-input/Form-input.component";
 
@@ -38,7 +39,7 @@ const CreatedAnswer: FC<createdAnswerTypes> = ({ questionIndex, answerIndex, ans
   };
 
   return (
-    <div className="answer-container">
+    <div className="answer">
       <FormInput
         value={answer.text}
         placeholder="Dodaj odpowiedź"

@@ -62,16 +62,6 @@ export const validateQuiz = (Quiz: quizzType): string | boolean => {
   else return true;
 };
 
-export const newOpenState = (numberOfQuestions: number) => {
-  return Array(numberOfQuestions)
-    .fill(false)
-    .map((el, index) => {
-      if (index === numberOfQuestions - 1) {
-        return !el;
-      } else return el;
-    });
-};
-
 export const validateNewUser = (email: string, password: string, confirmedPassword: string, displayName: string): string | void => {
   if (email === "") return "Nie podałeś emailu";
   else if (displayName === "") return "Nie podałeś nazwy użytkownika";
