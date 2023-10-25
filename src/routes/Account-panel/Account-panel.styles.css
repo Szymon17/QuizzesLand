@@ -1,25 +1,26 @@
-.account-panel {
+.accountPanel {
   margin: 0 auto;
   width: 70%;
-  min-height: 92vh;
+  min-height: 94vh;
   box-shadow: 10px 0 15px -15px rgb(49, 49, 49), -10px 0 15px -15px rgb(49, 49, 49);
+  background-color: #fcfcfc;
 }
 
-.account-container {
+.accountPanel__container {
   padding: 80px 10% 50px 10%;
 }
 
-.account-detail {
+.accountPanel__detail {
   margin-bottom: 40px;
 }
 
-.account-description {
+.accountPanel__description {
   margin-right: 10px;
   font-size: 20px;
   font-weight: 600;
 }
 
-.detail-body {
+.accountPanel__detail__body {
   font-size: 20px;
   color: rgb(0, 182, 238);
   font-weight: 600;
@@ -30,16 +31,12 @@
   text-align: center;
 }
 
-.account-container > section {
+.accountPanel__container > section {
   padding: 20px 0;
-  border-top: 2px solid white;
+  border-bottom: 2px solid black;
 }
 
-.account-container > section:nth-last-child(1) {
-  border-bottom: 2px solid white;
-}
-
-.account-quizzes > .button.disabled {
+.accountPanel__quizzes > .button.disabled {
   margin-top: 20px;
   height: 50px;
 }
@@ -48,21 +45,21 @@
   padding: 20px 20px;
 }
 
-.account-quiz-buttons .button {
+.accountPanel__quizzes__buttons .button {
   width: 130px;
   margin-top: 10px;
 }
 
-.create-quiz-button {
+.accountPanel__createQuizz {
   text-align: right;
 }
 
-.create-quiz-button > .button.disabled {
+.accountPanel__createQuizz > .button.disabled {
   height: 60px;
 }
 
 @media (max-width: 600px) {
-  .account-panel {
+  .accountPanel {
     width: 100%;
   }
 }

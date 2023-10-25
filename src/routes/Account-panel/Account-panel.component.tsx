@@ -7,6 +7,7 @@ import { selectUserDeleteDelayTime, selectUserEditDelayTime } from "../../store/
 import { deleteQuizFromDb } from "../../utils/firebase/firebase";
 import { deleteUserQuizFromReducer } from "../../store/user/user-reducer";
 import { deleteQuizFromReducer } from "../../store/quizzes/quizzes-reducer";
+
 import Button, { BUTTON_CLASSES } from "../../components/Button/Button.component";
 
 const AccountPanel = () => {
@@ -58,28 +59,28 @@ const AccountPanel = () => {
   return (
     <>
       {user && (
-        <div className="account-panel">
-          <div className="account-container">
-            <section className="account-details">
+        <div className="accountPanel">
+          <div className="accountPanel__container">
+            <section className="accountPanel__details">
               <h2 className="section-title">Moje dane</h2>
-              <div className="account-detail">
-                <span className="account-description">Nazwa użytkownika: </span>
-                <span className="detail-body">{user.displayName}</span>
+              <div className="accountPanel__detail">
+                <span className="accountPanel__description">Nazwa użytkownika: </span>
+                <span className="accountPanel__detail__body">{user.displayName}</span>
               </div>
-              <div className="account-detail">
-                <span className="account-description">Email: </span>
-                <span className="detail-body">{user.email}</span>
+              <div className="accountPanel__detail">
+                <span className="accountPanel__description">Email: </span>
+                <span className="accountPanel__detail__body">{user.email}</span>
               </div>
             </section>
-            <section className="account-quizzes">
+            <section className="accountPanel__quizzes">
               <h2 className="section-title">Moje quizy</h2>
               {userQuizzes &&
                 userQuizzes.map((quiz, index) => (
                   <div key={index} className="user-quiz">
-                    <span className="account-description">Quiz {index + 1}: </span>
-                    <span className="detail-body">{quiz.title}</span>
-                    <div className="account-quiz-buttons">
-                      <span className="edit-user-quiz">
+                    <span className="accountPanel__description">Quiz {index + 1}: </span>
+                    <span className="accountPanel__detail__body">{quiz.title}</span>
+                    <div className="accountPanel__quizzes__buttons">
+                      <span className="accountPanel__editUserQuiz">
                         {userEditDelayTime < actualTime ? (
                           <Button onClick={() => navigate(`./edit-quiz/${quiz.uid}`)}>Edytuj</Button>
                         ) : (
@@ -88,7 +89,7 @@ const AccountPanel = () => {
                           </Button>
                         )}
                       </span>
-                      <span className="delete-user-quiz">
+                      <span className="accountPanel__deleteUserQuiz">
                         {userDeleteDelayTime < actualTime ? (
                           <Button onClick={() => deleteQuiz(quiz.uid)}>Usuń</Button>
                         ) : (
@@ -100,7 +101,7 @@ const AccountPanel = () => {
                     </div>
                   </div>
                 ))}
-              <div className="create-quiz-button">
+              <div className="accountPanel__createQuizz">
                 {userQuizzes && userQuizzes.length < 3 ? (
                   <Button onClick={() => navigate("./create-quiz")}>Dodaj nowy quiz</Button>
                 ) : (
