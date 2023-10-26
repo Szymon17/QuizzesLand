@@ -8,7 +8,7 @@ import QuizItem from "../../components/Quiz-Item/QuizItem.component";
 
 const quizzesOnPage = 9;
 
-const Quizzes: FC<{ category?: any }> = ({ category = "Wszystko" }) => {
+const Quizzes = () => {
   const [once, setOnce] = useState(true);
   const [delayScrollEvent, setDelayScrollEvent] = useState(false);
 
@@ -52,9 +52,7 @@ const Quizzes: FC<{ category?: any }> = ({ category = "Wszystko" }) => {
 
   return (
     <div className="Quizzes" onScroll={scrollFetch}>
-      <h1 className="Quizzes__category">
-        Kategoria: <span className="Quizzes__category-span">{category}</span>
-      </h1>
+      <h1 className="Quizzes__header">Polecane quizy</h1>
       <div className="quizzes-container">
         {quizzes.map((quiz, index) => (
           <QuizItem quiz={quiz} key={index} />

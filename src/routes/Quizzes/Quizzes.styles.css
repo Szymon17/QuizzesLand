@@ -5,16 +5,11 @@
   overflow-x: hidden;
 }
 
-.Quizzes__category {
+.Quizzes__header {
   background-color: #fff;
-  height: 12vh;
-  line-height: 12vh;
+  height: 8vh;
+  line-height: 8vh;
   padding-left: 10%;
-}
-
-.Quizzes__category-span {
-  font-weight: 500;
-  font-size: 0.9em;
 }
 
 .quizzes-container {
@@ -22,7 +17,7 @@
   padding: 50px 0;
   max-width: 1500px;
   width: 90%;
-  min-height: calc(94vh - 12vh);
+  min-height: calc(95vh - 8vh);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px 50px;

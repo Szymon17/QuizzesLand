@@ -4,6 +4,7 @@ import { quizzType } from "../../store/quizzes/quizz-types";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 import Button from "../Button/Button.component";
 
 type quizProps = { quiz: quizzType };
