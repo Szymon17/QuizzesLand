@@ -12,6 +12,8 @@ import AccountPanel from "./routes/Account-panel/Account-panel.component";
 import CreateQuiz from "./routes/Create-quiz/Create-quiz.component";
 import Quizzes from "./routes/Quizzes/Quizzes.component";
 import EditQuiz from "./routes/Edit-quiz/Edit-quiz.component";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -33,6 +35,7 @@ function App() {
           <Route path="/account/edit-quiz/*" element={<EditQuiz />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

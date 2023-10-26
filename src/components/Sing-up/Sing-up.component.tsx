@@ -9,7 +9,6 @@ import FormInput from "../Form-input/Form-input.component";
 import Button, { BUTTON_CLASSES } from "../Button/Button.component";
 
 const SingUp = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [displayName, setName] = useState("");
@@ -23,7 +22,7 @@ const SingUp = () => {
 
   const registerUserHandler = async () => {
     const userData: userRegisterData = { email, password, confirmedPassword, displayName };
-    const register = await registerUser(userData, dispatch);
+    const register = await registerUser(userData);
     if (register) navigate("/sing-in");
   };
 

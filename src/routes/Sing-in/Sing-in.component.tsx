@@ -26,7 +26,7 @@ const SingIn = () => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-  const logInUser = () => dispatch(logInEmail({ email, password, dispatch: dispatch }));
+  const logInUser = () => dispatch(logInEmail({ email, password }));
 
   const logInUserAfterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") logInUser();

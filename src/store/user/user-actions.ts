@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { singUpEmailandPassword, addUserToDb, logInWithEmailAndPassword, getUserSnapshot, getCurrentUser } from "../../utils/firebase/firebase";
-import { setAlert } from "../alert/alert-reducer";
 import { validateNewUser } from "../../utils/functions/basic-functions";
 import { userRegisterData } from "./user-types";
+import { toast } from "react-toastify";
 
-export const registerUser = async ({ email, password, confirmedPassword, displayName }: userRegisterData, dispatch?: Function) => {
-  const validateUser = validateNewUser(email, password, confirmedPassword, displayName);
+export const registerUser = async ({ email, password, confirmedPassword, displayName }: userRegisterData) => {
+  const validateUserError = validateNewUser(email, password, confirmedPassword, displayName);
 
-  if (dispatch && validateUser) {
-    dispatch(setAlert(validateUser));
+  if (validateUserError) {
+    toast.dark(validateUserError);
     return;
   }
 
@@ -16,32 +16,30 @@ export const registerUser = async ({ email, password, confirmedPassword, display
     const user = await singUpEmailandPassword(email, password);
     if (user) {
       addUserToDb(user, { displayName });
-      if (dispatch) dispatch(setAlert("Dodano użytkownika"));
+      toast.dark("Dodano użytkownika");
       return true;
     }
   } catch (error: any) {
-    if (dispatch) {
-      if (error.code === "auth/invalid-email") dispatch(setAlert("Podałeś błędny email"));
-    }
+    if (error.code === "auth/invalid-email") toast.dark("Podałeś błędny email");
 
     return false;
   }
 };
 
-export const logInEmail = createAsyncThunk("user-login-email&password", async (params: { email: string; password: string; dispatch?: Function }) => {
-  const { email, password, dispatch } = params;
+export const logInEmail = createAsyncThunk("user-login-email&password", async (params: { email: string; password: string }) => {
+  const { email, password } = params;
 
   try {
     const { user } = await logInWithEmailAndPassword(email, password);
     const userSnapshot = await getUserSnapshot(user.uid);
-    if (dispatch) dispatch(setAlert("Logowanie udane"));
+
+    toast.dark("Logowanie udane");
 
     return userSnapshot;
   } catch (error: any) {
-    if (dispatch) {
-      if (error.code === "auth/too-many-requests") dispatch(setAlert("Zbyt wielę prób logowań"));
-      else dispatch(setAlert("Podałeś błędny email lub hasło"));
-    }
+    if (error.code === "auth/too-many-requests") toast.dark("Zbyt wielę prób logowań");
+    else toast.dark("Podałeś błędny email lub hasło");
+
     throw Error(error);
   }
 });

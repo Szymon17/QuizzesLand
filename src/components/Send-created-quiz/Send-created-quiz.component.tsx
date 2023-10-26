@@ -10,7 +10,7 @@ import { addNewQuizToDb, getLastQuizIndex } from "../../utils/firebase/firebase"
 import { useNavigate } from "react-router";
 import { updateUserQuizzes } from "../../store/user/user-reducer";
 import { addQuizToReducer } from "../../store/quizzes/quizzes-reducer";
-import { setAlert } from "../../store/alert/alert-reducer";
+import { toast } from "react-toastify";
 
 import Button from "../Button/Button.component";
 
@@ -53,7 +53,7 @@ const SendCreatedQuiz = () => {
         });
         dispatch(updateUserQuizzes(quiz));
         dispatch(addQuizToReducer(quiz));
-      } else if (typeof tryValidate === "string") dispatch(setAlert(tryValidate));
+      } else if (typeof tryValidate === "string") toast.dark(tryValidate);
     }
   };
 
