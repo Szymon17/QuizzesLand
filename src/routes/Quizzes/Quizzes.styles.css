@@ -23,6 +23,10 @@
   gap: 30px 50px;
 }
 
+.quizzes-container .quizItem {
+  height: calc((95vh - 8vh - 3 * 30px - 50px) / 3);
+}
+
 @media (max-width: 1200px) {
   .quizzes-container {
     width: 95%;

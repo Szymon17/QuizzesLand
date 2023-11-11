@@ -38,12 +38,8 @@ const Quizzes = () => {
 
     const lastIndexConunt = quizzes[quizzes.length - 1].index;
 
-    if (userScroll > scrollHeight - 100 && !delayScrollEvent && quizzesFetchStatus !== "loading") {
-      if (lastIndexConunt - quizzesOnPage > 0) {
-        dispatch(addFetchQuizzes({ numberOfDocs: quizzesOnPage, fromIndexCount: lastIndexConunt }));
-      } else if (lastIndexConunt > 0) {
-        dispatch(addFetchQuizzes({ numberOfDocs: lastIndexConunt + 1, fromIndexCount: lastIndexConunt }));
-      }
+    if (userScroll > scrollHeight - 100 && !delayScrollEvent && quizzesFetchStatus !== "loading" && lastIndexConunt > 0) {
+      dispatch(addFetchQuizzes({ numberOfDocs: quizzesOnPage, fromIndexCount: lastIndexConunt }));
 
       setDelayScrollEvent(true);
       setTimeout(() => setDelayScrollEvent(false), 1000);
